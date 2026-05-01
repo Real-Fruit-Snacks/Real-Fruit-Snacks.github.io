@@ -1,193 +1,487 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Matt — Offensive Security Researcher</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/tokens.css" />
-  <style>
-    html, body { margin: 0; padding: 0; background: #11111b; color: #cdd6f4; font-family: "Inter", ui-sans-serif, system-ui, sans-serif; }
-    * { box-sizing: border-box; }
-    a { color: inherit; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real-Fruit-Snacks / Water-themed offensive security toolkit</title>
+<meta name="description" content="40+ projects spanning C2 frameworks, network tunneling, encrypted shells, AD enumeration, web tooling, and learning environments. Built for authorized red team engagements.">
+<meta property="og:title" content="Real-Fruit-Snacks — Water-themed offensive security toolkit">
+<meta property="og:description" content="40+ projects · Rust · Go · Python · C · x86 ASM · brutalist branding · authorized testing only">
+<meta property="og:image" content="https://raw.githubusercontent.com/Real-Fruit-Snacks/Real-Fruit-Snacks/main/docs/assets/logo-dark.svg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231e1e2e'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Inter,sans-serif' font-size='20' font-weight='800' fill='%23cdd6f4'%3ER%3Ctspan fill='%2374c7ec'%3E.%3C/tspan%3E%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#1e1e2e;--mantle:#181825;--crust:#11111b;
+  --sf0:#313244;--sf1:#45475a;--sf2:#585b70;
+  --ov0:#6c7086;--ov1:#7f849c;--ov2:#9399b2;
+  --sub0:#a6adc8;--sub1:#bac2de;--text:#cdd6f4;
+  --mauve:#cba6f7;--lav:#b4befe;--blue:#89b4fa;--sky:#89dceb;--sapphire:#74c7ec;
+  --teal:#94e2d5;--green:#a6e3a1;--yellow:#f9e2af;--peach:#fab387;--red:#f38ba8;
+  --rosewater:#f5e0dc;--flamingo:#f2cdcd;
+  --accent:#74c7ec;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--crust);color:var(--text);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  font-size:15px;line-height:1.5;
+}
+::selection{background:var(--accent);color:var(--crust)}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'JetBrains Mono','SF Mono',monospace}
 
-    .grid {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
+/* ─── Top status bar ─────────────────────────────── */
+.status{
+  background:var(--crust);border-bottom:1px solid var(--text);
+  padding:10px 24px;display:flex;justify-content:space-between;
+  font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--ov2);
+  position:sticky;top:0;z-index:10;
+}
+.status .left{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.status .right{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.status b{color:var(--accent);font-weight:700}
+.status .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px;vertical-align:middle;animation:pulse 2.5s infinite}
+.status a{color:var(--ov2);transition:color .15s}
+.status a:hover{color:var(--text)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
-    .card {
-      position: relative;
-      background: var(--mantle);
-      border: 1px solid var(--surface0);
-      border-radius: 8px;
-      padding: 20px;
-      display: flex; flex-direction: column;
-      min-height: 210px;
-      cursor: pointer;
-      overflow: hidden;
-      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
-    }
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: var(--surface2);
-      background: color-mix(in oklab, var(--surface0) 40%, var(--mantle));
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    }
+/* ─── Hero ─────────────────────────────────────── */
+.hero{
+  border-bottom:1px solid var(--text);
+  padding:64px 24px 0;
+}
+.hero-inner{max-width:1280px;margin:0 auto}
+.hero .pop{
+  font-family:'JetBrains Mono','SF Mono',monospace;
+  font-size:12px;font-weight:500;color:var(--ov1);
+  letter-spacing:0.1em;text-transform:uppercase;
+  display:block;margin-bottom:24px;
+}
+.hero h1{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(56px,11vw,156px);
+  line-height:0.85;font-weight:800;
+  letter-spacing:-0.05em;color:var(--text);
+  margin-bottom:32px;
+}
+.hero h1 .dot{color:var(--accent)}
+.hero-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:0;border-top:1px solid var(--sf1);
+}
+.hero-grid > div{padding:20px 24px;border-right:1px solid var(--sf1)}
+.hero-grid > div:last-child{border-right:none}
+.hero-grid .label{
+  font-family:'JetBrains Mono','SF Mono',monospace;
+  font-size:10px;color:var(--ov0);
+  letter-spacing:0.18em;text-transform:uppercase;margin-bottom:8px;
+}
+.hero-grid .value{
+  font-family:'Inter',sans-serif;
+  font-size:28px;font-weight:700;color:var(--text);
+  letter-spacing:-0.02em;
+}
+.hero-grid .value .unit{color:var(--accent);font-size:0.55em;font-weight:600;margin-left:2px}
 
-    .card-enter {
-      animation: cardIn .35s cubic-bezier(.22,.61,.36,1) both;
-    }
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideIn { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    @keyframes blink { 50% { opacity: 0; } }
-    @keyframes pulse { 50% { opacity: 0.45; } }
+/* ─── Search bar ─────────────────────────────────── */
+.searchbar{
+  background:var(--mantle);border-bottom:1px solid var(--sf1);
+  padding:18px 24px;
+}
+.searchbar-inner{max-width:1280px;margin:0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.searchbar input{
+  flex:1;min-width:220px;
+  background:var(--crust);border:1px solid var(--sf1);
+  color:var(--text);padding:10px 14px;
+  font-family:'JetBrains Mono','SF Mono',monospace;font-size:13px;
+  outline:none;transition:border-color .15s;
+}
+.searchbar input:focus{border-color:var(--accent)}
+.searchbar input::placeholder{color:var(--ov0)}
+.searchbar-stats{
+  font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;
+  color:var(--ov1);letter-spacing:0.1em;text-transform:uppercase;
+  white-space:nowrap;
+}
+.searchbar-stats b{color:var(--accent);font-weight:700}
 
-    .cat-cell:hover {
-      background: color-mix(in oklab, var(--surface0) 60%, var(--mantle)) !important;
-    }
+/* ─── Category sections ──────────────────────────── */
+.category{
+  border-bottom:1px solid var(--sf1);
+  padding:48px 24px;
+}
+.category-inner{max-width:1280px;margin:0 auto}
+.category-header{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding-bottom:20px;margin-bottom:28px;
+  border-bottom:1px dashed var(--sf1);flex-wrap:wrap;gap:12px;
+}
+.category-num{
+  font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;
+  color:var(--accent);letter-spacing:0.18em;text-transform:uppercase;font-weight:700;
+}
+.category-name{
+  font-family:'Inter',sans-serif;font-size:32px;font-weight:700;
+  letter-spacing:-0.025em;color:var(--text);
+}
+.category-name mark{background:var(--accent);color:var(--crust);padding:0 6px;font-style:normal}
+.category-meta{
+  font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;
+  color:var(--ov1);letter-spacing:0.1em;text-transform:uppercase;
+}
+.category-meta b{color:var(--text);font-weight:700}
 
-    ::-webkit-scrollbar { width: 10px; height: 10px; }
-    ::-webkit-scrollbar-thumb { background: var(--surface1); border-radius: 999px; }
-    ::-webkit-scrollbar-track { background: transparent; }
+/* ─── Tool grid ──────────────────────────────────── */
+.tool-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:0;border:1px solid var(--sf1);
+}
+.tool-card{
+  display:flex;flex-direction:column;
+  padding:24px 26px;border-right:1px solid var(--sf1);border-bottom:1px solid var(--sf1);
+  background:var(--mantle);transition:background .15s,border-color .15s;
+  position:relative;cursor:pointer;
+}
+.tool-card:hover{
+  background:color-mix(in oklab, var(--sf0) 30%, var(--mantle));
+}
+.tool-card:hover .tool-name{color:var(--accent)}
+.tool-name{
+  font-family:'Inter',sans-serif;font-size:24px;font-weight:700;
+  letter-spacing:-0.02em;margin-bottom:8px;color:var(--text);
+  transition:color .15s;
+}
+.tool-name .dot{color:var(--accent)}
+.tool-desc{
+  color:var(--sub0);font-size:13px;line-height:1.55;
+  margin-bottom:16px;flex:1;
+}
+.tool-desc strong{color:var(--text);font-weight:600}
+.tool-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:14px;border-top:1px dashed var(--sf1);
+  font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;
+  letter-spacing:0.12em;text-transform:uppercase;
+}
+.tool-lang{color:var(--ov2);font-weight:600}
+.tool-lang::before{
+  content:'';display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--lang-color,var(--accent));margin-right:8px;vertical-align:middle;
+}
+.tool-link{color:var(--ov0);font-weight:600}
+.tool-card:hover .tool-link{color:var(--accent)}
 
-    /* Mobile */
-    @media (max-width: 820px) {
-      .hero-wrap { grid-template-columns: 1fr !important; gap: 28px !important; }
-      .hero-stats { order: 2; }
-      .sticky-nav { display: none !important; }
-      .hide-sm { display: none !important; }
-      .filter-row { padding: 10px 16px !important; }
-      .drawer { width: 100vw !important; }
-      main { padding: 16px 16px 60px !important; }
-      section { padding-top: 28px !important; }
-    }
-    @media (max-width: 520px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-  </style>
+/* lang colors */
+.lang-rust{--lang-color:var(--peach)}
+.lang-go{--lang-color:var(--sapphire)}
+.lang-c{--lang-color:var(--yellow)}
+.lang-python{--lang-color:var(--green)}
+.lang-assembly{--lang-color:var(--red)}
+.lang-javascript{--lang-color:var(--rosewater)}
+.lang-typescript{--lang-color:var(--lav)}
+.lang-shell{--lang-color:var(--mauve)}
+.lang-html{--lang-color:var(--peach)}
+.lang-lua{--lang-color:var(--blue)}
+.lang-zig{--lang-color:var(--yellow)}
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+/* ─── Big call to action band ────────────────────── */
+.band{
+  background:var(--text);color:var(--crust);
+  padding:48px 32px;border-bottom:1px solid var(--text);
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:32px;
+}
+.band-tag{
+  font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;
+  letter-spacing:0.2em;text-transform:uppercase;font-weight:600;
+}
+.band h3{
+  font-family:'Inter',sans-serif;font-weight:700;
+  font-size:32px;line-height:1.1;letter-spacing:-0.02em;
+}
+.band a.cta{
+  background:var(--crust);color:var(--text);
+  padding:16px 28px;font-family:'JetBrains Mono','SF Mono',monospace;
+  font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid var(--crust);transition:all 0.15s;white-space:nowrap;
+}
+.band a.cta:hover{background:var(--accent);color:var(--crust);border-color:var(--accent)}
 
-  <script src="data/repos.js"></script>
-  <script src="data/features.js"></script>
+/* ─── Footer ─────────────────────────────────────── */
+footer{
+  padding:32px 24px;display:flex;justify-content:space-between;
+  font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;
+  color:var(--ov0);letter-spacing:0.1em;text-transform:uppercase;flex-wrap:wrap;gap:16px;
+  max-width:1280px;margin:0 auto;
+}
+footer a{color:var(--ov2);border-bottom:1px solid var(--sf0);transition:all .15s}
+footer a:hover{color:var(--text);border-bottom-color:var(--text)}
+
+.no-results{
+  padding:48px;text-align:center;
+  font-family:'JetBrains Mono','SF Mono',monospace;font-size:14px;
+  color:var(--ov1);letter-spacing:0.05em;
+}
+
+@media (max-width:760px){
+  .hero h1{font-size:64px}
+  .hero-grid{grid-template-columns:1fr 1fr}
+  .hero-grid > div:nth-child(2){border-right:none}
+  .hero-grid > div:nth-child(1),.hero-grid > div:nth-child(2){border-bottom:1px solid var(--sf1)}
+  .band{grid-template-columns:1fr;text-align:left}
+  .status{font-size:10px;padding:10px 14px}
+  .status .left,.status .right{gap:14px}
+  .category-header{flex-direction:column;align-items:flex-start}
+  .category-name{font-size:24px}
+  .tool-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-<div id="root" class="density-cozy"></div>
+<div class="status">
+  <div class="left">
+    <span><b>REAL-FRUIT-SNACKS</b></span>
+    <span><span class="dot"></span>40+ PROJECTS</span>
+    <span>WATER-THEMED OFFSEC</span>
+  </div>
+  <div class="right">
+    <a href="https://github.com/Real-Fruit-Snacks">GITHUB</a>
+    <a href="https://github.com/Real-Fruit-Snacks/Real-Fruit-Snacks">UMBRELLA REPO</a>
+  </div>
+</div>
 
-<script type="text/babel" src="dossier.jsx"></script>
+<section class="hero">
+  <div class="hero-inner">
+    <span class="pop">Matt &nbsp;//&nbsp; offensive security researcher &nbsp;//&nbsp; opsec-first design</span>
+    <h1>REAL-FRUIT-SNACKS<span class="dot">.</span></h1>
+    <div class="hero-grid">
+      <div>
+        <div class="label">tools</div>
+        <div class="value">40<span class="unit">+ projects</span></div>
+      </div>
+      <div>
+        <div class="label">languages</div>
+        <div class="value">11<span class="unit"> stacks</span></div>
+      </div>
+      <div>
+        <div class="label">categories</div>
+        <div class="value">6<span class="unit"> domains</span></div>
+      </div>
+      <div>
+        <div class="label">license</div>
+        <div class="value">MIT<span class="unit"> · GPLv3</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<script type="text/babel">
-  const STORAGE_KEY = "matt-resume-prefs";
-  const loadPrefs = () => {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
-  };
-  const savePrefs = (p) => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch {}
-  };
+<div class="searchbar">
+  <div class="searchbar-inner">
+    <input type="text" id="search" placeholder="Search projects — name, description, language, topic..." autocomplete="off" spellcheck="false">
+    <div class="searchbar-stats" id="stats"><b id="visible-count">43</b> / 43 PROJECTS</div>
+  </div>
+</div>
 
-  const App = () => {
-    const initial = loadPrefs();
-    const [theme, setTheme] = React.useState(initial.theme || "dark");
-    const [density, setDensity] = React.useState(initial.density || "cozy");
-    const [tweakOpen, setTweakOpen] = React.useState(false);
+<div id="content"></div>
 
-    React.useEffect(() => {
-      const root = document.getElementById("root");
-      root.className = `${theme === "light" ? "theme-light" : ""} density-${density}`.trim();
-      document.body.style.background = theme === "light" ? "#eff1f5" : "#11111b";
-      savePrefs({ theme, density });
-    }, [theme, density]);
+<div class="band">
+  <div class="band-tag">→ EXPLORE</div>
+  <h3>Pick a tool. Read its docs.<br>Use it on something authorized.</h3>
+  <a class="cta" href="https://github.com/Real-Fruit-Snacks">Open org</a>
+</div>
 
-    return (
-      <>
-        <Dossier />
+<footer>
+  <span>© 2026 Real-Fruit-Snacks · Authorized testing only</span>
+  <span>
+    <a href="https://github.com/Real-Fruit-Snacks">github</a> &nbsp;·&nbsp;
+    <a href="https://github.com/Real-Fruit-Snacks/Real-Fruit-Snacks">umbrella</a> &nbsp;·&nbsp;
+    <a href="https://github.com/Real-Fruit-Snacks/MyNotes">notes</a>
+  </span>
+</footer>
 
-        <button
-          onClick={() => setTweakOpen(o => !o)}
-          aria-label="Toggle tweaks"
-          style={{
-            position: "fixed", right: 20, bottom: 20, zIndex: 9999,
-            width: 40, height: 40, borderRadius: "50%",
-            background: "var(--mantle)",
-            border: "1px solid var(--surface1)",
-            color: "var(--subtext0)",
-            cursor: "pointer",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-          }}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-        </button>
+<script>
+const REPOS = [
+  // C2 & Implants
+  { name: "Kraken", desc: "OPSEC-first C2 framework — X25519 ECDH, AES-256-GCM, modular implant with runtime-loadable modules, mesh networking, multi-transport (HTTP/HTTPS/TCP/SMB/DNS), BOF compatibility.", lang: "Rust", url: "https://github.com/Real-Fruit-Snacks/Kraken", topics: ["c2","implant","aes-256-gcm","x25519","mesh","bof"], category: "C2 & Implants" },
+  { name: "Aquifer", desc: "Linux post-exploitation framework using kernel namespace isolation — multi-channel C2 with polymorphic beacons and 36 stealth modules.", lang: "Go", url: "https://github.com/Real-Fruit-Snacks/Aquifer", topics: ["linux","post-exploitation","c2","polymorphic","namespaces"], category: "C2 & Implants" },
+  { name: "Siphon", desc: "Lightweight C2 framework — ECDH P-256 forward secrecy, AES-256-GCM, uTLS Chrome fingerprinting.", lang: "Go", url: "https://github.com/Real-Fruit-Snacks/Siphon", topics: ["c2","ecdh","aes-256-gcm","utls","forward-secrecy"], category: "C2 & Implants" },
+  { name: "Wellspring", desc: "Payload delivery server — token-gated, 12 delivery methods, AES-256-GCM at rest, memory zeroing. Single static binary.", lang: "Go", url: "https://github.com/Real-Fruit-Snacks/Wellspring", topics: ["payload-delivery","aes-256-gcm","red-team"], category: "C2 & Implants" },
+  { name: "Spillway", desc: "Reverse/bind/dormant FUSE filesystem mount — browse remote filesystems locally over TLS 1.3 with mutual PSK auth.", lang: "Go", url: "https://github.com/Real-Fruit-Snacks/Spillway", topics: ["fuse","filesystem","tls","psk","offensive"], category: "C2 & Implants" },
+  { name: "Vapor", desc: "Encrypted reverse shell + process injector in pure x86_64 NASM — ChaCha20-Poly1305 AEAD, Hell's Gate syscalls, zero deps.", lang: "Assembly", url: "https://github.com/Real-Fruit-Snacks/Vapor", topics: ["reverse-shell","nasm","chacha20","hells-gate"], category: "C2 & Implants" },
+  { name: "Grotto", desc: "Encrypted netcat in pure x86_64 NASM — ChaCha20-Poly1305, Linux ELF + Windows PE, ~8 KB, zero dependencies.", lang: "Assembly", url: "https://github.com/Real-Fruit-Snacks/Grotto", topics: ["nasm","chacha20","networking","cross-platform"], category: "C2 & Implants" },
+  { name: "Undercurrent", desc: "io_uring stealth implant loader — ChaCha20-Poly1305 AEAD, ~4.2 KB binary, invisible to syscall monitoring.", lang: "Assembly", url: "https://github.com/Real-Fruit-Snacks/Undercurrent", topics: ["io-uring","nasm","implant","stealth"], category: "C2 & Implants" },
+  { name: "Droplet", desc: "Encrypted HTTPS reverse shell for Windows — ~50 KB C implant with interactive Python listener, AES-256, TLS transport.", lang: "C", url: "https://github.com/Real-Fruit-Snacks/Droplet", topics: ["reverse-shell","windows","aes-256","tls"], category: "C2 & Implants" },
+  { name: "Dew", desc: "Encrypted HTTPS reverse shell — XChaCha20-Poly1305 over TLS, ~37 KB binary, zero dependencies.", lang: "C", url: "https://github.com/Real-Fruit-Snacks/Dew", topics: ["reverse-shell","xchacha20","tls","zero-deps"], category: "C2 & Implants" },
 
-        {tweakOpen && (
-          <div style={{
-            position: "fixed", right: 20, bottom: 70, zIndex: 10000,
-            width: 260, background: "var(--mantle)", color: "var(--text)",
-            border: "1px solid var(--surface1)", borderRadius: 10,
-            boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
-            padding: 16, fontFamily: '"Inter", system-ui, sans-serif', fontSize: 13,
-          }}>
-            <div style={{
-              fontFamily: 'ui-monospace, "JetBrains Mono", Menlo, monospace',
-              fontSize: 11, color: "var(--subtext0)", letterSpacing: 1,
-              textTransform: "uppercase", marginBottom: 12,
-              display: "flex", justifyContent: "space-between",
-            }}>
-              <span>Tweaks</span>
-              <span style={{color:"var(--mauve)"}}>●</span>
-            </div>
-            <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: 11, color: "var(--subtext0)", marginBottom: 6, fontFamily: 'ui-monospace, Menlo, monospace' }}>theme</div>
-              <div style={{ display: "flex", gap: 4 }}>
-                {["dark", "light"].map(t => (
-                  <button key={t} onClick={() => setTheme(t)}
-                    style={{
-                      flex: 1, padding: "6px 10px", fontSize: 12,
-                      background: theme === t ? "var(--mauve)" : "transparent",
-                      color: theme === t ? "var(--crust)" : "var(--text)",
-                      border: "1px solid var(--surface1)", borderRadius: 4, cursor: "pointer",
-                      fontFamily: 'ui-monospace, Menlo, monospace',
-                    }}>{t}</button>
-                ))}
-              </div>
-            </div>
+  // Network & Tunneling
+  { name: "Flux", desc: "Swiss Army Netcat — single static binary replacing nc/ncat/socat/pwncat. TLS+Noise encryption, auto-PTY shells, file transfer with SHA256, SOCKS5 pivoting, TCP scanning.", lang: "Rust", url: "https://github.com/Real-Fruit-Snacks/Flux", topics: ["netcat","socks5","tls","pivoting","pty"], category: "Network & Tunneling" },
+  { name: "Neap", desc: "Static SSH server — reverse/bind shells with full PTY, SFTP, local/remote/dynamic port forwarding, TLS with SNI spoofing.", lang: "Rust", url: "https://github.com/Real-Fruit-Snacks/Neap", topics: ["ssh","sftp","port-forwarding","tls","sni-spoofing"], category: "Network & Tunneling" },
+  { name: "Slipstream", desc: "Drop-in SSH wrapper — tunnel management, file transfers, passive filesystem mapping, per-command session logging, fingerprint identity.", lang: "Rust", url: "https://github.com/Real-Fruit-Snacks/Slipstream", topics: ["ssh","tunneling","session-logging"], category: "Network & Tunneling" },
+  { name: "Undertow", desc: "Static SSH server — reverse/bind shells, SFTP, port forwarding, TLS wrapping with SNI spoofing. Under 1.5 MB.", lang: "Go", url: "https://github.com/Real-Fruit-Snacks/Undertow", topics: ["ssh","sftp","port-forwarding","reverse-shell"], category: "Network & Tunneling" },
+  { name: "Conduit", desc: "SOCAT relay with kernel-level process masquerading — argument hiding, prctl/setproctitle stealth, 50+ channel types.", lang: "C", url: "https://github.com/Real-Fruit-Snacks/Conduit", topics: ["socat","network-relay","stealth","masquerade"], category: "Network & Tunneling" },
+  { name: "Depth", desc: "Complete SSH-2.0 in pure x86_64 NASM — ChaCha20-Poly1305, Ed25519, X25519, SFTP, PTY, port forwarding. 94 KB static ELF, no libc.", lang: "Assembly", url: "https://github.com/Real-Fruit-Snacks/Depth", topics: ["ssh","nasm","chacha20","ed25519","no-libc"], category: "Network & Tunneling" },
+  { name: "Culvert", desc: "Pivot under the obstruction — one-command ligolo-ng tunnel setup with TUN, routing, magic 240/4 localhost CIDR, and WebUI.", lang: "Shell", url: "https://github.com/Real-Fruit-Snacks/Culvert", topics: ["ligolo-ng","tunneling","pivoting","tun"], category: "Network & Tunneling" },
+
+  // Enumeration & Analysis
+  { name: "Abyss", desc: "Offensive forensic analysis — extract credentials, keys, persistence from disk/memory images. SAM, NTDS.dit, LSA, DPAPI, browser passwords, SSH keys, LSASS minidumps.", lang: "Rust", url: "https://github.com/Real-Fruit-Snacks/Abyss", topics: ["forensics","credentials","ntds","dpapi","lsass"], category: "Enumeration & Analysis" },
+  { name: "Flood", desc: "Async high-throughput web fuzzer — directory enum, VHost discovery, parameter fuzzing. Recursive scanning, clusterbomb mode, auto-throttle on 429s, JSON/CSV/Hashcat output.", lang: "Rust", url: "https://github.com/Real-Fruit-Snacks/Flood", topics: ["web-fuzzer","vhost","clusterbomb","burp"], category: "Enumeration & Analysis" },
+  { name: "Maelstrom", desc: "NetExec wrapper — 35+ AD enumeration modules in one command, multi-target scanning, colored output, actionable per-finding recommendations.", lang: "Python", url: "https://github.com/Real-Fruit-Snacks/Maelstrom", topics: ["netexec","active-directory","ad-enum","red-team"], category: "Enumeration & Analysis" },
+  { name: "Rapids", desc: "Modular credential spraying — 28 native protocol modules, automatic port scanning, adaptive skipping of unreachable targets, pass-the-hash support.", lang: "Python", url: "https://github.com/Real-Fruit-Snacks/Rapids", topics: ["password-spray","pass-the-hash","red-team"], category: "Enumeration & Analysis" },
+  { name: "Runoff", desc: "Active Directory audit leveraging BloodHound CE — extracts quick wins, attack paths, and highlights misconfigurations.", lang: "Python", url: "https://github.com/Real-Fruit-Snacks/Runoff", topics: ["active-directory","bloodhound","audit","attack-paths"], category: "Enumeration & Analysis" },
+  { name: "Lure", desc: "SMB hash bait — drops poisoned .url/.scf/.xml payloads on writable shares to coerce NTLM authentication via Responder.", lang: "Python", url: "https://github.com/Real-Fruit-Snacks/Lure", topics: ["smb","responder","ntlm","red-team"], category: "Enumeration & Analysis" },
+  { name: "Whirlpool", desc: "Privesc reasoning engine — parses LinPEAS/WinPEAS output and generates ranked exploitation playbooks highlighting viable paths.", lang: "Python", url: "https://github.com/Real-Fruit-Snacks/Whirlpool", topics: ["privesc","linpeas","winpeas","automation"], category: "Enumeration & Analysis" },
+  { name: "Seep", desc: "Windows privilege escalation enumeration — 16 categorized checks, inventory of 97 tools, MITRE ATT&CK mapping, fileless PowerShell agent, single-file HTML reports.", lang: "Python", url: "https://github.com/Real-Fruit-Snacks/Seep", topics: ["privesc","windows","mitre-attack"], category: "Enumeration & Analysis" },
+  { name: "Eddy", desc: "Surgical log entry removal — wtmp/btmp/utmp, lastlog, journal, Windows EVTX, pacct. Find-then-clean workflow with timestamp preservation.", lang: "Go", url: "https://github.com/Real-Fruit-Snacks/Eddy", topics: ["logs","forensics","stealth","cleanup"], category: "Enumeration & Analysis" },
+  { name: "Deluge", desc: "Parser and formatter for Nmap and RustScan outputs — color-coded terminal reports, multi-format exports (MD/CSV/JSON/HTML), interactive scanning with Catppuccin styling.", lang: "Python", url: "https://github.com/Real-Fruit-Snacks/Deluge", topics: ["nmap","rustscan","reports","parsing"], category: "Enumeration & Analysis" },
+  { name: "Riptide", desc: "Collaborative pentesting terminal and playbook workspace — real-time sync across operators, credential vault, variable substitution, output parsing, session recording.", lang: "JavaScript", url: "https://github.com/Real-Fruit-Snacks/Riptide", topics: ["collaboration","pentesting","terminal","playbook"], category: "Enumeration & Analysis" },
+
+  // Multi-Call Binaries
+  { name: "Rill", desc: "BusyBox-style multi-call binary in pure x86_64 NASM — 41 Unix utilities, ~34 KB static ELF, direct syscalls, no libc.", lang: "Assembly", url: "https://github.com/Real-Fruit-Snacks/Rill", topics: ["busybox","nasm","static","no-libc"], category: "Multi-Call Binaries" },
+  { name: "Staysail", desc: "BusyBox-style multi-call binary in Zig — 84 Unix utilities, ~1 MB statically-linked, native cross-compile to Linux/macOS/Windows.", lang: "Zig", url: "https://github.com/Real-Fruit-Snacks/Staysail", topics: ["busybox","zig","cross-compile"], category: "Multi-Call Binaries" },
+  { name: "Moonraker", desc: "BusyBox-style multi-call binary in Lua — 81 Unix utilities, ~1.2 MB static executable via luastatic with embedded Lua VM.", lang: "Lua", url: "https://github.com/Real-Fruit-Snacks/Moonraker", topics: ["busybox","lua","luastatic"], category: "Multi-Call Binaries" },
+  { name: "Jib", desc: "BusyBox-style multi-call binary in Rust — 73 Unix utilities + jq/http/dig, ~2.4 MB avg (1.4 MB slim → 3.7 MB full) across 11 platform builds.", lang: "Rust", url: "https://github.com/Real-Fruit-Snacks/Jib", topics: ["busybox","rust","slim","cli"], category: "Multi-Call Binaries" },
+  { name: "Topsail", desc: "Single-file BusyBox-like multi-call binary in Go — ~3.4 MB per platform, .deb/.rpm/.apk packages too.", lang: "Go", url: "https://github.com/Real-Fruit-Snacks/Topsail", topics: ["busybox","golang","static","packages"], category: "Multi-Call Binaries" },
+  { name: "Mainsail", desc: "BusyBox-style multi-call binary in Python — 73 Unix utilities, ~5.5 MB native bundles or ~110 KB .pyz with system Python.", lang: "Python", url: "https://github.com/Real-Fruit-Snacks/Mainsail", topics: ["busybox","python","pyz"], category: "Multi-Call Binaries" },
+
+  // Reference & Environments
+  { name: "Cascade", desc: "Native markdown editor — real-time collaboration, live preview, wiki-links, canvas whiteboard, 21+ themes. Tauri + Rust.", lang: "TypeScript", url: "https://github.com/Real-Fruit-Snacks/Cascade", topics: ["markdown","editor","tauri","collab"], category: "Reference & Environments" },
+  { name: "Sunken-Archive", desc: "Personal knowledge base — digital garden with interconnected wiki-style notes, graph view, full-text search. Built on Quartz.", lang: "TypeScript", url: "https://github.com/Real-Fruit-Snacks/Sunken-Archive", topics: ["digital-garden","quartz","notes"], category: "Reference & Environments" },
+  { name: "Tidepool", desc: "Interactive xterm.js-based terminal portfolio — explore a developer profile through real shell commands in the browser.", lang: "JavaScript", url: "https://github.com/Real-Fruit-Snacks/Tidepool", topics: ["xterm","terminal","portfolio"], category: "Reference & Environments" },
+  { name: "Shallows", desc: "Browser-native Linux terminals via x86 emulation — no servers, no installs, no backend.", lang: "JavaScript", url: "https://github.com/Real-Fruit-Snacks/Shallows", topics: ["emulation","linux","wasm","x86"], category: "Reference & Environments" },
+  { name: "Ripple", desc: "Browser-based Vim editor — full keybindings via CodeMirror 6, split panes, tabs, virtual filesystem, zero dependencies.", lang: "JavaScript", url: "https://github.com/Real-Fruit-Snacks/Ripple", topics: ["vim","codemirror","editor","browser"], category: "Reference & Environments" },
+  { name: "Surge", desc: "Markdown to searchable command reference — fuzzy search, variable substitution on copy, offline-first PWA, Catppuccin themes.", lang: "JavaScript", url: "https://github.com/Real-Fruit-Snacks/Surge", topics: ["markdown","cheatsheet","pwa","offline"], category: "Reference & Environments" },
+  { name: "Fathom", desc: "Offline man pages browser with TLDR summaries inline — instant search, Catppuccin themes. Progressive Web App.", lang: "JavaScript", url: "https://github.com/Real-Fruit-Snacks/Fathom", topics: ["man-pages","tldr","pwa","offline"], category: "Reference & Environments" },
+  { name: "HydroShot", desc: "Screenshot capture and annotation — region select, drawing tools, copy/save. Built with Rust, winit, tiny-skia.", lang: "Rust", url: "https://github.com/Real-Fruit-Snacks/HydroShot", topics: ["screenshot","annotation","winit"], category: "Reference & Environments" },
+  { name: "Deadwater", desc: "Open research publication platform — index, search, and serve computational papers. Full-text search, citation graph, REST API.", lang: "TypeScript", url: "https://github.com/Real-Fruit-Snacks/Deadwater", topics: ["research","search","citations","api"], category: "Reference & Environments" },
+  { name: "MyNotes", desc: "Personal pentester field notebook — tradecraft references built with MkDocs Material + Catppuccin theming, deployed via GitHub Pages.", lang: "Shell", url: "https://github.com/Real-Fruit-Snacks/MyNotes", topics: ["mkdocs","catppuccin","notes","tradecraft"], category: "Reference & Environments" },
+  { name: "Tidemark", desc: "Obsidian plugin — replace variables in markdown with YAML frontmatter; copy/replace/rename in one command.", lang: "TypeScript", url: "https://github.com/Real-Fruit-Snacks/Tidemark", topics: ["obsidian","plugin","markdown","yaml"], category: "Reference & Environments" },
+  { name: "x86-assembly-lab", desc: "Interactive browser-based x86 assembly lab — live simulator, stack visualizer, register quiz, tutorial progression from fundamentals to reverse engineering.", lang: "HTML", url: "https://github.com/Real-Fruit-Snacks/x86-assembly-lab", topics: ["assembly","x86","education","simulator"], category: "Reference & Environments" },
+
+  // Games
+  { name: "Blueprint", desc: "Browser-based incremental factory game — build, automate, prestige, publish. Zero-dependency vanilla HTML/CSS/JS.", lang: "JavaScript", url: "https://github.com/Real-Fruit-Snacks/Blueprint", topics: ["game","incremental","factory","vanilla-js"], category: "Games" },
+  { name: "Crownfall", desc: "Pixel-art medieval wave-defense incremental built as a single HTML file. Hold the wall, bank Crowns, return stronger.", lang: "HTML", url: "https://github.com/Real-Fruit-Snacks/Crownfall", topics: ["game","pixel-art","incremental","wave-defense"], category: "Games" },
+  { name: "Tower-Defense", desc: "Cyberpunk neon tower defense — 6 elements, 14 towers, procedural campaign, endless mode, challenges, roguelite unlocks. Phaser 3 + TypeScript + Vite.", lang: "TypeScript", url: "https://github.com/Real-Fruit-Snacks/Tower-Defense", topics: ["tower-defense","phaser","roguelite"], category: "Games" },
+
+  // Platforms & Meta
+  { name: "armsforge", desc: "AI-powered security platform for offensive operations — intelligent automation, Claude Code integration, workflow orchestration.", lang: "TypeScript", url: "https://github.com/Real-Fruit-Snacks/armsforge", topics: ["ai","offensive-security","automation","claude-code"], category: "Platforms & Meta" },
+  { name: "Real-Fruit-Snacks", desc: "Water-themed security toolkit umbrella — central catalog of all 40+ projects with categorized index and brutalist branding.", lang: "Shell", url: "https://github.com/Real-Fruit-Snacks/Real-Fruit-Snacks", topics: ["meta","red-team","umbrella"], category: "Platforms & Meta" },
+];
+
+const CATEGORIES = [
+  { id: "c2", name: "C2 & Implants", accent: "#f38ba8", desc: "Command-and-control frameworks, encrypted implants, payload delivery, and stealth loaders." },
+  { id: "net", name: "Network & Tunneling", accent: "#74c7ec", desc: "SSH servers, pivoting kits, relays, and custom transport layers." },
+  { id: "enum", name: "Enumeration & Analysis", accent: "#fab387", desc: "AD auditing, credential work, forensics, web fuzzing, and reasoning engines." },
+  { id: "multi", name: "Multi-Call Binaries", accent: "#94e2d5", desc: "A sail-themed sextet of BusyBox-style toolkits in six different languages." },
+  { id: "ref", name: "Reference & Environments", accent: "#cba6f7", desc: "Editors, knowledge bases, terminals in browsers, and learning labs." },
+  { id: "games", name: "Games", accent: "#f9e2af", desc: "Browser games built between engagements — vanilla HTML, single-file builds." },
+  { id: "meta", name: "Platforms & Meta", accent: "#b4befe", desc: "Umbrella infrastructure and AI-augmented tooling." },
+];
+
+const CAT_MAP = {
+  "C2 & Implants": "c2",
+  "Network & Tunneling": "net",
+  "Enumeration & Analysis": "enum",
+  "Multi-Call Binaries": "multi",
+  "Reference & Environments": "ref",
+  "Games": "games",
+  "Platforms & Meta": "meta",
+};
+
+function langClass(lang) {
+  return "lang-" + lang.toLowerCase().replace(/[^a-z]/g, "");
+}
+
+function escapeHTML(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function highlightTokens(text, query) {
+  if (!query) return escapeHTML(text);
+  const safe = escapeHTML(text);
+  const q = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return safe.replace(new RegExp("(" + q + ")", "gi"),
+    '<mark style="background:var(--accent);color:var(--crust);padding:0 2px">$1</mark>');
+}
+
+function renderCard(repo, query) {
+  const lc = langClass(repo.lang);
+  return `
+    <a class="tool-card" href="${repo.url}" target="_blank" rel="noopener">
+      <div class="tool-name">${highlightTokens(repo.name, query)}<span class="dot">.</span></div>
+      <div class="tool-desc">${highlightTokens(repo.desc, query)}</div>
+      <div class="tool-meta">
+        <span class="tool-lang ${lc}">${repo.lang}</span>
+        <span class="tool-link">→ REPO</span>
+      </div>
+    </a>
+  `;
+}
+
+function render(query = "") {
+  const q = query.trim().toLowerCase();
+  const filtered = !q ? REPOS : REPOS.filter(r =>
+    r.name.toLowerCase().includes(q) ||
+    r.desc.toLowerCase().includes(q) ||
+    r.lang.toLowerCase().includes(q) ||
+    r.topics.some(t => t.includes(q))
+  );
+
+  document.getElementById("visible-count").textContent = filtered.length;
+
+  const root = document.getElementById("content");
+  if (filtered.length === 0) {
+    root.innerHTML = '<div class="no-results">// no projects match "' + escapeHTML(query) + '"</div>';
+    return;
+  }
+
+  const byCat = {};
+  filtered.forEach(r => {
+    const id = CAT_MAP[r.category];
+    if (!byCat[id]) byCat[id] = [];
+    byCat[id].push(r);
+  });
+
+  const html = CATEGORIES.filter(c => byCat[c.id]).map((cat, i) => {
+    const repos = byCat[cat.id];
+    const num = String(i + 1).padStart(2, "0");
+    return `
+      <section class="category" id="cat-${cat.id}" style="--accent:${cat.accent}">
+        <div class="category-inner">
+          <div class="category-header">
             <div>
-              <div style={{ fontSize: 11, color: "var(--subtext0)", marginBottom: 6, fontFamily: 'ui-monospace, Menlo, monospace' }}>density</div>
-              <div style={{ display: "flex", gap: 4 }}>
-                {["compact", "cozy"].map(d => (
-                  <button key={d} onClick={() => setDensity(d)}
-                    style={{
-                      flex: 1, padding: "6px 10px", fontSize: 12,
-                      background: density === d ? "var(--mauve)" : "transparent",
-                      color: density === d ? "var(--crust)" : "var(--text)",
-                      border: "1px solid var(--surface1)", borderRadius: 4, cursor: "pointer",
-                      fontFamily: 'ui-monospace, Menlo, monospace',
-                    }}>{d}</button>
-                ))}
-              </div>
+              <div class="category-num">${num} / ${cat.name}</div>
+              <div class="category-name" style="margin-top:8px">${cat.desc}</div>
             </div>
+            <div class="category-meta"><b>${repos.length}</b> ${repos.length === 1 ? "project" : "projects"}</div>
           </div>
-        )}
-      </>
-    );
-  };
+          <div class="tool-grid">
+            ${repos.map(r => renderCard(r, query)).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }).join("");
 
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(<App />);
+  root.innerHTML = html;
+}
+
+const searchInput = document.getElementById("search");
+let searchTimer;
+searchInput.addEventListener("input", (e) => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => render(e.target.value), 80);
+});
+
+document.getElementById("visible-count").nextSibling.textContent = " / " + REPOS.length + " PROJECTS";
+document.getElementById("stats").innerHTML = '<b id="visible-count">' + REPOS.length + '</b> / ' + REPOS.length + ' PROJECTS';
+
+render();
 </script>
+
 </body>
 </html>
