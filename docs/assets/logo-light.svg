@@ -10,12 +10,16 @@
   <line x1="200" y1="140" x2="200" y2="200" stroke="#bcc0cc" stroke-width="1"/>
   <line x1="400" y1="140" x2="400" y2="200" stroke="#bcc0cc" stroke-width="1"/>
   <line x1="600" y1="140" x2="600" y2="200" stroke="#bcc0cc" stroke-width="1"/>
-  <text x="20" y="158" font-family="'JetBrains Mono', 'SF Mono', monospace" font-size="9" font-weight="600" fill="#9ca0b0" letter-spacing="2">ROLE</text>
-  <text x="20" y="186" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#1e1e2e" letter-spacing="-1">OFFENSIVE<tspan fill="#d20f39" font-size="14"> · SECURITY</tspan></text>
-  <text x="220" y="158" font-family="'JetBrains Mono', 'SF Mono', monospace" font-size="9" font-weight="600" fill="#9ca0b0" letter-spacing="2">REPOS</text>
-  <text x="220" y="186" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#1e1e2e" letter-spacing="-1">40+<tspan fill="#d20f39" font-size="14"> CATALOGED</tspan></text>
-  <text x="420" y="158" font-family="'JetBrains Mono', 'SF Mono', monospace" font-size="9" font-weight="600" fill="#9ca0b0" letter-spacing="2">THEME</text>
-  <text x="420" y="186" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#1e1e2e" letter-spacing="-1">CATPPUCCIN<tspan fill="#d20f39" font-size="14"> · MOCHA</tspan></text>
-  <text x="620" y="158" font-family="'JetBrains Mono', 'SF Mono', monospace" font-size="9" font-weight="600" fill="#9ca0b0" letter-spacing="2">STACK</text>
-  <text x="620" y="186" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#1e1e2e" letter-spacing="-1">VANILLA<tspan fill="#d20f39" font-size="14"> · STATIC</tspan></text>
+  <text x="20" y="158" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="10" font-weight="600" fill="#9ca0b0" letter-spacing="1">ROLE</text>
+  <text x="20" y="175" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#d20f39" letter-spacing="0">OFFENSIVE SEC</text>
+  <text x="20" y="190" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="8" fill="#9ca0b0" letter-spacing="0">RED TEAM · TOOL DEV · RESEARCH</text>
+  <text x="220" y="158" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="10" font-weight="600" fill="#9ca0b0" letter-spacing="1">REPOS</text>
+  <text x="220" y="175" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#d20f39" letter-spacing="0">40+ CATALOGED</text>
+  <text x="220" y="190" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="8" fill="#9ca0b0" letter-spacing="0">C2 · ENUM · TUNNEL · WEB</text>
+  <text x="420" y="158" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="10" font-weight="600" fill="#9ca0b0" letter-spacing="1">THEME</text>
+  <text x="420" y="175" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#d20f39" letter-spacing="0">CATPPUCCIN</text>
+  <text x="420" y="190" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="8" fill="#9ca0b0" letter-spacing="0">MOCHA · LATTE · BRUTALIST</text>
+  <text x="620" y="158" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="10" font-weight="600" fill="#9ca0b0" letter-spacing="1">STACK</text>
+  <text x="620" y="175" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#d20f39" letter-spacing="0">VANILLA STATIC</text>
+  <text x="620" y="190" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="8" fill="#9ca0b0" letter-spacing="0">HTML · CSS · JS · GH PAGES</text>
 </svg>
