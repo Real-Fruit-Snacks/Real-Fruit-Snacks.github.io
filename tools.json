@@ -1,0 +1,33 @@
+{
+  "_comment": "One entry per PUBLIC repo. description \u2264 60 chars, no period \u2014 identical to the GitHub repo description. featured: true on at most one. Order = display order.",
+  "tools": [
+    {
+      "repo": "repo-name",
+      "description": "What it does, for whom",
+      "language": "PowerShell",
+      "version": "v1.0.0",
+      "platform": "Windows",
+      "featured": true
+    },
+    {
+      "repo": "repo-name",
+      "description": "What it does, for whom",
+      "language": "Python",
+      "version": "v0.1.0",
+      "platform": "Linux"
+    },
+    {
+      "repo": "repo-name",
+      "description": "What it does, for whom",
+      "language": "Go",
+      "platform": "any OS"
+    }
+  ],
+  "retired": [
+    "Kraken",
+    "Maelstrom",
+    "Rapids",
+    "Undertow",
+    "Lure"
+  ]
+}
