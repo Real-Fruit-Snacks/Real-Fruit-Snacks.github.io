@@ -2,7 +2,7 @@
   "_comment": "One entry per PUBLIC repo. description <= 60 chars, no period, same as the GitHub repo description. featured: true on at most a few. Order = display order.",
   "tools": [
     {"repo": "HydroShot", "description": "Fast screenshot capture and annotation, pure Rust", "language": "Rust", "featured": true},
-    {"repo": "proton-qbit-port-sync", "description": "Keeps qBittorrent's port synced to Proton VPN", "language": "PowerShell", "platform": "Windows"},
+    {"repo": "port-sync", "description": "Keeps qBittorrent's port synced to Proton VPN", "language": "PowerShell", "platform": "Windows"},
     {"repo": "carify", "description": "Convert video for Uconnect USB playback, via ffmpeg", "language": "PowerShell", "platform": "any OS"},
     {"repo": "forge-framework", "description": "Modular offensive-security framework with a console", "language": "Python"},
     {"repo": "identity-gen", "description": "Offline generator for throwaway signup identities", "language": "HTML", "platform": "browser"},
