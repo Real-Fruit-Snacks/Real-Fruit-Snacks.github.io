@@ -1,14 +1,14 @@
 {
-  "_comment": "One entry per PUBLIC repo. description <= 60 chars, no period, same as the GitHub repo description. featured: true on at most a few. Order = display order.",
+  "_comment": "One entry per PUBLIC repo, in display order. description: <= 60 chars, no period, same as the GitHub repo description. short: <= 26 chars, for the hero terminal (match .github brand/org.toml where the tool is listed there). featured: true on at most a few.",
   "tools": [
-    {"repo": "screen-mark", "description": "Screenshot capture and annotation in pure Rust", "language": "Rust", "featured": true},
-    {"repo": "port-sync", "description": "Keeps qBittorrent's port synced to Proton VPN", "language": "PowerShell", "platform": "Windows"},
-    {"repo": "carify", "description": "Convert video for Uconnect USB playback, via ffmpeg", "language": "PowerShell", "platform": "any OS"},
-    {"repo": "certapi", "description": "mTLS API client for the Windows certificate store", "language": "C#", "platform": "Windows"},
-    {"repo": "identity-gen", "description": "Offline generator for throwaway signup identities", "language": "HTML", "platform": "browser"},
-    {"repo": "powershell-toolbox", "description": "A grab-bag of my PowerShell scripts, each one standalone", "language": "PowerShell", "platform": "Windows"},
-    {"repo": "forge-framework", "description": "Modular offensive-security framework with a console", "language": "Python"},
-    {"repo": "open-file", "description": "Learn and play chess in your browser, offline", "language": "TypeScript", "platform": "browser"}
+    {"repo": "screen-mark", "description": "Screenshot capture and annotation in pure Rust", "language": "Rust", "featured": true, "short": "capture and annotate"},
+    {"repo": "port-sync", "description": "Keeps qBittorrent's port synced to Proton VPN", "language": "PowerShell", "platform": "Windows", "short": "qBittorrent + Proton"},
+    {"repo": "carify", "description": "Convert video for Uconnect USB playback, via ffmpeg", "language": "PowerShell", "platform": "any OS", "short": "video for Uconnect"},
+    {"repo": "certapi", "description": "mTLS API client for the Windows certificate store", "language": "C#", "platform": "Windows", "short": "mTLS via the cert store"},
+    {"repo": "identity-gen", "description": "Offline generator for throwaway signup identities", "language": "HTML", "platform": "browser", "short": "throwaway identities"},
+    {"repo": "powershell-toolbox", "description": "A grab-bag of my PowerShell scripts, each one standalone", "language": "PowerShell", "platform": "Windows", "short": "standalone scripts"},
+    {"repo": "forge-framework", "description": "Modular offensive-security framework with a console", "language": "Python", "short": "offensive-security console"},
+    {"repo": "open-file", "description": "Learn and play chess in your browser, offline", "language": "TypeScript", "platform": "browser", "short": "chess in the browser"}
   ],
   "retired": ["Kraken", "Maelstrom", "Rapids", "Lure", "Undertow"]
 }

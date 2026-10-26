@@ -3,28 +3,40 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RFS — Real tools. No filler.</title>
+<link rel="canonical" href="https://real-fruit-snacks.github.io/">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c0d10">
-<meta name="description" content="Small, sharp tools for people who run their own infrastructure.">
+<meta name="description" content="Small tools that each do one job: screenshots, car video, VPN ports, client certificates, throwaway identities.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://real-fruit-snacks.github.io/">
 <meta property="og:title" content="RFS — Real tools. No filler.">
-<meta property="og:description" content="Small, sharp tools for people who run their own infrastructure.">
+<meta property="og:description" content="Small tools that each do one job: screenshots, car video, VPN ports, client certificates, throwaway identities.">
 <meta property="og:image" content="https://real-fruit-snacks.github.io/assets/og.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="RFS: Real tools. No filler. Beside it, a terminal listing the tools">
 <meta name="twitter:card" content="summary_large_image">
 <script>try{const t=localStorage.getItem('rfs-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.dataset.theme='dayshift'}catch(e){}</script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/IBMPlexSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* ---- tokens (from brand/tokens/rfs.css) ---- */
-:root,:root[data-theme="nightshift"]{--bg:#0C0D10;--surface:#13151A;--raised:#1A1D24;--line:#262A33;--text:#E8E6E1;--mute:#8A8F99;--primary:#FF6A3D;--accent:#FFC247;--signal:#3DDC97;--terminal:#070809;--tile:#1A1D24;--glow:0 0 24px rgba(255,106,61,.35);--term-bg:#070809;--term-tab:#111318;--term-line:#262A33;--term-text:#C4C7CF;--term-mute:#8A8F99;--term-primary:#FF6A3D;--sans:"IBM Plex Sans",Inter,system-ui,sans-serif;--mono:"IBM Plex Mono","JetBrains Mono",ui-monospace,monospace}
-:root[data-theme="dayshift"]{--term-bg:#FFFFFF;--term-tab:#ECEAE4;--term-line:#D6D3CB;--term-text:#1A1B1E;--term-mute:#6B6F78;--term-primary:#C43F11;--bg:#F6F5F2;--surface:#FFFFFF;--raised:#ECEAE4;--line:#D6D3CB;--text:#1A1B1E;--mute:#6B6F78;--primary:#C43F11;--accent:#9A6700;--signal:#167A4E;--terminal:#1A1B1E;--tile:#1A1B1E;--glow:none}
+/* ---- fonts: IBM Plex, vendored (fonts/OFL.txt) ---- */
+@font-face{font-family:"IBM Plex Sans";font-weight:400;font-display:swap;src:url("fonts/IBMPlexSans-Regular.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-weight:600;font-display:swap;src:url("fonts/IBMPlexSans-SemiBold.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-weight:700;font-display:swap;src:url("fonts/IBMPlexSans-Bold.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-weight:400;font-display:swap;src:url("fonts/IBMPlexMono-Regular.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-weight:600;font-display:swap;src:url("fonts/IBMPlexMono-SemiBold.woff2") format("woff2")}
+/* ---- tokens (from .github brand/tokens/rfs.css) ---- */
+:root,:root[data-theme="nightshift"]{color-scheme:dark;--bg:#0C0D10;--surface:#13151A;--raised:#1A1D24;--line:#262A33;--text:#E8E6E1;--mute:#8A8F99;--primary:#FF6A3D;--accent:#FFC247;--signal:#3DDC97;--tile:#1A1D24;--dots:#1E222B;--glow:0 0 24px rgba(255,106,61,.35);--glow-field:rgba(255,106,61,.10);--term-bg:#070809;--term-tab:#13151A;--term-line:#262A33;--term-text:#E8E6E1;--term-mute:#8A8F99;--term-primary:#FF6A3D;--term-accent:#FFC247;--sans:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+:root[data-theme="dayshift"]{color-scheme:light;--bg:#F6F5F2;--surface:#FFFFFF;--raised:#ECEAE4;--line:#D6D3CB;--text:#1A1B1E;--mute:#6B6F78;--primary:#C43F11;--accent:#9A6700;--signal:#167A4E;--tile:#1A1B1E;--dots:#DDD9D1;--glow:none;--glow-field:transparent;--term-bg:#FFFFFF;--term-tab:#ECEAE4;--term-line:#D6D3CB;--term-text:#1A1B1E;--term-mute:#6B6F78;--term-primary:#C43F11;--term-accent:#9A6700}
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--bg)}
 body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 code,.mono{font-family:var(--mono)}
 /* nav */
@@ -34,30 +46,34 @@ nav .wrap{display:flex;align-items:center;height:60px;gap:28px}
 .brand svg{display:block}
 nav ul{display:flex;gap:22px;list-style:none;margin-left:auto;font-size:14px;color:var(--mute)}
 nav ul a:hover{color:var(--text)}
-.toggle{width:34px;height:20px;border-radius:10px;background:var(--raised);border:1px solid var(--line);position:relative;cursor:pointer;margin-left:auto}
-nav ul + .toggle{margin-left:0}
+.toggle{width:34px;height:20px;border-radius:10px;background:var(--raised);border:1px solid var(--line);position:relative;cursor:pointer;flex:none}
 .toggle::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--primary);box-shadow:var(--glow)}
 [data-theme="dayshift"] .toggle::after{left:16px}
-/* hero */
-.hero{padding:96px 0 72px}
-.hero .label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:18px;display:flex;align-items:center;gap:10px}
-.hero .label i{width:28px;height:3px;background:var(--primary);border-radius:2px;display:inline-block}
-h1{font-size:56px;line-height:1.05;letter-spacing:-.03em;font-weight:700;max-width:14ch}
-.hero p{font-size:18px;color:var(--mute);max-width:52ch;margin-top:20px}
-.install{margin-top:34px;display:inline-flex;align-items:stretch;border:1px solid var(--term-line);border-radius:10px;background:var(--term-bg);overflow:hidden;max-width:100%}
-[data-theme="dayshift"] .install{box-shadow:0 1px 2px rgba(26,27,30,.05)}
-.install .tabs{display:flex;flex-direction:column;border-right:1px solid var(--term-line)}
-.install .tabs span{font-family:var(--mono);font-size:11px;padding:0 14px;color:var(--term-mute);display:flex;align-items:center;flex:1;cursor:pointer}
-.install .tabs span.on{color:var(--term-text);background:var(--term-tab)}
-.install code{padding:16px 20px;font-size:14px;color:var(--term-text);display:flex;align-items:center;gap:12px;white-space:nowrap;overflow:auto}
-.install code b{color:var(--term-primary);font-weight:600}
-.install .copy{border-left:1px solid var(--term-line);padding:0 16px;display:flex;align-items:center;color:var(--term-text);font-size:12px;font-family:var(--mono);cursor:pointer}
-/* tools */
+/* hero: the cover field (dot grid + Ember glow from the lower right) */
+.hero{padding:88px 0 80px;background:radial-gradient(70% 90% at 78% 110%,var(--glow-field),transparent 70%),radial-gradient(circle at 1.2px 1.2px,var(--dots) 1.2px,transparent 1.3px) 0 0/26px 26px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero .wrap>*{min-width:0}
+.mark{font-family:var(--mono);font-weight:600;font-size:96px;line-height:1;letter-spacing:-.05em;display:inline-block}
+.mark::after{content:"";display:block;height:7px;border-radius:4px;background:var(--primary);margin:14px 0 0 .04em;width:calc(100% - .1em)}
+h1{font-size:40px;line-height:1.1;letter-spacing:-.03em;font-weight:700;margin-top:30px}
+.hero p{font-size:17px;color:var(--mute);max-width:44ch;margin-top:16px}
+.org{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--mute);margin-top:22px}
+.term{border:1px solid var(--term-line);border-radius:10px;background:var(--term-bg);overflow:hidden}
+[data-theme="dayshift"] .term{box-shadow:0 1px 2px rgba(26,27,30,.05)}
+.term .bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;background:var(--term-tab);border-bottom:1px solid var(--term-line);position:relative}
+.term .bar i{width:9px;height:9px;border-radius:50%;background:var(--term-line)}
+.term .bar span{position:absolute;left:0;right:0;text-align:center;font-family:var(--mono);font-size:12px;color:var(--term-mute);pointer-events:none}
+.term pre{font-family:var(--mono);font-size:13.5px;line-height:28px;padding:16px 22px 18px;color:var(--term-mute);overflow-x:auto}
+.term b{color:var(--term-primary);font-weight:600}
+.term a{color:var(--term-text)}
+.term a:hover{color:var(--term-primary)}
+.term .l{color:var(--term-accent)}
+.term .cur{display:inline-block;width:8px;height:16px;background:var(--term-primary);vertical-align:-3px}
+/* sections */
 section{padding:56px 0;border-top:1px solid var(--line)}
-section:nth-of-type(odd){background:var(--surface)}
-[data-theme="nightshift"] section:nth-of-type(odd){background:transparent}
+[data-theme="dayshift"] section:nth-of-type(even){background:var(--surface)}
 [data-theme="dayshift"] .card,[data-theme="dayshift"] .rule{box-shadow:0 1px 2px rgba(26,27,30,.04)}
-[data-theme="dayshift"] section:nth-of-type(odd) .card,[data-theme="dayshift"] section:nth-of-type(odd) .rule{background:var(--bg)}
+[data-theme="dayshift"] section:nth-of-type(even) .card,[data-theme="dayshift"] section:nth-of-type(even) .rule{background:var(--bg)}
 h2{font-size:22px;letter-spacing:-.01em;font-weight:600;margin-bottom:6px}
 .sub{color:var(--mute);font-size:14px;margin-bottom:28px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -68,48 +84,50 @@ h2{font-size:22px;letter-spacing:-.01em;font-weight:600;margin-bottom:6px}
 .card .n i.hot{background:var(--primary);box-shadow:var(--glow)}
 .card .d{font-size:13.5px;color:var(--mute);line-height:1.5;flex:1}
 .card .f{display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:4px}
-.card .f b{color:var(--text);font-weight:500}
-/* rules */
+.card .f b{color:var(--text);font-weight:600}
 .rules{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .rule{padding:18px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
 .rule .k{font-family:var(--mono);font-size:11px;color:var(--primary);letter-spacing:.06em;margin-bottom:8px}
 .rule p{font-size:13.5px;color:var(--text);line-height:1.5}
-/* retired */
 .retired{display:flex;flex-wrap:wrap;gap:8px}
-.retired span{font-family:var(--mono);font-size:12px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;color:var(--mute);background:var(--surface)}
-/* footer */
+.retired a{font-family:var(--mono);font-size:12px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;color:var(--mute);background:var(--surface)}
+.retired a:hover{color:var(--text)}
 footer{border-top:1px solid var(--line);padding:34px 0;font-size:13px;color:var(--mute)}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 footer .brand{font-size:14px}
+footer a:hover{color:var(--text)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.grid{grid-template-columns:1fr 1fr}.rules{grid-template-columns:1fr 1fr}}
 @media (max-width:720px){
-  .hero{padding:56px 0 44px}h1{font-size:38px}.hero p{font-size:16px}
-  nav ul{display:none}nav ul + .toggle{margin-left:auto}.grid,.rules{grid-template-columns:1fr}
-  .install{display:flex;flex-direction:column}.install .tabs{flex-direction:row;border-right:0;border-bottom:1px solid var(--term-line)}.install .tabs span{padding:10px 14px}
-  .install .copy{border-left:0;border-top:1px solid var(--term-line);padding:10px 16px;justify-content:center}
+  .hero{padding:52px 0 48px}.mark{font-size:72px}h1{font-size:32px}.hero p{font-size:16px}
+  nav ul{display:none}.toggle{margin-left:auto}.grid,.rules{grid-template-columns:1fr}
+  .term pre{font-size:12.5px;padding:14px 16px}.term .w{display:none}
 }
 </style>
 </head>
 <body>
 <nav><div class="wrap">
-  <a class="brand" href="/"><svg width="28" height="28" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="var(--tile)"/><text x="32" y="43" text-anchor="middle" font-family="IBM Plex Mono" font-weight="600" font-size="28" letter-spacing="-1.5" fill="#fff">RFS</text><rect x="14" y="48" width="36" height="4" rx="2" fill="var(--primary)"/></svg>RFS</a>
+  <a class="brand" href="/" aria-label="RFS home"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="var(--tile)"/><text x="32" y="43" text-anchor="middle" font-family="IBM Plex Mono" font-weight="600" font-size="28" letter-spacing="-1.5" fill="#fff">RFS</text><rect x="14" y="48" width="36" height="4" rx="2" fill="var(--primary)"/></svg>RFS</a>
   <ul><li><a href="#tools">Tools</a></li><li><a href="#how">How these are built</a></li><li><a href="https://github.com/Real-Fruit-Snacks/.github/blob/main/BRAND.md">Brand</a></li><li><a href="https://github.com/Real-Fruit-Snacks">GitHub ↗</a></li></ul>
-  <div class="toggle" title="Nightshift / Dayshift"></div>
+  <button class="toggle" type="button" aria-label="Switch between Nightshift (dark) and Dayshift (light)" title="Nightshift / Dayshift"></button>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <div class="label"><i></i>Real-Fruit-Snacks</div>
-  <h1>Real tools.<br>No filler.</h1>
-  <p>Small, sharp tools for people who run their own infrastructure. Mostly PowerShell, Python, and things that should have existed already.</p>
-  <div class="install">
-    <div class="tabs"><span class="on" data-cmd="irm rfs.sh/toolbox | iex">pwsh</span><span data-cmd="curl -fsSL rfs.sh/toolbox | sh">sh</span></div>
-    <code><b>❯</b> <span id="cmd">irm rfs.sh/toolbox | iex</span></code>
-    <div class="copy" id="copy">copy</div>
+  <div>
+    <div class="mark" aria-hidden="true">RFS</div>
+    <h1>Real tools. No filler.</h1>
+    <p>Small tools that each do one job: screenshots, video for the car, VPN ports, client certificates, throwaway identities. Mostly PowerShell, Rust and C#.</p>
+    <div class="org">REAL-FRUIT-SNACKS</div>
+  </div>
+  <div class="term" aria-label="The tools, as a terminal listing">
+    <div class="bar"><i></i><i></i><i></i><span>pwsh</span></div>
+    <pre id="ls"><b>$</b> <span style="color:var(--term-text)">gh repo list Real-Fruit-Snacks</span>
+<span class="cur"></span></pre>
   </div>
 </div></header>
 
 <section id="tools"><div class="wrap">
-  <h2>Tools</h2><div class="sub">One job each. Public, MIT, maintained.</div>
-  <div class="grid" id="grid"></div>
+  <h2>Tools</h2><div class="sub">One job each. Open source, maintained, issues answered.</div>
+  <div class="grid" id="grid"><noscript>The list needs JavaScript. All of them are on <a href="https://github.com/Real-Fruit-Snacks?tab=repositories">GitHub</a>.</noscript></div>
 </div></section>
 
 <section id="how"><div class="wrap">
@@ -123,7 +141,7 @@ footer .brand{font-size:14px}
 </div></section>
 
 <section><div class="wrap">
-  <h2>Retired</h2><div class="sub">The water series. Archived; each one says what replaced it.</div>
+  <h2>Retired</h2><div class="sub">The water series. Archived and read-only; no fixes or releases.</div>
   <div class="retired" id="retired"></div>
 </div></section>
 
@@ -133,14 +151,17 @@ footer .brand{font-size:14px}
   <a class="mono" href="https://github.com/Real-Fruit-Snacks">github.com/Real-Fruit-Snacks</a>
 </div></footer>
 <script>
-const root=document.documentElement;
-document.querySelector('.toggle').onclick=()=>{root.dataset.theme=root.dataset.theme==='dayshift'?'nightshift':'dayshift';try{localStorage.setItem('rfs-theme',root.dataset.theme)}catch(e){}};
-document.querySelectorAll('.install .tabs span').forEach(t=>t.onclick=()=>{document.querySelectorAll('.install .tabs span').forEach(x=>x.classList.remove('on'));t.classList.add('on');document.getElementById('cmd').textContent=t.dataset.cmd});
-document.getElementById('copy').onclick=async e=>{try{await navigator.clipboard.writeText(document.getElementById('cmd').textContent);e.target.textContent='copied';setTimeout(()=>e.target.textContent='copy',1200)}catch(_){}};
+const root=document.documentElement,tg=document.querySelector('.toggle');
+const sync=()=>tg.setAttribute('aria-pressed',root.dataset.theme==='dayshift');sync();
+tg.onclick=()=>{root.dataset.theme=root.dataset.theme==='dayshift'?'nightshift':'dayshift';sync();try{localStorage.setItem('rfs-theme',root.dataset.theme)}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const gh=r=>`https://github.com/Real-Fruit-Snacks/${encodeURIComponent(r)}`;
 fetch('tools.json').then(r=>r.json()).then(d=>{
-  document.getElementById('grid').innerHTML=d.tools.map(t=>`<a class="card" href="https://github.com/Real-Fruit-Snacks/${esc(t.repo)}"><div class="n"><i${t.featured?' class="hot"':''}></i>${esc(t.repo)}</div><div class="d">${esc(t.description)}</div><div class="f"><span>● <b>${esc(t.language)}</b></span>${t.version?`<span>${esc(t.version)}</span>`:''}${t.platform?`<span>${esc(t.platform)}</span>`:''}</div></a>`).join('');
-  document.getElementById('retired').innerHTML=d.retired.map(r=>`<span>${esc(r)}</span>`).join('');
+  const pad=Math.max(...d.tools.map(t=>t.repo.length))+2;
+  document.getElementById('ls').innerHTML=`<b>$</b> <span style="color:var(--term-text)">gh repo list Real-Fruit-Snacks</span>\n`+
+    d.tools.map(t=>`<a href="${gh(t.repo)}">${esc(t.repo)}</a>${' '.repeat(pad-t.repo.length)}<span class="w">${esc(t.short||'')}</span>`).join('\n')+`\n<span class="cur"></span>`;
+  document.getElementById('grid').innerHTML=d.tools.map(t=>`<a class="card" href="${gh(t.repo)}"><div class="n"><i${t.featured?' class="hot"':''}></i>${esc(t.repo)}</div><div class="d">${esc(t.description)}</div><div class="f"><span>● <b>${esc(t.language)}</b></span>${t.platform?`<span>${esc(t.platform)}</span>`:''}</div></a>`).join('');
+  document.getElementById('retired').innerHTML=d.retired.map(r=>`<a href="${gh(r)}">${esc(r)}</a>`).join('');
 });
 </script>
 </body></html>
