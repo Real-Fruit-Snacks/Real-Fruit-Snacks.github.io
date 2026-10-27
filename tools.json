@@ -6,6 +6,7 @@
     {"repo": "carify", "description": "Convert video for Uconnect USB playback, via ffmpeg", "language": "PowerShell", "platform": "any OS", "short": "video for Uconnect"},
     {"repo": "certapi", "description": "mTLS API client for the Windows certificate store", "language": "C#", "platform": "Windows", "short": "mTLS via the cert store"},
     {"repo": "identity-gen", "description": "Offline generator for throwaway signup identities", "language": "HTML", "platform": "browser", "short": "throwaway identities"},
+    {"repo": "amazon-order-sync", "description": "Syncs your Amazon orders into local Markdown notes", "language": "JavaScript", "platform": "Windows, Linux", "short": "orders to Markdown"},
     {"repo": "powershell-toolbox", "description": "A grab-bag of my PowerShell scripts, each one standalone", "language": "PowerShell", "platform": "Windows", "short": "standalone scripts"},
     {"repo": "forge-framework", "description": "Modular offensive-security framework with a console", "language": "Python", "short": "offensive-security console"},
     {"repo": "open-file", "description": "Learn and play chess in your browser, offline", "language": "TypeScript", "platform": "browser", "short": "chess in the browser"}
