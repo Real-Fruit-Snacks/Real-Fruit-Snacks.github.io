@@ -1,0 +1,20 @@
+name: check
+
+# The list is true: index.html matches tools.json, every listed repo is public and not archived, and every
+# retired one is archived. Weekly too, because a repo can be archived or renamed without this repo changing.
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '23 5 * * 1'
+  workflow_dispatch:
+
+jobs:
+  list:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: index.html matches tools.json, and tools.json matches GitHub
+        run: node scripts/build.mjs --check --github
+        env:
+          GH_TOKEN: ${{ github.token }}

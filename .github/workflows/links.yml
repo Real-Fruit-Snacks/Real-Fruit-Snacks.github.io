@@ -1,0 +1,26 @@
+name: links
+
+# Links in the page and the docs. Monthly as well, because the tool pages they point at move without
+# this repo changing.
+on:
+  push:
+    branches: [main]
+    paths: ['**.md', '**.html', 'tools.json']
+  schedule:
+    - cron: '41 6 4 * *'
+  workflow_dispatch:
+
+jobs:
+  lychee:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --max-retries 4 --retry-wait-time 10 --timeout 30
+            --accept 200,206,429
+            './**/*.md' './*.html'
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

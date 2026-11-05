@@ -1,14 +1,45 @@
 # real-fruit-snacks.github.io
 
-The RFS site. One static page, no build step, no framework, nothing loaded from other sites.
+The list of every tool I maintain, at **[real-fruit-snacks.github.io](https://real-fruit-snacks.github.io/)**. Each tool is shown by its job: what you hand it and what you get back. On the page an orange seam sweeps each job in turn.
 
-| File | Edit when |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/screen-dark.png">
+  <img alt="The page's first screen: the headline Small tools, one job each, an index of twelve tools with screen-mark marked, and screen-mark's job beside it: Ctrl+PrintScreen in, screen-mark_2026-11-05_091412.png out" src="assets/readme/screen-light.png" width="100%">
+</picture>
+
+One static page served by GitHub Pages from `main`. No build step on the server, no framework, and nothing loaded from other sites: the fonts are in `fonts/`, the script is about 110 lines in `script.js`.
+
+## Adding, renaming or retiring a tool
+
+Edit `tools.json`, then write it into the page:
+
+```sh
+node scripts/build.mjs
+```
+
+That puts the list into `index.html` between the `<!-- build: -->` markers, so the page shows all of it without JavaScript. Commit both files. CI runs `node scripts/build.mjs --check --github`, which fails if `index.html` is out of date, if a listed repo is archived, private or missing on GitHub, or if a retired one isn't archived. It runs weekly too, so a repo archived somewhere else shows up here.
+
+Each entry in `tools.json`:
+
+| Field | What |
 |---|---|
-| `tools.json` | A repo is added, renamed, retired, or its one-liner changes. Feeds both the hero terminal (`short`) and the cards (`description`). This is the only file that changes routinely. |
-| `index.html` | Layout or copy changes. Tokens at the top of `<style>` mirror `rfs-brand/brand/tokens/rfs.css` — change them there first. |
-| `assets/`, icons, `manifest.webmanifest` | Only when the brand package in `rfs-brand/brand/` changes. Copy, don't redraw. `assets/og.png` is `rfs-brand/brand/social/rfs-social-org-dark-1280x640.png` (from `tools/make-org-art.py`). |
-| `fonts/` | IBM Plex woff2 (OFL, `fonts/OFL.txt`). Sans 400/600/700, Mono 400/600. |
+| `repo` | The repo name under Real-Fruit-Snacks |
+| `description` | GitHub's one-line description, about 60 characters, no period |
+| `in`, `out` | The job, up to 40 characters each, quoted from what the tool really reads and writes. `` `backticks` `` set a part in mono |
+| `language`, `platform` | Shown beside the name |
+| `site` | The tool's project page; without one the row links to the repo |
 
-Themes: Nightshift (default) / Dayshift. Follows the OS preference, remembers the toggle in `localStorage`.
+`around` holds the repos that aren't tools (the brand, rfs.tools), and `retired` the archived ones. The same list is drawn into the [profile README](https://github.com/Real-Fruit-Snacks/Real-Fruit-Snacks) by its `art/make-board.py` and named in rfs-brand's `brand/org.toml`, so a change here goes there too.
 
-Brand guide: https://github.com/Real-Fruit-Snacks/rfs-brand/blob/main/BRAND.md
+## Files
+
+| File | What |
+|---|---|
+| `index.html`, `styles.css`, `script.js` | The page. Its design decisions are in [DESIGN.md](DESIGN.md) |
+| `tools.json`, `scripts/build.mjs` | The list, and the script that writes it into the page |
+| `fonts/` | Schibsted Grotesk and Fragment Mono, woff2, with their OFL licences |
+| `card.html` → `assets/og.png` | The social preview. Render it with killer-repo's `card.mjs card.html --out assets/og.png`; keep the path, the page's `og:image` points at it |
+| `scripts/mark.svg` | The favicon source. The icon files and `manifest.webmanifest` are built from it with killer-design's `icons.mjs build` |
+| `assets/readme/` | The screenshots above: the first screen at 1440 × 900, three seconds after load |
+
+Colours are the RFS Nightshift and Dayshift values from [rfs-brand](https://github.com/Real-Fruit-Snacks/rfs-brand/blob/main/BRAND.md). The theme follows the OS setting, and the Night/Day switch saves its choice as `rfs-theme`, the same key the other RFS pages use.

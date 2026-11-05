@@ -1,167 +1,245 @@
 <!doctype html>
-<html lang="en" data-theme="nightshift">
+<html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RFS — Real tools. No filler.</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real-Fruit-Snacks: small tools, one job each</title>
+<meta name="description" content="Small tools by one person, each for one job: screenshots, car video, VPN ports, client certificates, throwaway identities, Amazon orders, chess, Proxmox labs.">
 <link rel="canonical" href="https://real-fruit-snacks.github.io/">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon.ico" sizes="48x48">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0c0d10">
-<meta name="description" content="Small tools that each do one job: screenshots, car video, VPN ports, client certificates, throwaway identities, Amazon order history.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://real-fruit-snacks.github.io/">
-<meta property="og:title" content="RFS — Real tools. No filler.">
-<meta property="og:description" content="Small tools that each do one job: screenshots, car video, VPN ports, client certificates, throwaway identities, Amazon order history.">
+<meta property="og:title" content="Real-Fruit-Snacks: small tools, one job each">
+<meta property="og:description" content="Every tool I maintain, with the job it does: what goes in and what comes out.">
 <meta property="og:image" content="https://real-fruit-snacks.github.io/assets/og.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="RFS: Real tools. No filler. Beside it, a terminal listing the tools">
+<meta property="og:image:alt" content="Small tools, one job each. screen-mark's job: Ctrl+PrintScreen in, a timestamped PNG out, with an orange seam between them">
 <meta name="twitter:card" content="summary_large_image">
-<script>try{const t=localStorage.getItem('rfs-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.dataset.theme='dayshift'}catch(e){}</script>
-<link rel="preload" href="fonts/IBMPlexSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<style>
-/* ---- fonts: IBM Plex, vendored (fonts/OFL.txt) ---- */
-@font-face{font-family:"IBM Plex Sans";font-weight:400;font-display:swap;src:url("fonts/IBMPlexSans-Regular.woff2") format("woff2")}
-@font-face{font-family:"IBM Plex Sans";font-weight:600;font-display:swap;src:url("fonts/IBMPlexSans-SemiBold.woff2") format("woff2")}
-@font-face{font-family:"IBM Plex Sans";font-weight:700;font-display:swap;src:url("fonts/IBMPlexSans-Bold.woff2") format("woff2")}
-@font-face{font-family:"IBM Plex Mono";font-weight:400;font-display:swap;src:url("fonts/IBMPlexMono-Regular.woff2") format("woff2")}
-@font-face{font-family:"IBM Plex Mono";font-weight:600;font-display:swap;src:url("fonts/IBMPlexMono-SemiBold.woff2") format("woff2")}
-/* ---- tokens (from .github brand/tokens/rfs.css) ---- */
-:root,:root[data-theme="nightshift"]{color-scheme:dark;--bg:#0C0D10;--surface:#13151A;--raised:#1A1D24;--line:#262A33;--text:#E8E6E1;--mute:#8A8F99;--primary:#FF6A3D;--accent:#FFC247;--signal:#3DDC97;--tile:#1A1D24;--dots:#1E222B;--glow:0 0 24px rgba(255,106,61,.35);--glow-field:rgba(255,106,61,.10);--term-bg:#070809;--term-tab:#13151A;--term-line:#262A33;--term-text:#E8E6E1;--term-mute:#8A8F99;--term-primary:#FF6A3D;--term-accent:#FFC247;--sans:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
-:root[data-theme="dayshift"]{color-scheme:light;--bg:#F6F5F2;--surface:#FFFFFF;--raised:#ECEAE4;--line:#D6D3CB;--text:#1A1B1E;--mute:#6B6F78;--primary:#C43F11;--accent:#9A6700;--signal:#167A4E;--tile:#1A1B1E;--dots:#DDD9D1;--glow:none;--glow-field:transparent;--term-bg:#FFFFFF;--term-tab:#ECEAE4;--term-line:#D6D3CB;--term-text:#1A1B1E;--term-mute:#6B6F78;--term-primary:#C43F11;--term-accent:#9A6700}
-*{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--bg)}
-body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
-code,.mono{font-family:var(--mono)}
-/* nav */
-nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(8px);z-index:9}
-nav .wrap{display:flex;align-items:center;height:60px;gap:28px}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:600;font-size:18px;letter-spacing:-.05em}
-.brand svg{display:block}
-nav ul{display:flex;gap:22px;list-style:none;margin-left:auto;font-size:14px;color:var(--mute)}
-nav ul a:hover{color:var(--text)}
-.toggle{width:34px;height:20px;border-radius:10px;background:var(--raised);border:1px solid var(--line);position:relative;cursor:pointer;flex:none}
-.toggle::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--primary);box-shadow:var(--glow)}
-[data-theme="dayshift"] .toggle::after{left:16px}
-/* hero: the cover field (dot grid + Ember glow from the lower right) */
-.hero{padding:88px 0 80px;background:radial-gradient(70% 90% at 78% 110%,var(--glow-field),transparent 70%),radial-gradient(circle at 1.2px 1.2px,var(--dots) 1.2px,transparent 1.3px) 0 0/26px 26px}
-.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.hero .wrap>*{min-width:0}
-.mark{font-family:var(--mono);font-weight:600;font-size:96px;line-height:1;letter-spacing:-.05em;display:inline-block}
-.mark::after{content:"";display:block;height:7px;border-radius:4px;background:var(--primary);margin:14px 0 0 .04em;width:calc(100% - .1em)}
-h1{font-size:40px;line-height:1.1;letter-spacing:-.03em;font-weight:700;margin-top:30px}
-.hero p{font-size:17px;color:var(--mute);max-width:44ch;margin-top:16px}
-.org{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--mute);margin-top:22px}
-.term{border:1px solid var(--term-line);border-radius:10px;background:var(--term-bg);overflow:hidden}
-[data-theme="dayshift"] .term{box-shadow:0 1px 2px rgba(26,27,30,.05)}
-.term .bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;background:var(--term-tab);border-bottom:1px solid var(--term-line);position:relative}
-.term .bar i{width:9px;height:9px;border-radius:50%;background:var(--term-line)}
-.term .bar span{position:absolute;left:0;right:0;text-align:center;font-family:var(--mono);font-size:12px;color:var(--term-mute);pointer-events:none}
-.term pre{font-family:var(--mono);font-size:13.5px;line-height:28px;padding:16px 22px 18px;color:var(--term-mute);overflow-x:auto}
-.term b{color:var(--term-primary);font-weight:600}
-.term a{color:var(--term-text)}
-.term a:hover{color:var(--term-primary)}
-.term .l{color:var(--term-accent)}
-.term .cur{display:inline-block;width:8px;height:16px;background:var(--term-primary);vertical-align:-3px}
-/* sections */
-section{padding:56px 0;border-top:1px solid var(--line)}
-[data-theme="dayshift"] section:nth-of-type(even){background:var(--surface)}
-[data-theme="dayshift"] .card,[data-theme="dayshift"] .rule{box-shadow:0 1px 2px rgba(26,27,30,.04)}
-[data-theme="dayshift"] section:nth-of-type(even) .card,[data-theme="dayshift"] section:nth-of-type(even) .rule{background:var(--bg)}
-h2{font-size:22px;letter-spacing:-.01em;font-weight:600;margin-bottom:6px}
-.sub{color:var(--mute);font-size:14px;margin-bottom:28px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s}
-.card:hover{border-color:var(--primary)}
-.card .n{font-family:var(--mono);font-weight:600;font-size:14.5px;display:flex;align-items:center;gap:8px}
-.card .n i{width:8px;height:8px;border-radius:50%;background:var(--mute);display:inline-block}
-.card .n i.hot{background:var(--primary);box-shadow:var(--glow)}
-.card .d{font-size:13.5px;color:var(--mute);line-height:1.5;flex:1}
-.card .f{display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:4px}
-.card .f b{color:var(--text);font-weight:600}
-.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.rule{padding:18px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
-.rule .k{font-family:var(--mono);font-size:11px;color:var(--primary);letter-spacing:.06em;margin-bottom:8px}
-.rule p{font-size:13.5px;color:var(--text);line-height:1.5}
-.retired{display:flex;flex-wrap:wrap;gap:8px}
-.retired a{font-family:var(--mono);font-size:12px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;color:var(--mute);background:var(--surface)}
-.retired a:hover{color:var(--text)}
-footer{border-top:1px solid var(--line);padding:34px 0;font-size:13px;color:var(--mute)}
-footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
-footer .brand{font-size:14px}
-footer a:hover{color:var(--text)}
-@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.grid{grid-template-columns:1fr 1fr}.rules{grid-template-columns:1fr 1fr}}
-@media (max-width:720px){
-  .hero{padding:52px 0 48px}.mark{font-size:72px}h1{font-size:32px}.hero p{font-size:16px}
-  nav ul{display:none}.toggle{margin-left:auto}.grid,.rules{grid-template-columns:1fr}
-  .term pre{font-size:12.5px;padding:14px 16px}.term .w{display:none}
-}
-</style>
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0C0D10">
+<script>
+  // A saved theme wins over the system setting. The key is shared with the other RFS pages.
+  try { var t = localStorage.getItem('rfs-theme'); if (t === 'nightshift' || t === 'dayshift') document.documentElement.dataset.theme = t; } catch (e) {}
+  document.documentElement.classList.add('js');
+</script>
+<link rel="preload" href="fonts/schibsted-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fragment-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<nav><div class="wrap">
-  <a class="brand" href="/" aria-label="RFS home"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="var(--tile)"/><text x="32" y="43" text-anchor="middle" font-family="IBM Plex Mono" font-weight="600" font-size="28" letter-spacing="-1.5" fill="#fff">RFS</text><rect x="14" y="48" width="36" height="4" rx="2" fill="var(--primary)"/></svg>RFS</a>
-  <ul><li><a href="#tools">Tools</a></li><li><a href="#how">How these are built</a></li><li><a href="https://github.com/Real-Fruit-Snacks/rfs-brand/blob/main/BRAND.md">Brand</a></li><li><a href="https://github.com/Real-Fruit-Snacks">GitHub ↗</a></li></ul>
-  <button class="toggle" type="button" aria-label="Switch between Nightshift (dark) and Dayshift (light)" title="Nightshift / Dayshift"></button>
-</div></nav>
+<a class="skip" href="#tools">Skip to the tools</a>
 
-<header class="hero"><div class="wrap">
-  <div>
-    <div class="mark" aria-hidden="true">RFS</div>
-    <h1>Real tools. No filler.</h1>
-    <p>Small tools that each do one job: screenshots, video for the car, VPN ports, client certificates, throwaway identities, Amazon order history. Mostly PowerShell, Rust and C#.</p>
-    <div class="org">REAL-FRUIT-SNACKS</div>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="./" aria-label="Real-Fruit-Snacks, top of the page">Real-Fruit-Snacks<i aria-hidden="true"></i></a>
+    <nav aria-label="Page">
+      <a href="#tools">Tools</a>
+      <a href="#how">How they're built</a>
+      <a href="#retired">Retired</a>
+      <a href="https://github.com/Real-Fruit-Snacks">GitHub</a>
+    </nav>
+    <button class="theme" type="button" id="theme"><span class="sr-only">Theme: </span><span class="t-night">Night</span><span class="t-day">Day</span></button>
   </div>
-  <div class="term" aria-label="The tools, as a terminal listing">
-    <div class="bar"><i></i><i></i><i></i><span>pwsh</span></div>
-    <pre id="ls"><b>$</b> <span style="color:var(--term-text)">gh repo list Real-Fruit-Snacks</span>
-<span class="cur"></span></pre>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap hero-grid">
+    <h1>Small tools, one job each.</h1>
+    <p class="stand">Written by one person, for jobs I kept doing by hand. Each tool below is shown by its job: what you hand it, and what you get back.</p>
   </div>
-</div></header>
+</div>
 
-<section id="tools"><div class="wrap">
-  <h2>Tools</h2><div class="sub">One job each. Open source, maintained, issues answered.</div>
-  <div class="grid" id="grid"><noscript>The list needs JavaScript. All of them are on <a href="https://github.com/Real-Fruit-Snacks?tab=repositories">GitHub</a>.</noscript></div>
-</div></section>
-
-<section id="how"><div class="wrap">
-  <h2>How these are built</h2><div class="sub">The same four rules on every repo.</div>
-  <div class="rules">
-    <div class="rule"><div class="k">01</div><p>One job per tool. If it needs a second README section to explain, it's two tools.</p></div>
-    <div class="rule"><div class="k">02</div><p>Install is one line, shown first.</p></div>
-    <div class="rule"><div class="k">03</div><p>"Tested on" is a list of real versions, not a promise.</p></div>
-    <div class="rule"><div class="k">04</div><p>Known issues sit above the fold.</p></div>
+<section id="tools" class="board-wrap" aria-labelledby="tools-h">
+  <div class="wrap">
+    <div class="board-head">
+      <h2 id="tools-h"><span class="count"><!-- build:count -->12<!-- /build:count --></span> tools</h2>
+      <p class="cycle"><span class="tally" aria-hidden="true"><b id="at">01</b> / <!-- build:count -->12<!-- /build:count --></span><button class="pause" type="button" id="pause" aria-pressed="false">Pause</button></p>
+    </div>
+    <div class="board">
+      <div class="index-wrap">
+        <ol class="index" id="index">
+<!-- build:board -->
+<li class="tool" data-repo="screen-mark" data-site="https://real-fruit-snacks.github.io/screen-mark/" data-src="https://github.com/Real-Fruit-Snacks/screen-mark">
+  <a class="row" href="https://real-fruit-snacks.github.io/screen-mark/" aria-describedby="job-screen-mark"><span class="no">01</span><span class="name">screen-mark</span><span class="lang">Rust</span></a>
+  <div class="job" id="job-screen-mark">
+    <p class="desc">Screenshot capture and annotation in pure Rust</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">Ctrl+PrintScreen</span></code></span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out"><code><span class="w">screen-mark_</span><wbr><span class="w">2026-11-05_</span><wbr><span class="w">091412.png</span></code></span></p>
+    <p class="meta"><span class="m">Rust · Windows, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/screen-mark">Source</a></p>
   </div>
-</div></section>
+</li>
+<li class="tool" data-repo="port-sync" data-site="https://real-fruit-snacks.github.io/port-sync/" data-src="https://github.com/Real-Fruit-Snacks/port-sync">
+  <a class="row" href="https://real-fruit-snacks.github.io/port-sync/" aria-describedby="job-port-sync"><span class="no">02</span><span class="name">port-sync</span><span class="lang">PowerShell</span></a>
+  <div class="job" id="job-port-sync">
+    <p class="desc">Keeps qBittorrent's port synced to Proton VPN</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">Port</span> <span class="w">pair</span> <span class="w">51037-&gt;51037</span></code></span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out"><code><span class="w">listening</span> <span class="w">port</span> <span class="w">updated:</span> <span class="w">48213</span> <span class="w">-&gt;</span> <span class="w">51037</span></code></span></p>
+    <p class="meta"><span class="m">PowerShell · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/port-sync">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="carify" data-site="https://real-fruit-snacks.github.io/carify/" data-src="https://github.com/Real-Fruit-Snacks/carify">
+  <a class="row" href="https://real-fruit-snacks.github.io/carify/" aria-describedby="job-carify"><span class="no">03</span><span class="name">carify</span><span class="lang">sh, PowerShell</span></a>
+  <div class="job" id="job-carify">
+    <p class="desc">Convert video for Uconnect USB playback, via ffmpeg</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">HEVC <span class="w">10-bit</span> · 1080p · AC3 5.1</span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">H.264 <span class="w">8-bit</span> · 720p · AAC stereo</span></p>
+    <p class="meta"><span class="m">sh, PowerShell · Windows, macOS, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/carify">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="certapi" data-site="https://real-fruit-snacks.github.io/certapi/" data-src="https://github.com/Real-Fruit-Snacks/certapi">
+  <a class="row" href="https://real-fruit-snacks.github.io/certapi/" aria-describedby="job-certapi"><span class="no">04</span><span class="name">certapi</span><span class="lang">C#</span></a>
+  <div class="job" id="job-certapi">
+    <p class="desc">mTLS API client for the Windows certificate store</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">a client certificate in <code><span class="w">CurrentUser\</span><wbr><span class="w">My</span></code></span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">200 OK; the key never left the store</span></p>
+    <p class="meta"><span class="m">C# · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/certapi">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="identity-gen" data-site="https://real-fruit-snacks.github.io/identity-gen/" data-src="https://github.com/Real-Fruit-Snacks/identity-gen">
+  <a class="row" href="https://real-fruit-snacks.github.io/identity-gen/" aria-describedby="job-identity-gen"><span class="no">05</span><span class="name">identity-gen</span><span class="lang">HTML</span></a>
+  <div class="job" id="job-identity-gen">
+    <p class="desc">Offline generator for throwaway signup identities</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">a signup form that wants too much</span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">a <span class="w">stand-in:</span> name, handle, passphrase</span></p>
+    <p class="meta"><span class="m">HTML · browser</span> <a href="https://github.com/Real-Fruit-Snacks/identity-gen">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="amazon-order-sync" data-site="https://real-fruit-snacks.github.io/amazon-order-sync/" data-src="https://github.com/Real-Fruit-Snacks/amazon-order-sync">
+  <a class="row" href="https://real-fruit-snacks.github.io/amazon-order-sync/" aria-describedby="job-amazon-order-sync"><span class="no">06</span><span class="name">amazon-order-sync</span><span class="lang">JavaScript</span></a>
+  <div class="job" id="job-amazon-order-sync">
+    <p class="desc">Syncs your Amazon orders into local Markdown notes</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">Amazon's order history</span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">one <code><span class="w">Order-&lt;id&gt;.md</span></code> per order</span></p>
+    <p class="meta"><span class="m">JavaScript · Windows, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/amazon-order-sync">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="powershell-toolbox" data-site="https://real-fruit-snacks.github.io/powershell-toolbox/" data-src="https://github.com/Real-Fruit-Snacks/powershell-toolbox">
+  <a class="row" href="https://real-fruit-snacks.github.io/powershell-toolbox/" aria-describedby="job-powershell-toolbox"><span class="no">07</span><span class="name">powershell-toolbox</span><span class="lang">PowerShell</span></a>
+  <div class="job" id="job-powershell-toolbox">
+    <p class="desc">A grab-bag of my PowerShell scripts, each one standalone</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">every repo your <code><span class="w">gh</span></code> login sees</span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">one at a time: keep, archive or delete</span></p>
+    <p class="meta"><span class="m">PowerShell · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/powershell-toolbox">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="forge-framework" data-site="https://github.com/Real-Fruit-Snacks/forge-framework" data-src="https://github.com/Real-Fruit-Snacks/forge-framework">
+  <a class="row" href="https://github.com/Real-Fruit-Snacks/forge-framework" aria-describedby="job-forge-framework"><span class="no">08</span><span class="name">forge-framework</span><span class="lang">Python</span></a>
+  <div class="job" id="job-forge-framework">
+    <p class="desc">Modular offensive-security framework with a console</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">use</span></code>, <code><span class="w">set</span></code>, <code><span class="w">run</span></code></span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">hosts, creds and loot in one workspace</span></p>
+    <p class="meta"><span class="m">Python</span> <a href="https://github.com/Real-Fruit-Snacks/forge-framework">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="open-file" data-site="https://real-fruit-snacks.github.io/open-file/" data-src="https://github.com/Real-Fruit-Snacks/open-file">
+  <a class="row" href="https://real-fruit-snacks.github.io/open-file/" aria-describedby="job-open-file"><span class="no">09</span><span class="name">open-file</span><span class="lang">TypeScript</span></a>
+  <div class="job" id="job-open-file">
+    <p class="desc">Learn and play chess in your browser, offline</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">a blunder in one of your games</span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">a puzzle made from it</span></p>
+    <p class="meta"><span class="m">TypeScript · browser</span> <a href="https://github.com/Real-Fruit-Snacks/open-file">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="proxflow" data-site="https://real-fruit-snacks.github.io/proxflow/" data-src="https://github.com/Real-Fruit-Snacks/proxflow">
+  <a class="row" href="https://real-fruit-snacks.github.io/proxflow/" aria-describedby="job-proxflow"><span class="no">10</span><span class="name">proxflow</span><span class="lang">TypeScript</span></a>
+  <div class="job" id="job-proxflow">
+    <p class="desc">Proxmox map and lab builder that works offline</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">a Proxmox with no internet</span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">a domain lab, built from one canvas</span></p>
+    <p class="meta"><span class="m">TypeScript · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/proxflow">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="agent-toolkit" data-site="https://real-fruit-snacks.github.io/agent-toolkit/" data-src="https://github.com/Real-Fruit-Snacks/agent-toolkit">
+  <a class="row" href="https://real-fruit-snacks.github.io/agent-toolkit/" aria-describedby="job-agent-toolkit"><span class="no">11</span><span class="name">agent-toolkit</span><span class="lang">PowerShell</span></a>
+  <div class="job" id="job-agent-toolkit">
+    <p class="desc">Pinned installers and config for my coding setup</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">a bare Windows machine</span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">the same pinned coding setup</span></p>
+    <p class="meta"><span class="m">PowerShell · Windows, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/agent-toolkit">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="killer-skills" data-site="https://real-fruit-snacks.github.io/killer-skills/" data-src="https://github.com/Real-Fruit-Snacks/killer-skills">
+  <a class="row" href="https://real-fruit-snacks.github.io/killer-skills/" aria-describedby="job-killer-skills"><span class="no">12</span><span class="name">killer-skills</span><span class="lang">JavaScript</span></a>
+  <div class="job" id="job-killer-skills">
+    <p class="desc">Claude Code skills for sites, repo pages and review councils</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">/</span><wbr><span class="w">killer-design</span></code></span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">a site, screenshotted and fixed</span></p>
+    <p class="meta"><span class="m">JavaScript · Claude Code</span> <a href="https://github.com/Real-Fruit-Snacks/killer-skills">Source</a></p>
+  </div>
+</li>
+<!-- /build:board -->
+        </ol>
+        <i class="marker" aria-hidden="true"></i>
+      </div>
+      <div class="display" id="display" aria-hidden="true">
+<!-- build:display -->
+<div class="d-head"><span class="d-no">01</span><p class="d-name">screen-mark</p><p class="d-meta">Rust · Windows, Linux</p></div>
+<p class="d-desc">Screenshot capture and annotation in pure Rust</p>
+<div class="d-job">
+  <span class="k k-in">In</span>
+  <p class="v v-in"><span class="dim"><code><span class="w">Ctrl+PrintScreen</span></code></span><span class="lit"><code><span class="w">Ctrl+PrintScreen</span></code></span></p>
+  <span class="k k-out">Out</span>
+  <p class="v v-out"><code><span class="w">screen-mark_</span><wbr><span class="w">2026-11-05_</span><wbr><span class="w">091412.png</span></code></p>
+  <i class="seam"></i>
+</div>
+<p class="d-links"><a tabindex="-1" href="https://real-fruit-snacks.github.io/screen-mark/">Project page</a><a tabindex="-1" href="https://github.com/Real-Fruit-Snacks/screen-mark">Source</a></p>
+<!-- /build:display -->
+      </div>
+    </div>
+  </div>
+</section>
 
-<section><div class="wrap">
-  <h2>Retired</h2><div class="sub">The water series. Archived and read-only; no fixes or releases.</div>
-  <div class="retired" id="retired"></div>
-</div></section>
+<section id="around" class="around" aria-labelledby="around-h">
+  <div class="wrap split">
+    <h2 id="around-h">Around them</h2>
+    <ul class="plain">
+<!-- build:around -->
+<li><a href="https://real-fruit-snacks.github.io/rfs-brand/">rfs-brand</a><span>RFS brand, profile art and repo templates</span><a class="src" href="https://github.com/Real-Fruit-Snacks/rfs-brand">Source</a></li>
+<li><a href="https://rfs.tools/">rfs.tools</a><span>The front door at rfs.tools, one page pointing at GitHub</span><a class="src" href="https://github.com/Real-Fruit-Snacks/rfs.tools">Source</a></li>
+<!-- /build:around -->
+    </ul>
+  </div>
+</section>
 
-<footer><div class="wrap">
-  <span class="brand">RFS</span>
-  <span>Issues and PRs welcome on any active repo. No roadmap, no Discord.</span>
-  <a class="mono" href="https://github.com/Real-Fruit-Snacks">github.com/Real-Fruit-Snacks</a>
-</div></footer>
-<script>
-const root=document.documentElement,tg=document.querySelector('.toggle');
-const sync=()=>tg.setAttribute('aria-pressed',root.dataset.theme==='dayshift');sync();
-tg.onclick=()=>{root.dataset.theme=root.dataset.theme==='dayshift'?'nightshift':'dayshift';sync();try{localStorage.setItem('rfs-theme',root.dataset.theme)}catch(e){}};
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const gh=r=>`https://github.com/Real-Fruit-Snacks/${encodeURIComponent(r)}`;
-fetch('tools.json').then(r=>r.json()).then(d=>{
-  const pad=Math.max(...d.tools.map(t=>t.repo.length))+2;
-  document.getElementById('ls').innerHTML=`<b>$</b> <span style="color:var(--term-text)">gh repo list Real-Fruit-Snacks</span>\n`+
-    d.tools.map(t=>`<a href="${gh(t.repo)}">${esc(t.repo)}</a>${' '.repeat(pad-t.repo.length)}<span class="w">${esc(t.short||'')}</span>`).join('\n')+`\n<span class="cur"></span>`;
-  document.getElementById('grid').innerHTML=d.tools.map(t=>`<a class="card" href="${gh(t.repo)}"><div class="n"><i${t.featured?' class="hot"':''}></i>${esc(t.repo)}</div><div class="d">${esc(t.description)}</div><div class="f"><span>● <b>${esc(t.language)}</b></span>${t.platform?`<span>${esc(t.platform)}</span>`:''}</div></a>`).join('');
-  document.getElementById('retired').innerHTML=d.retired.map(r=>`<a href="${gh(r)}">${esc(r)}</a>`).join('');
-});
-</script>
-</body></html>
+<section id="how" class="how" aria-labelledby="how-h">
+  <div class="wrap">
+    <h2 id="how-h">How they're built</h2>
+    <p class="lede">The rules I hold every repo to.</p>
+    <ol class="rules">
+      <li><p>One job per tool. If it needs a second README section to explain, it's two tools.</p></li>
+      <li><p>Install is one line, shown first.</p></li>
+      <li><p>“Tested on” is a list of real versions, not a promise.</p></li>
+      <li><p>Known issues sit above the fold.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="retired" class="retired" aria-labelledby="retired-h">
+  <div class="wrap split">
+    <h2 id="retired-h">Retired</h2>
+    <div>
+      <p><span class="state">Archived</span> The water series: read-only, with no fixes or releases.</p>
+      <ul class="names"><!-- build:retired --><li><a href="https://github.com/Real-Fruit-Snacks/Kraken">Kraken</a></li><li><a href="https://github.com/Real-Fruit-Snacks/Maelstrom">Maelstrom</a></li><li><a href="https://github.com/Real-Fruit-Snacks/Rapids">Rapids</a></li><li><a href="https://github.com/Real-Fruit-Snacks/Lure">Lure</a></li><li><a href="https://github.com/Real-Fruit-Snacks/Undertow">Undertow</a></li><!-- /build:retired --></ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="sign">Real tools. No filler.</p>
+    <div class="foot-grid">
+      <p>Issues and PRs welcome on any active repo. No roadmap, no Discord.</p>
+      <p><a href="https://github.com/Real-Fruit-Snacks">github.com/Real-Fruit-Snacks</a> · <a href="https://rfs.tools/">rfs.tools</a> · <a href="https://github.com/Real-Fruit-Snacks/Real-Fruit-Snacks.github.io">This page's source</a></p>
+      <p class="colophon">Set in Schibsted Grotesk and Fragment Mono. Colours from the <a href="https://github.com/Real-Fruit-Snacks/rfs-brand/blob/main/BRAND.md">RFS brand</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

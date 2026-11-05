@@ -1,15 +1,34 @@
 {
-  "_comment": "One entry per PUBLIC repo, in display order. description: <= 60 chars, no period, same as the GitHub repo description. short: <= 26 chars, for the hero terminal (match .github brand/org.toml where the tool is listed there). featured: true on at most a few.",
+  "_comment": "One entry per PUBLIC, non-archived repo, in display order. description: <= 60 chars, no period, as on GitHub. in / out: the job, <= 40 chars each, quoted from what the tool really reads and writes; `backticks` set it in mono. site: the project page, if there is one. short: <= 26 chars (rfs-brand org.toml). After editing, run: node scripts/build.mjs",
   "tools": [
-    {"repo": "screen-mark", "description": "Screenshot capture and annotation in pure Rust", "language": "Rust", "featured": true, "short": "capture and annotate"},
-    {"repo": "port-sync", "description": "Keeps qBittorrent's port synced to Proton VPN", "language": "PowerShell", "platform": "Windows", "short": "qBittorrent + Proton"},
-    {"repo": "carify", "description": "Convert video for Uconnect USB playback, via ffmpeg", "language": "PowerShell", "platform": "any OS", "short": "video for Uconnect"},
-    {"repo": "certapi", "description": "mTLS API client for the Windows certificate store", "language": "C#", "platform": "Windows", "short": "mTLS via the cert store"},
-    {"repo": "identity-gen", "description": "Offline generator for throwaway signup identities", "language": "HTML", "platform": "browser", "short": "throwaway identities"},
-    {"repo": "amazon-order-sync", "description": "Syncs your Amazon orders into local Markdown notes", "language": "JavaScript", "platform": "Windows, Linux", "short": "orders to Markdown"},
-    {"repo": "powershell-toolbox", "description": "A grab-bag of my PowerShell scripts, each one standalone", "language": "PowerShell", "platform": "Windows", "short": "standalone scripts"},
-    {"repo": "forge-framework", "description": "Modular offensive-security framework with a console", "language": "Python", "short": "offensive-security console"},
-    {"repo": "open-file", "description": "Learn and play chess in your browser, offline", "language": "TypeScript", "platform": "browser", "short": "chess in the browser"}
+    {"repo": "screen-mark", "description": "Screenshot capture and annotation in pure Rust", "language": "Rust", "platform": "Windows, Linux", "featured": true, "short": "capture and annotate",
+     "in": "`Ctrl+PrintScreen`", "out": "`screen-mark_2026-11-05_091412.png`", "site": "https://real-fruit-snacks.github.io/screen-mark/"},
+    {"repo": "port-sync", "description": "Keeps qBittorrent's port synced to Proton VPN", "language": "PowerShell", "platform": "Windows", "short": "qBittorrent + Proton",
+     "in": "`Port pair 51037->51037`", "out": "`listening port updated: 48213 -> 51037`", "site": "https://real-fruit-snacks.github.io/port-sync/"},
+    {"repo": "carify", "description": "Convert video for Uconnect USB playback, via ffmpeg", "language": "sh, PowerShell", "platform": "Windows, macOS, Linux", "short": "video for Uconnect",
+     "in": "HEVC 10-bit · 1080p · AC3 5.1", "out": "H.264 8-bit · 720p · AAC stereo", "site": "https://real-fruit-snacks.github.io/carify/"},
+    {"repo": "certapi", "description": "mTLS API client for the Windows certificate store", "language": "C#", "platform": "Windows", "short": "mTLS via the cert store",
+     "in": "a client certificate in `CurrentUser\\My`", "out": "200 OK; the key never left the store", "site": "https://real-fruit-snacks.github.io/certapi/"},
+    {"repo": "identity-gen", "description": "Offline generator for throwaway signup identities", "language": "HTML", "platform": "browser", "short": "throwaway identities",
+     "in": "a signup form that wants too much", "out": "a stand-in: name, handle, passphrase", "site": "https://real-fruit-snacks.github.io/identity-gen/"},
+    {"repo": "amazon-order-sync", "description": "Syncs your Amazon orders into local Markdown notes", "language": "JavaScript", "platform": "Windows, Linux", "short": "orders to Markdown",
+     "in": "Amazon's order history", "out": "one `Order-<id>.md` per order", "site": "https://real-fruit-snacks.github.io/amazon-order-sync/"},
+    {"repo": "powershell-toolbox", "description": "A grab-bag of my PowerShell scripts, each one standalone", "language": "PowerShell", "platform": "Windows", "short": "standalone scripts",
+     "in": "every repo your `gh` login sees", "out": "one at a time: keep, archive or delete", "site": "https://real-fruit-snacks.github.io/powershell-toolbox/"},
+    {"repo": "forge-framework", "description": "Modular offensive-security framework with a console", "language": "Python", "short": "offensive-security console",
+     "in": "`use`, `set`, `run`", "out": "hosts, creds and loot in one workspace"},
+    {"repo": "open-file", "description": "Learn and play chess in your browser, offline", "language": "TypeScript", "platform": "browser", "short": "chess in the browser",
+     "in": "a blunder in one of your games", "out": "a puzzle made from it", "site": "https://real-fruit-snacks.github.io/open-file/"},
+    {"repo": "proxflow", "description": "Proxmox map and lab builder that works offline", "language": "TypeScript", "platform": "Windows", "short": "Proxmox labs offline",
+     "in": "a Proxmox with no internet", "out": "a domain lab, built from one canvas", "site": "https://real-fruit-snacks.github.io/proxflow/"},
+    {"repo": "agent-toolkit", "description": "Pinned installers and config for my coding setup", "language": "PowerShell", "platform": "Windows, Linux", "short": "pinned coding setup",
+     "in": "a bare Windows machine", "out": "the same pinned coding setup", "site": "https://real-fruit-snacks.github.io/agent-toolkit/"},
+    {"repo": "killer-skills", "description": "Claude Code skills for sites, repo pages and review councils", "language": "JavaScript", "platform": "Claude Code", "short": "skills for Claude Code",
+     "in": "`/killer-design`", "out": "a site, screenshotted and fixed", "site": "https://real-fruit-snacks.github.io/killer-skills/"}
+  ],
+  "around": [
+    {"repo": "rfs-brand", "description": "RFS brand, profile art and repo templates", "site": "https://real-fruit-snacks.github.io/rfs-brand/"},
+    {"repo": "rfs.tools", "description": "The front door at rfs.tools, one page pointing at GitHub", "site": "https://rfs.tools/"}
   ],
   "retired": ["Kraken", "Maelstrom", "Rapids", "Lure", "Undertow"]
 }
