@@ -71,6 +71,9 @@ test('--github fails on a repo around the tools that gh cannot find', (t) =>
 test('--github fails on a retired repo that is not archived', (t) =>
   fails(t, github({ Old: repo('Old') }), 'Old: listed as retired, but not archived'));
 
+test('--github fails on a retired repo that is private: the page links to it', (t) =>
+  fails(t, github({ Old: repo('Old', { archived: true, private: true }) }), 'Old: retired, but private; the page links to it'));
+
 test('--github fails on a retired repo gh cannot find', (t) =>
   fails(t, github({ Old: null }), 'Old: retired, but not found on GitHub'));
 
