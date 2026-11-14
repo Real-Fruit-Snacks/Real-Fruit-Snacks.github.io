@@ -4,7 +4,8 @@
 //   node scripts/build.mjs            rewrite index.html
 //   node scripts/build.mjs --check    exit 1 if index.html is out of date (CI)
 //   node scripts/build.mjs --github   also check every repo against GitHub with `gh`: listed tools are
-//                                     public and not archived, retired ones are archived (CI)
+//                                     public and not archived, retired ones are archived and public (CI)
+//   node scripts/build.mjs --help     print the usage; any other option is refused with exit 2
 import { readFileSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';

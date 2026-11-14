@@ -17,7 +17,7 @@ Edit `tools.json`, then write it into the page:
 node scripts/build.mjs
 ```
 
-That puts the list into `index.html` between the `<!-- build: -->` markers, so the page shows all of it without JavaScript. Commit both files. CI runs `node scripts/build.mjs --check --github`, which fails if `index.html` is out of date, if a listed repo is archived, private or missing on GitHub, or if a retired one isn't archived. It runs weekly too, so a repo archived somewhere else shows up here.
+That puts the list into `index.html` between the `<!-- build: -->` markers, so the page shows all of it without JavaScript. Commit both files. CI runs `node scripts/build.mjs --check --github`, which fails if `index.html` is out of date, if a listed repo is archived, private or missing on GitHub, or if a retired one isn't archived or is private (the page links to it). It runs weekly too, so a repo archived somewhere else shows up here.
 
 Each entry in `tools.json`:
 
@@ -33,14 +33,14 @@ Each entry in `tools.json`:
 
 ## Tests
 
-The tests cover `scripts/build.mjs`: every `tools.json` rule it enforces, what it writes between the build markers, `--check` on a current page and a stale one, and `--github` against a stand-in `gh`, so they never reach GitHub and need no token. They use `node:test` and nothing else; Node 24, no install. From the repo's root:
+The tests cover `scripts/build.mjs`: every `tools.json` rule it enforces, what it writes between the build markers, `--check` on a current page and a stale one, CRLF and LF checkouts, unknown options and `--help`, and `--github` against a stand-in `gh`, so they never reach GitHub and need no token. `script.test.mjs` runs `script.js` against a stand-in browser (`fake-page.mjs`) to check that the board follows reduced motion when it's turned on or off with the page open. They use `node:test` and nothing else; Node 24, no install. From the repo's root:
 
 ```sh
 cd tests
 node --test
 ```
 
-Each test works on a copy of the script in a temporary folder, so `index.html` and `tools.json` are never touched. CI runs them on every push and pull request, in the `tests` job of `.github/workflows/check.yml`.
+Each build test works on a copy of the script in a temporary folder, so `index.html` and `tools.json` are never touched. CI runs them on every push and pull request, in the `tests` job of `.github/workflows/check.yml`.
 
 ## Files
 
@@ -48,7 +48,7 @@ Each test works on a copy of the script in a temporary folder, so `index.html` a
 |---|---|
 | `index.html`, `styles.css`, `script.js` | The page. Its design decisions are in [DESIGN.md](DESIGN.md) |
 | `tools.json`, `scripts/build.mjs` | The list, and the script that writes it into the page |
-| `tests/` | The tests for `scripts/build.mjs`, with the stand-in `gh` in `tests/stand-in/` |
+| `tests/` | The tests for `scripts/build.mjs` and `script.js`, with the stand-in `gh` in `tests/stand-in/` |
 | `fonts/` | Schibsted Grotesk and Fragment Mono, woff2, with their OFL licences |
 | `card.html` → `assets/og.png` | The social preview. Render it with killer-repo's `card.mjs card.html --out assets/og.png`; keep the path, the page's `og:image` points at it |
 | `scripts/mark.svg` | The favicon source. The icon files and `manifest.webmanifest` are built from it with killer-design's `icons.mjs build` |

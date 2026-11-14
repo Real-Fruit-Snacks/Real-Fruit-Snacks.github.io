@@ -44,7 +44,7 @@ The seam: an Ember hairline that passes across a job from left to right. Behind 
 The first screen is the whole collection plus one job being done. On load the display shows screen-mark's input; 300ms later the seam sweeps it and `screen-mark_2026-11-05_091412.png` appears behind it. Every 4.5s the Ember marker slides down the index to the next tool and its job runs. Pointing at or focusing any row runs that tool's job and stops the cycle; Pause stops it too.
 
 - **No JS:** the display shows screen-mark's finished job and every row shows its own job and description.
-- **Reduced motion:** no cycle and no sweep. Hover and focus still switch the display, instantly.
+- **Reduced motion:** no cycle and no sweep. Hover and focus still switch the display, instantly. Turning it on with the page open stops the cycle; turning it off starts it again, unless the visitor paused or picked a tool meanwhile.
 - **Phone:** the display sits under the headline on the first screen and keeps cycling; the index rows below carry their jobs inline.
 
 ## Imagery and texture
