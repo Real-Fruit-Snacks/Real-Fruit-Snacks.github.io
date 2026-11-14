@@ -14,7 +14,7 @@ import { dirname, join } from 'node:path';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OWNER = 'Real-Fruit-Snacks';
 const args = new Set(process.argv.slice(2));
-const USAGE = 'usage: node scripts/build.mjs [--check] [--github]\n  (none)     rewrite index.html from tools.json\n  --check    exit 1 if index.html is out of date\n  --github   also check every repo against GitHub with gh';
+const USAGE = 'usage: node scripts/build.mjs [--check] [--github] [--help]\n  (none)     rewrite index.html from tools.json\n  --check    exit 1 if index.html is out of date\n  --github   also check every repo against GitHub with gh\n  --help     print this';
 if (args.has('--help') || args.has('-h')) { console.log(USAGE); process.exit(0); }
 const unknown = [...args].filter((a) => a !== '--check' && a !== '--github');
 if (unknown.length) { console.error(`unknown option: ${unknown.join(' ')}\n${USAGE}`); process.exit(2); }

@@ -1,7 +1,7 @@
 name: check
 
 # The list is true: index.html matches tools.json, every listed repo is public and not archived, and every
-# retired one is archived. Weekly too, because a repo can be archived or renamed without this repo changing.
+# retired one is archived and public. Weekly too, because a repo can be archived or renamed without this repo changing.
 on:
   push:
   pull_request:
