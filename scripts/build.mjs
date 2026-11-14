@@ -123,6 +123,7 @@ if (args.has('--github')) {
   for (const name of data.retired) {
     let r;
     try { r = gh(name); } catch { fails.push(`${name}: retired, but not found on GitHub`); continue; }
+    if (r.p) fails.push(`${name}: retired, but private; the page links to it`);
     if (!r.a) fails.push(`${name}: listed as retired, but not archived`);
   }
   if (fails.length) { console.error(fails.join('\n')); process.exit(1); }
