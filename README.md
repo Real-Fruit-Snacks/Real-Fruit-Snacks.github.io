@@ -50,8 +50,8 @@ Each build test works on a copy of the script in a temporary folder, so `index.h
 | `tools.json`, `scripts/build.mjs` | The list, and the script that writes it into the page |
 | `tests/` | The tests for `scripts/build.mjs` and `script.js`, with the stand-in `gh` in `tests/stand-in/` |
 | `fonts/` | Schibsted Grotesk and Fragment Mono, woff2, with their OFL licences |
-| `card.html` → `assets/og.png` | The social preview. Render it with killer-repo's `card.mjs card.html --out assets/og.png`; keep the path, the page's `og:image` points at it |
-| `scripts/mark.svg` | The favicon source. The icon files and `manifest.webmanifest` are built from it with killer-design's `icons.mjs build` |
+| `card.html` → `assets/og.png` | The social preview. Screenshot it at 1280 × 640 in a headless browser, served over HTTP so the fonts load; keep the path, the page's `og:image` points at it |
+| `scripts/mark.svg` | The favicon source. The icon files and `manifest.webmanifest` are built from it: `favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` and `icon-maskable-512.png` |
 | `assets/readme/` | The screenshots above: the first screen at 1440 × 900, three seconds after load |
 
 Colours are the RFS Nightshift and Dayshift values from [rfs-brand](https://github.com/Real-Fruit-Snacks/rfs-brand/blob/main/BRAND.md). The theme follows the OS setting, and the Night/Day switch saves its choice as `rfs-theme`, the same key the other RFS pages use.

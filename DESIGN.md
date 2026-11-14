@@ -64,7 +64,7 @@ First person where it's my reason ("jobs I kept doing by hand"), plain labels ev
 - `tools.json` is the list. `node scripts/build.mjs` writes it into `index.html` between the `build:` markers, so the page works without JS; CI fails if they differ, or if a listed repo is archived, private or missing.
 - `index.html`, `styles.css`, `script.js`, `fonts/`, the icons and `manifest.webmanifest`.
 - `assets/og.png` is the social preview, rendered from `scripts/card.html`. Its URL is unchanged.
-- `scripts/mark.svg` is the favicon source; the icon files are built from it with killer-design's `icons.mjs`.
+- `scripts/mark.svg` is the favicon source; the icon files and `manifest.webmanifest` are built from it.
 
 ## Alternatives considered
 
