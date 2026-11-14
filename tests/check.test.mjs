@@ -1,9 +1,9 @@
 // --check: exit 0 on a page that matches tools.json, exit 1 on one that doesn't, and never write the page.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { data, project, tool } from './helpers.mjs';
+import { data, project, tool, ROOT } from './helpers.mjs';
 
 test('--check passes on a page that is current', (t) => {
   const p = project(t);
@@ -19,7 +19,9 @@ test('--check passes on the real page', (t) => {
   const p = project(t, { real: true });
   const r = p.run(['--check']);
   assert.equal(r.code, 0, r.stderr);
-  assert.match(r.stdout, /^index\.html matches tools\.json \(\d+ tools, \d+ around them, \d+ retired\)/);
+  // The counts come from the real tools.json, so this follows the list as tools are added and retired.
+  const real = JSON.parse(readFileSync(join(ROOT, 'tools.json'), 'utf8'));
+  assert.equal(r.stdout.trim(), `index.html matches tools.json (${real.tools.length} tools, ${real.around.length} around them, ${real.retired.length} retired)`);
 });
 
 test('--check fails on a page that was never built, and leaves it as it was', (t) => {
