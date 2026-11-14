@@ -65,8 +65,10 @@ export function project(t, { data: d = data(), page = PAGE, real = false } = {})
       const log = join(dir, 'gh-calls.log');
       writeFileSync(ghFile, JSON.stringify(gh));
       writeFileSync(log, '');
+      // No GitHub token reaches the script: the stand-in needs none, and nothing here should be able to use one.
+      const env = Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^(GH|GITHUB)_(ENTERPRISE_)?TOKEN$/i.test(k)));
       const r = spawnSync(process.execPath, ['--require', USE_GH, join(dir, 'scripts', 'build.mjs'), ...args], {
-        cwd: dir, encoding: 'utf8', env: { ...process.env, GH_STAND_IN: ghFile, GH_STAND_IN_LOG: log },
+        cwd: dir, encoding: 'utf8', env: { ...env, GH_STAND_IN: ghFile, GH_STAND_IN_LOG: log },
       });
       const calls = readFileSync(log, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l));
       return { code: r.status, stdout: r.stdout, stderr: r.stderr, calls };
