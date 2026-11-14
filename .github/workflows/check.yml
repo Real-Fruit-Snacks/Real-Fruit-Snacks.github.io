@@ -10,8 +10,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  # The tests for scripts/build.mjs: its tools.json rules, the build blocks, --check, and --github against
-  # a stand-in gh, so this job needs no token.
+  # The tests for scripts/build.mjs (its tools.json rules, the build blocks, --check, and --github against
+  # a stand-in gh, so this job needs no token) and for script.js against a stand-in browser.
   tests:
     runs-on: ubuntu-24.04
     steps:
