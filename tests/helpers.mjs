@@ -46,11 +46,9 @@ export function project(t, { data: d = data(), page = PAGE, real = false } = {})
   mkdirSync(join(dir, 'scripts'));
   copyFileSync(join(ROOT, 'scripts', 'build.mjs'), join(dir, 'scripts', 'build.mjs'));
   if (real) {
-    // With LF endings, as they are committed and as CI checks them out: a Windows checkout with
-    // core.autocrlf=true has CRLF, and build.mjs writes LF, so there the page would look out of date.
-    const lf = (name) => writeFileSync(join(dir, name), readFileSync(join(ROOT, name), 'utf8').replaceAll('\r\n', '\n'));
-    lf('tools.json');
-    lf('index.html');
+    // As they are in this checkout, line endings and all: build.mjs reads CRLF and LF alike.
+    copyFileSync(join(ROOT, 'tools.json'), join(dir, 'tools.json'));
+    copyFileSync(join(ROOT, 'index.html'), join(dir, 'index.html'));
   } else {
     writeFileSync(join(dir, 'tools.json'), JSON.stringify(d, null, 2));
     writeFileSync(join(dir, 'index.html'), page);
@@ -65,8 +63,10 @@ export function project(t, { data: d = data(), page = PAGE, real = false } = {})
       const log = join(dir, 'gh-calls.log');
       writeFileSync(ghFile, JSON.stringify(gh));
       writeFileSync(log, '');
-      // No GitHub token reaches the script: the stand-in needs none, and nothing here should be able to use one.
+      // No GitHub login reaches the script: the stand-in needs none, so no token, and GH_CONFIG_DIR is the
+      // empty temp folder, so even a real gh reached by mistake would find no stored login.
       const env = Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^(GH|GITHUB)_(ENTERPRISE_)?TOKEN$/i.test(k)));
+      env.GH_CONFIG_DIR = dir;
       const r = spawnSync(process.execPath, ['--require', USE_GH, join(dir, 'scripts', 'build.mjs'), ...args], {
         cwd: dir, encoding: 'utf8', env: { ...env, GH_STAND_IN: ghFile, GH_STAND_IN_LOG: log },
       });
