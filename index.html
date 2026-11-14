@@ -56,8 +56,8 @@
 <section id="tools" class="board-wrap" aria-labelledby="tools-h">
   <div class="wrap">
     <div class="board-head">
-      <h2 id="tools-h"><span class="count"><!-- build:count -->11<!-- /build:count --></span> tools</h2>
-      <p class="cycle"><span class="tally" aria-hidden="true"><b id="at">01</b> / <!-- build:count -->11<!-- /build:count --></span><button class="pause" type="button" id="pause" aria-pressed="false">Pause</button></p>
+      <h2 id="tools-h"><span class="count"><!-- build:count -->12<!-- /build:count --></span> tools</h2>
+      <p class="cycle"><span class="tally" aria-hidden="true"><b id="at">01</b> / <!-- build:count -->12<!-- /build:count --></span><button class="pause" type="button" id="pause" aria-pressed="false">Pause</button></p>
     </div>
     <div class="board">
       <div class="index-wrap">
@@ -73,12 +73,12 @@
   </div>
 </li>
 <li class="tool" data-repo="port-sync" data-site="https://real-fruit-snacks.github.io/port-sync/" data-src="https://github.com/Real-Fruit-Snacks/port-sync">
-  <a class="row" href="https://real-fruit-snacks.github.io/port-sync/" aria-describedby="job-port-sync"><span class="no">02</span><span class="name">port-sync</span><span class="lang">PowerShell</span></a>
+  <a class="row" href="https://real-fruit-snacks.github.io/port-sync/" aria-describedby="job-port-sync"><span class="no">02</span><span class="name">port-sync</span><span class="lang">Rust</span></a>
   <div class="job" id="job-port-sync">
     <p class="desc">Keeps qBittorrent's port synced to Proton VPN</p>
     <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">Port</span> <span class="w">pair</span> <span class="w">51037-&gt;51037</span></code></span></p>
     <p class="io"><span class="k k-out">Out</span> <span class="v-out"><code><span class="w">listening</span> <span class="w">port</span> <span class="w">updated:</span> <span class="w">48213</span> <span class="w">-&gt;</span> <span class="w">51037</span></code></span></p>
-    <p class="meta"><span class="m">PowerShell · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/port-sync">Source</a></p>
+    <p class="meta"><span class="m">Rust · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/port-sync">Source</a></p>
   </div>
 </li>
 <li class="tool" data-repo="carify" data-site="https://real-fruit-snacks.github.io/carify/" data-src="https://github.com/Real-Fruit-Snacks/carify">
@@ -109,12 +109,12 @@
   </div>
 </li>
 <li class="tool" data-repo="amazon-order-sync" data-site="https://real-fruit-snacks.github.io/amazon-order-sync/" data-src="https://github.com/Real-Fruit-Snacks/amazon-order-sync">
-  <a class="row" href="https://real-fruit-snacks.github.io/amazon-order-sync/" aria-describedby="job-amazon-order-sync"><span class="no">06</span><span class="name">amazon-order-sync</span><span class="lang">JavaScript</span></a>
+  <a class="row" href="https://real-fruit-snacks.github.io/amazon-order-sync/" aria-describedby="job-amazon-order-sync"><span class="no">06</span><span class="name">amazon-order-sync</span><span class="lang">Rust</span></a>
   <div class="job" id="job-amazon-order-sync">
     <p class="desc">Syncs your Amazon orders into local Markdown notes</p>
     <p class="io"><span class="k k-in">In</span> <span class="v-in">Amazon's order history</span></p>
     <p class="io"><span class="k k-out">Out</span> <span class="v-out">one <code><span class="w">Order-&lt;id&gt;.md</span></code> per order</span></p>
-    <p class="meta"><span class="m">JavaScript · Windows, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/amazon-order-sync">Source</a></p>
+    <p class="meta"><span class="m">Rust · Windows, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/amazon-order-sync">Source</a></p>
   </div>
 </li>
 <li class="tool" data-repo="powershell-toolbox" data-site="https://real-fruit-snacks.github.io/powershell-toolbox/" data-src="https://github.com/Real-Fruit-Snacks/powershell-toolbox">
@@ -156,10 +156,19 @@
 <li class="tool" data-repo="agent-toolkit" data-site="https://real-fruit-snacks.github.io/agent-toolkit/" data-src="https://github.com/Real-Fruit-Snacks/agent-toolkit">
   <a class="row" href="https://real-fruit-snacks.github.io/agent-toolkit/" aria-describedby="job-agent-toolkit"><span class="no">11</span><span class="name">agent-toolkit</span><span class="lang">PowerShell</span></a>
   <div class="job" id="job-agent-toolkit">
-    <p class="desc">Pinned installers and config for my coding setup</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in">a bare Windows machine</span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out">the same pinned coding setup</span></p>
+    <p class="desc">T3 Code and Claude Code on Windows, without admin rights</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">a Windows desktop where you aren't admin</span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">T3 Code and Claude Code, no UAC prompt</span></p>
     <p class="meta"><span class="m">PowerShell · Windows, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/agent-toolkit">Source</a></p>
+  </div>
+</li>
+<li class="tool" data-repo="dev-toolkit" data-site="https://github.com/Real-Fruit-Snacks/dev-toolkit" data-src="https://github.com/Real-Fruit-Snacks/dev-toolkit">
+  <a class="row" href="https://github.com/Real-Fruit-Snacks/dev-toolkit" aria-describedby="job-dev-toolkit"><span class="no">12</span><span class="name">dev-toolkit</span><span class="lang">C#</span></a>
+  <div class="job" id="job-dev-toolkit">
+    <p class="desc">Developer tools for an offline Windows machine</p>
+    <p class="io"><span class="k k-in">In</span> <span class="v-in">a Windows PC with no internet or admin</span></p>
+    <p class="io"><span class="k k-out">Out</span> <span class="v-out">Rust, Python, Node and .NET, all offline</span></p>
+    <p class="meta"><span class="m">C# · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/dev-toolkit">Source</a></p>
   </div>
 </li>
 <!-- /build:board -->
