@@ -1,0 +1,3 @@
+# Every clone checks text files out with LF, as they are committed: on Windows with core.autocrlf=true,
+# index.html would otherwise be CRLF and differ from what scripts/build.mjs writes.
+* text=auto eol=lf
