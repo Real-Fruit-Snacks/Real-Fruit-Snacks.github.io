@@ -80,7 +80,12 @@ const blocks = { board, display, around, retired, count: String(data.tools.lengt
 
 // ---- write ----
 const file = join(ROOT, 'index.html');
-const before = readFileSync(file, 'utf8');
+// Compare and build with LF; a checkout with CRLF (git's core.autocrlf on Windows) is written back with CRLF.
+// Line endings alone never make the file out of date; a rewrite uses the ending most of its lines have.
+const raw = readFileSync(file, 'utf8');
+const crlf = (raw.match(/\r\n/g) || []).length;
+const eol = crlf * 2 > (raw.match(/\n/g) || []).length ? '\r\n' : '\n';
+const before = raw.replace(/\r\n/g, '\n');
 let after = before;
 for (const [name, html] of Object.entries(blocks)) {
   const re = new RegExp(`(<!-- build:${name} -->)[\\s\\S]*?(<!-- /build:${name} -->)`, 'g');
@@ -93,7 +98,7 @@ if (args.has('--check')) {
   if (after !== before) { console.error('index.html is out of date with tools.json: run node scripts/build.mjs'); process.exit(1); }
   console.log(`index.html matches tools.json (${data.tools.length} tools, ${data.around.length} around them, ${data.retired.length} retired)`);
 } else if (after !== before) {
-  writeFileSync(file, after);
+  writeFileSync(file, after.replace(/\n/g, eol));
   console.log(`wrote index.html (${data.tools.length} tools, ${data.around.length} around them, ${data.retired.length} retired)`);
 } else {
   console.log('index.html already matches tools.json');
