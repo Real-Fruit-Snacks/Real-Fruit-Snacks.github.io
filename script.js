@@ -99,6 +99,18 @@
   });
   pause.addEventListener('click', function () { setPlaying(!playing); if (playing) { show((current + 1) % tools.length); } });
   if (still.matches) setPlaying(false);
+  // Turning reduced motion on while the page is open stops the cycle, as loading with it on does;
+  // turning it off again brings the cycle back, unless the visitor paused or picked a tool meanwhile.
+  var motionPaused = false;
+  pause.addEventListener('click', function () { motionPaused = false; });
+  tools.forEach(function (t) {
+    q(t, '.row').addEventListener('focus', function () { motionPaused = false; });
+    q(t, '.row').addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') motionPaused = false; });
+  });
+  still.addEventListener('change', function () {
+    if (still.matches && playing) { motionPaused = true; setPlaying(false); }
+    else if (!still.matches && motionPaused) { motionPaused = false; setPlaying(true); }
+  });
 
   new IntersectionObserver(function (es) { onScreen = es[0].isIntersecting; tick(); }).observe(display);
   document.addEventListener('visibilitychange', tick);
