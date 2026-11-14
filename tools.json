@@ -22,9 +22,7 @@
     {"repo": "proxflow", "description": "Proxmox map and lab builder that works offline", "language": "TypeScript", "platform": "Windows", "short": "Proxmox labs offline",
      "in": "a Proxmox with no internet", "out": "a domain lab, built from one canvas", "site": "https://real-fruit-snacks.github.io/proxflow/"},
     {"repo": "agent-toolkit", "description": "Pinned installers and config for my coding setup", "language": "PowerShell", "platform": "Windows, Linux", "short": "pinned coding setup",
-     "in": "a bare Windows machine", "out": "the same pinned coding setup", "site": "https://real-fruit-snacks.github.io/agent-toolkit/"},
-    {"repo": "killer-skills", "description": "Claude Code skills for sites, repo pages and review councils", "language": "JavaScript", "platform": "Claude Code", "short": "skills for Claude Code",
-     "in": "`/killer-design`", "out": "a site, screenshotted and fixed", "site": "https://real-fruit-snacks.github.io/killer-skills/"}
+     "in": "a bare Windows machine", "out": "the same pinned coding setup", "site": "https://real-fruit-snacks.github.io/agent-toolkit/"}
   ],
   "around": [
     {"repo": "rfs-brand", "description": "RFS brand, profile art and repo templates", "site": "https://real-fruit-snacks.github.io/rfs-brand/"},

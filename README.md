@@ -4,7 +4,7 @@ The list of every tool I maintain, at **[real-fruit-snacks.github.io](https://re
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/readme/screen-dark.png">
-  <img alt="The page's first screen: the headline Small tools, one job each, an index of twelve tools with screen-mark marked, and screen-mark's job beside it: Ctrl+PrintScreen in, screen-mark_2026-11-05_091412.png out" src="assets/readme/screen-light.png" width="100%">
+  <img alt="The page's first screen: the headline Small tools, one job each, an index of eleven tools with screen-mark marked, and screen-mark's job beside it: Ctrl+PrintScreen in, screen-mark_2026-11-05_091412.png out" src="assets/readme/screen-light.png" width="100%">
 </picture>
 
 One static page served by GitHub Pages from `main`. No build step on the server, no framework, and nothing loaded from other sites: the fonts are in `fonts/`, the script is about 110 lines in `script.js`.
