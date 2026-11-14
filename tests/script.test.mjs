@@ -42,6 +42,14 @@ test('turning reduced motion off again brings the cycle back', () => {
   assert.equal(p.showing(), '02');
 });
 
+test('a page loaded with reduced motion on starts cycling once it is turned off', () => {
+  const p = page({ reducedMotion: true });
+  p.reducedMotion(false);
+  assert.equal(p.button(), 'Pause');
+  p.wait(EVERY);
+  assert.equal(p.showing(), '02');
+});
+
 test('a tool picked while motion was reduced stays shown after it is turned off', () => {
   const p = page();
   p.reducedMotion(true);

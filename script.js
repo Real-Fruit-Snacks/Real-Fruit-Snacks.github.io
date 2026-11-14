@@ -101,7 +101,8 @@
   if (still.matches) setPlaying(false);
   // Turning reduced motion on while the page is open stops the cycle, as loading with it on does;
   // turning it off again brings the cycle back, unless the visitor paused or picked a tool meanwhile.
-  var motionPaused = false;
+  // A page loaded with it on is paused by it too, so it starts cycling once it's turned off.
+  var motionPaused = still.matches;
   pause.addEventListener('click', function () { motionPaused = false; });
   tools.forEach(function (t) {
     q(t, '.row').addEventListener('focus', function () { motionPaused = false; });
