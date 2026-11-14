@@ -31,12 +31,24 @@ Each entry in `tools.json`:
 
 `around` holds the repos that aren't tools (the brand, rfs.tools), and `retired` the archived ones. The same list is drawn into the [profile README](https://github.com/Real-Fruit-Snacks/Real-Fruit-Snacks) by its `art/make-board.py` and named in rfs-brand's `brand/org.toml`, so a change here goes there too.
 
+## Tests
+
+The tests cover `scripts/build.mjs`: every `tools.json` rule it enforces, what it writes between the build markers, `--check` on a current page and a stale one, and `--github` against a stand-in `gh`, so they never reach GitHub and need no token. They use `node:test` and nothing else; Node 24, no install. From the repo's root:
+
+```sh
+cd tests
+node --test
+```
+
+Each test works on a copy of the script in a temporary folder, so `index.html` and `tools.json` are never touched. CI runs them on every push and pull request, in the `tests` job of `.github/workflows/check.yml`.
+
 ## Files
 
 | File | What |
 |---|---|
 | `index.html`, `styles.css`, `script.js` | The page. Its design decisions are in [DESIGN.md](DESIGN.md) |
 | `tools.json`, `scripts/build.mjs` | The list, and the script that writes it into the page |
+| `tests/` | The tests for `scripts/build.mjs`, with the stand-in `gh` in `tests/stand-in/` |
 | `fonts/` | Schibsted Grotesk and Fragment Mono, woff2, with their OFL licences |
 | `card.html` → `assets/og.png` | The social preview. Render it with killer-repo's `card.mjs card.html --out assets/og.png`; keep the path, the page's `og:image` points at it |
 | `scripts/mark.svg` | The favicon source. The icon files and `manifest.webmanifest` are built from it with killer-design's `icons.mjs build` |
