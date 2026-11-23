@@ -24,15 +24,11 @@
     {"repo": "pwn-playbooks", "description": "Playbooks for pwn-broker: read into the note, fill in, run", "language": "Markdown", "platform": "Kali Linux", "short": "playbooks for the note",
      "in": "`:Pb smb` in the note window", "out": "`Playbook: SMB enumeration`, to fill in", "site": "https://real-fruit-snacks.github.io/pwn-playbooks/"},
     {"repo": "open-file", "description": "Learn and play chess in your browser, offline", "language": "TypeScript", "platform": "browser", "short": "chess in the browser",
-     "in": "a blunder in one of your games", "out": "a puzzle made from it", "site": "https://real-fruit-snacks.github.io/open-file/"},
-    {"repo": "agent-toolkit", "description": "T3 Code and Claude Code on Windows, without admin rights", "language": "PowerShell", "platform": "Windows, Linux", "short": "Claude Code without admin",
-     "in": "a Windows desktop where you aren't admin", "out": "T3 Code and Claude Code, no UAC prompt", "site": "https://real-fruit-snacks.github.io/agent-toolkit/"},
-    {"repo": "dev-toolkit", "description": "Developer tools for an offline Windows machine", "language": "C#", "platform": "Windows", "short": "offline dev tools",
-     "in": "a Windows PC with no internet or admin", "out": "Rust, Python, Node and .NET, all offline"}
+     "in": "a blunder in one of your games", "out": "a puzzle made from it", "site": "https://real-fruit-snacks.github.io/open-file/"}
   ],
   "around": [
     {"repo": "rfs-brand", "description": "RFS brand, profile art and repo templates", "site": "https://real-fruit-snacks.github.io/rfs-brand/"},
     {"repo": "rfs.tools", "description": "The front door at rfs.tools, one page pointing at GitHub", "site": "https://rfs.tools/"}
   ],
-  "retired": ["Kraken", "Maelstrom", "Rapids", "Lure", "Undertow"]
+  "retired": ["agent-toolkit", "dev-toolkit", "Kraken", "Maelstrom", "Rapids", "Lure", "Undertow"]
 }
