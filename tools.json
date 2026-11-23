@@ -15,8 +15,6 @@
      "in": "Amazon's order history", "out": "one `Order-<id>.md` per order", "site": "https://real-fruit-snacks.github.io/amazon-order-sync/"},
     {"repo": "powershell-toolbox", "description": "A grab-bag of my PowerShell scripts, each one standalone", "language": "PowerShell", "platform": "Windows", "short": "standalone scripts",
      "in": "every repo your `gh` login sees", "out": "one at a time: keep, archive or delete", "site": "https://real-fruit-snacks.github.io/powershell-toolbox/"},
-    {"repo": "forge-framework", "description": "Modular offensive-security framework with a console", "language": "Python", "short": "offensive-security console",
-     "in": "`use`, `set`, `run`", "out": "hosts, creds and loot in one workspace"},
     {"repo": "pwn-broker", "description": "Keeps a box's targets, notes, creds and tools in order", "language": "Python", "platform": "Kali Linux", "short": "HTB boxes in order",
      "in": "`pwn-broker new`", "out": "`2026-11-16_htb_forest.finished.tar.gz`", "site": "https://real-fruit-snacks.github.io/pwn-broker/"},
     {"repo": "pwn-shop", "description": "Tool packages for pwn-broker, built from upstream releases", "language": "Python", "platform": "Kali Linux", "short": "packages for pwn-broker",
@@ -30,5 +28,5 @@
     {"repo": "rfs-brand", "description": "RFS brand, profile art and repo templates", "site": "https://real-fruit-snacks.github.io/rfs-brand/"},
     {"repo": "rfs.tools", "description": "The front door at rfs.tools, one page pointing at GitHub", "site": "https://rfs.tools/"}
   ],
-  "retired": ["agent-toolkit", "dev-toolkit", "Kraken", "Maelstrom", "Rapids", "Lure", "Undertow"]
+  "retired": ["agent-toolkit", "dev-toolkit", "forge-framework", "Kraken", "Maelstrom", "Rapids", "Lure", "Undertow"]
 }
