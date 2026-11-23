@@ -21,6 +21,8 @@
      "in": "an upstream release, pinned by SHA-256", "out": "`kerbrute-1.0.3-1.zip`", "site": "https://real-fruit-snacks.github.io/pwn-shop/"},
     {"repo": "pwn-playbooks", "description": "Playbooks for pwn-broker: read into the note, fill in, run", "language": "Markdown", "platform": "Kali Linux", "short": "playbooks for the note",
      "in": "`:Pb smb` in the note window", "out": "`Playbook: SMB enumeration`, to fill in", "site": "https://real-fruit-snacks.github.io/pwn-playbooks/"},
+    {"repo": "pwn-report", "description": "Private, evidence-linked reports from pwn-broker archives", "language": "Python", "platform": "Kali Linux", "short": "reports from box archives",
+     "in": "`2026-11-16_htb_forest.finished.tar.gz`", "out": "`report.md`, every file with its SHA-256", "site": "https://real-fruit-snacks.github.io/pwn-report/"},
     {"repo": "open-file", "description": "Learn and play chess in your browser, offline", "language": "TypeScript", "platform": "browser", "short": "chess in the browser",
      "in": "a blunder in one of your games", "out": "a puzzle made from it", "site": "https://real-fruit-snacks.github.io/open-file/"}
   ],
