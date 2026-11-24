@@ -1,7 +1,5 @@
 name: check
 
-# The list is true: index.html matches tools.json, every listed repo is public and not archived, and every
-# retired one is archived and public. Weekly too, because a repo can be archived or renamed without this repo changing.
 on:
   push:
   pull_request:
@@ -10,24 +8,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  # The tests for scripts/build.mjs (its tools.json rules, the build blocks, --check, and --github against
-  # a stand-in gh, so this job needs no token) and for script.js against a stand-in browser.
-  tests:
+  catalog:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-      - name: node --test
-        working-directory: tests
-        run: node --test
-
-  list:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v5
-      - name: index.html matches tools.json, and tools.json matches GitHub
-        run: node scripts/build.mjs --check --github
+      - name: Verify tools.json matches site and live GitHub repos
+        run: node scripts/verify-catalog.mjs --check --github
         env:
           GH_TOKEN: ${{ github.token }}

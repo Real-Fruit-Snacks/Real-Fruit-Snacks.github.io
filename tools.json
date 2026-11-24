@@ -1,34 +1,148 @@
 {
-  "_comment": "One entry per PUBLIC, non-archived repo, in display order. description: <= 60 chars, no period, as on GitHub. in / out: the job, <= 40 chars each, quoted from what the tool really reads and writes; `backticks` set it in mono. site: the project page, if there is one. short: <= 26 chars (rfs-brand org.toml). After editing, run: node scripts/build.mjs",
+  "_comment": "One entry per PUBLIC, non-archived repo in catalog display order. Keep in step with Real-Fruit-Snacks/art/make-board.py and rfs-brand/brand/org.toml. Verify with: node scripts/verify-catalog.mjs --check [--github]",
   "tools": [
-    {"repo": "screen-mark", "description": "Screenshot capture and annotation in pure Rust", "language": "Rust", "platform": "Windows, Linux", "featured": true, "short": "capture and annotate",
-     "in": "`Ctrl+PrintScreen`", "out": "`screen-mark_2026-11-05_091412.png`", "site": "https://real-fruit-snacks.github.io/screen-mark/"},
-    {"repo": "port-sync", "description": "Keeps qBittorrent's port synced to Proton VPN", "language": "Rust", "platform": "Windows", "short": "qBittorrent + Proton",
-     "in": "`Port pair 51037->51037`", "out": "`listening port updated: 48213 -> 51037`", "site": "https://real-fruit-snacks.github.io/port-sync/"},
-    {"repo": "carify", "description": "Convert video for Uconnect USB playback, via ffmpeg", "language": "sh, PowerShell", "platform": "Windows, macOS, Linux", "short": "video for Uconnect",
-     "in": "HEVC 10-bit · 1080p · AC3 5.1", "out": "H.264 8-bit · 720p · AAC stereo", "site": "https://real-fruit-snacks.github.io/carify/"},
-    {"repo": "certapi", "description": "mTLS API client for the Windows certificate store", "language": "C#", "platform": "Windows", "short": "mTLS via the cert store",
-     "in": "a client certificate in `CurrentUser\\My`", "out": "200 OK; the key never left the store", "site": "https://real-fruit-snacks.github.io/certapi/"},
-    {"repo": "identity-gen", "description": "Offline generator for throwaway signup identities", "language": "HTML", "platform": "browser", "short": "throwaway identities",
-     "in": "a signup form that wants too much", "out": "a stand-in: name, handle, passphrase", "site": "https://real-fruit-snacks.github.io/identity-gen/"},
-    {"repo": "amazon-order-sync", "description": "Syncs your Amazon orders into local Markdown notes", "language": "Rust", "platform": "Windows, Linux", "short": "orders to Markdown",
-     "in": "Amazon's order history", "out": "one `Order-<id>.md` per order", "site": "https://real-fruit-snacks.github.io/amazon-order-sync/"},
-    {"repo": "powershell-toolbox", "description": "A grab-bag of my PowerShell scripts, each one standalone", "language": "PowerShell", "platform": "Windows", "short": "standalone scripts",
-     "in": "every repo your `gh` login sees", "out": "one at a time: keep, archive or delete", "site": "https://real-fruit-snacks.github.io/powershell-toolbox/"},
-    {"repo": "pwn-broker", "description": "Keeps a box's targets, notes, creds and tools in order", "language": "Python", "platform": "Kali Linux", "short": "HTB boxes in order",
-     "in": "`pwn-broker new`", "out": "`2026-11-16_htb_forest.finished.tar.gz`", "site": "https://real-fruit-snacks.github.io/pwn-broker/"},
-    {"repo": "pwn-shop", "description": "Tool packages for pwn-broker, built from upstream releases", "language": "Python", "platform": "Kali Linux", "short": "packages for pwn-broker",
-     "in": "an upstream release, pinned by SHA-256", "out": "`kerbrute-1.0.3-1.zip`", "site": "https://real-fruit-snacks.github.io/pwn-shop/"},
-    {"repo": "pwn-playbooks", "description": "Playbooks for pwn-broker: read into the note, fill in, run", "language": "Markdown", "platform": "Kali Linux", "short": "playbooks for the note",
-     "in": "`:Pb smb` in the note window", "out": "`Playbook: SMB enumeration`, to fill in", "site": "https://real-fruit-snacks.github.io/pwn-playbooks/"},
-    {"repo": "pwn-report", "description": "Private, evidence-linked reports from pwn-broker archives", "language": "Python", "platform": "Kali Linux", "short": "reports from box archives",
-     "in": "`2026-11-16_htb_forest.finished.tar.gz`", "out": "`report.md`, every file with its SHA-256", "site": "https://real-fruit-snacks.github.io/pwn-report/"},
-    {"repo": "open-file", "description": "Learn and play chess in your browser, offline", "language": "TypeScript", "platform": "browser", "short": "chess in the browser",
-     "in": "a blunder in one of your games", "out": "a puzzle made from it", "site": "https://real-fruit-snacks.github.io/open-file/"}
+    {
+      "repo": "screen-mark",
+      "description": "Screenshot capture and annotation in pure Rust",
+      "language": "Rust",
+      "platform": "Windows, Linux",
+      "featured": true,
+      "short": "capture and annotate",
+      "in": "`Ctrl+PrintScreen`",
+      "out": "`screen-mark_2026-11-05_091412.png`",
+      "site": "https://real-fruit-snacks.github.io/screen-mark/"
+    },
+    {
+      "repo": "port-sync",
+      "description": "Keeps qBittorrent's port synced to Proton VPN",
+      "language": "Rust",
+      "platform": "Windows",
+      "short": "qBittorrent + Proton",
+      "in": "`Port pair 51037->51037`",
+      "out": "`listening port updated: 48213 -> 51037`",
+      "site": "https://real-fruit-snacks.github.io/port-sync/"
+    },
+    {
+      "repo": "carify",
+      "description": "Convert video for Uconnect USB playback, via ffmpeg",
+      "language": "sh, PowerShell",
+      "platform": "Windows, macOS, Linux",
+      "short": "video for Uconnect",
+      "in": "HEVC 10-bit · 1080p · AC3 5.1",
+      "out": "H.264 8-bit · 720p · AAC stereo",
+      "site": "https://real-fruit-snacks.github.io/carify/"
+    },
+    {
+      "repo": "certapi",
+      "description": "mTLS API client for the Windows certificate store",
+      "language": "C#",
+      "platform": "Windows",
+      "short": "mTLS via the cert store",
+      "in": "a client certificate in `CurrentUser\\My`",
+      "out": "200 OK; the key never left the store",
+      "site": "https://real-fruit-snacks.github.io/certapi/"
+    },
+    {
+      "repo": "identity-gen",
+      "description": "Offline generator for throwaway signup identities",
+      "language": "HTML",
+      "platform": "browser",
+      "short": "throwaway identities",
+      "in": "a signup form that wants too much",
+      "out": "a stand-in: name, handle, passphrase",
+      "site": "https://real-fruit-snacks.github.io/identity-gen/"
+    },
+    {
+      "repo": "amazon-order-sync",
+      "description": "Syncs your Amazon orders into local Markdown notes",
+      "language": "Rust",
+      "platform": "Windows, Linux",
+      "short": "orders to Markdown",
+      "in": "Amazon's order history",
+      "out": "one `Order-<id>.md` per order",
+      "site": "https://real-fruit-snacks.github.io/amazon-order-sync/"
+    },
+    {
+      "repo": "powershell-toolbox",
+      "description": "A grab-bag of standalone PowerShell scripts",
+      "language": "PowerShell",
+      "platform": "Windows",
+      "short": "standalone scripts",
+      "in": "every repo your `gh` login sees",
+      "out": "one at a time: keep, archive or delete",
+      "site": "https://real-fruit-snacks.github.io/powershell-toolbox/"
+    },
+    {
+      "repo": "pwn-broker",
+      "description": "Keeps a box's targets, notes, creds, and tools in order",
+      "language": "Python",
+      "platform": "Kali Linux",
+      "short": "HTB boxes in order",
+      "in": "`pwn-broker new`",
+      "out": "`2026-11-16_htb_forest.finished.tar.gz`",
+      "site": "https://real-fruit-snacks.github.io/pwn-broker/"
+    },
+    {
+      "repo": "pwn-shop",
+      "description": "Tool packages for pwn-broker, built from upstream releases",
+      "language": "Python",
+      "platform": "Kali Linux",
+      "short": "packages for pwn-broker",
+      "in": "an upstream release, pinned by SHA-256",
+      "out": "`kerbrute-1.0.3-1.zip`",
+      "site": "https://real-fruit-snacks.github.io/pwn-shop/"
+    },
+    {
+      "repo": "pwn-playbooks",
+      "description": "Playbooks for pwn-broker: read into the note, fill in, run",
+      "language": "Markdown",
+      "platform": "Kali Linux",
+      "short": "playbooks for the note",
+      "in": "`:Pb smb` in the note window",
+      "out": "`Playbook: SMB enumeration`, to fill in",
+      "site": "https://real-fruit-snacks.github.io/pwn-playbooks/"
+    },
+    {
+      "repo": "pwn-report",
+      "description": "Private, evidence-linked reports from pwn-broker archives",
+      "language": "Python",
+      "platform": "Kali Linux",
+      "short": "reports from box archives",
+      "in": "`2026-11-16_htb_forest.finished.tar.gz`",
+      "out": "`report.md`, every file with its SHA-256",
+      "site": "https://real-fruit-snacks.github.io/pwn-report/"
+    },
+    {
+      "repo": "open-file",
+      "description": "Learn and play chess in your browser, offline",
+      "language": "TypeScript",
+      "platform": "browser",
+      "short": "offline chess trainer",
+      "in": "a blunder in one of your games",
+      "out": "a puzzle made from it",
+      "site": "https://real-fruit-snacks.github.io/open-file/"
+    }
   ],
   "around": [
-    {"repo": "rfs-brand", "description": "RFS brand, profile art and repo templates", "site": "https://real-fruit-snacks.github.io/rfs-brand/"},
-    {"repo": "rfs.tools", "description": "The front door at rfs.tools, one page pointing at GitHub", "site": "https://rfs.tools/"}
+    {
+      "repo": "rfs-brand",
+      "description": "RFS brand system, profile art, and repo templates",
+      "site": "https://real-fruit-snacks.github.io/rfs-brand/"
+    },
+    {
+      "repo": "rfs.tools",
+      "description": "The front door at rfs.tools, one page pointing at GitHub",
+      "site": "https://rfs.tools/"
+    }
   ],
-  "retired": ["agent-toolkit", "dev-toolkit", "forge-framework", "Kraken", "Maelstrom", "Rapids", "Lure", "Undertow"]
+  "retired": [
+    "forge-framework",
+    "agent-toolkit",
+    "dev-toolkit",
+    "Kraken",
+    "Maelstrom",
+    "Rapids",
+    "Lure",
+    "Undertow"
+  ]
 }

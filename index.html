@@ -1,245 +1,741 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Real-Fruit-Snacks: small tools, one job each</title>
-<meta name="description" content="Small tools by one person, each for one job: screenshots, car video, VPN ports, client certificates, throwaway identities, Amazon orders, chess, Proxmox labs.">
-<link rel="canonical" href="https://real-fruit-snacks.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://real-fruit-snacks.github.io/">
-<meta property="og:title" content="Real-Fruit-Snacks: small tools, one job each">
-<meta property="og:description" content="Every tool I maintain, with the job it does: what goes in and what comes out.">
-<meta property="og:image" content="https://real-fruit-snacks.github.io/assets/og.png">
-<meta property="og:image:width" content="1280">
-<meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="Small tools, one job each. screen-mark's job: Ctrl+PrintScreen in, a timestamped PNG out, with an orange seam between them">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="favicon.ico" sizes="32x32">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0C0D10">
-<script>
-  // A saved theme wins over the system setting. The key is shared with the other RFS pages.
-  try { var t = localStorage.getItem('rfs-theme'); if (t === 'nightshift' || t === 'dayshift') document.documentElement.dataset.theme = t; } catch (e) {}
-  document.documentElement.classList.add('js');
-</script>
-<link rel="preload" href="fonts/schibsted-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/fragment-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <script>
+    try {
+      var savedScheme = localStorage.getItem("color-scheme");
+      if (savedScheme === "light" || savedScheme === "dark") {
+        document.querySelector('meta[name="color-scheme"]').content = savedScheme;
+      }
+      var savedCue = localStorage.getItem("rfs-cyc-cue");
+      if (savedCue !== null && /^[0-5]$/.test(savedCue)) {
+        document.documentElement.dataset.cue = savedCue;
+      } else {
+        document.documentElement.dataset.cue = savedScheme === "light" ? "5" : "2";
+      }
+    } catch (e) {}
+  </script>
+  <title>Real-Fruit-Snacks — Local-first open-source software</title>
+  <meta name="description" content="Twelve local-first open-source tools across Rust, Python, C#, PowerShell, and TypeScript—desktop utilities, Windows networking, Kali workflows, and offline browser apps with zero accounts or tracking.">
+  <link rel="canonical" href="https://real-fruit-snacks.github.io/">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#050507">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://real-fruit-snacks.github.io/">
+  <meta property="og:title" content="Real-Fruit-Snacks — Local-first open-source software">
+  <meta property="og:description" content="Twelve local-first open-source tools across Rust, Python, C#, PowerShell, and TypeScript—zero accounts, zero tracking, verifiable inputs and outputs.">
+  <meta property="og:image" content="https://real-fruit-snacks.github.io/assets/og.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:alt" content="Real-Fruit-Snacks: Built local-first. Twelve active open-source tools on GitHub.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="fonts/big-shoulders-stencil-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/albert-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/azeret-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<a class="skip" href="#tools">Skip to the tools</a>
+  <a class="skip-link visually-hidden" href="#main-heading">Skip to main content</a>
 
-<header class="top">
-  <div class="wrap">
-    <a class="mark" href="./" aria-label="Real-Fruit-Snacks, top of the page">Real-Fruit-Snacks<i aria-hidden="true"></i></a>
-    <nav aria-label="Page">
-      <a href="#tools">Tools</a>
-      <a href="#how">How they're built</a>
-      <a href="#retired">Retired</a>
-      <a href="https://github.com/Real-Fruit-Snacks">GitHub</a>
-    </nav>
-    <button class="theme" type="button" id="theme"><span class="sr-only">Theme: </span><span class="t-night">Night</span><span class="t-day">Day</span></button>
-  </div>
-</header>
+  <div class="stage-shell">
+    <aside class="stage-rail" aria-label="Lighting desk">
+      <div class="rail-top-group">
+        <header>
+          <a class="brand-lockup" href="#top" aria-label="Real-Fruit-Snacks home">
+            <span class="brand-acronym">RFS</span>
+            <span class="brand-full">Real-Fruit-Snacks</span>
+          </a>
+        </header>
 
-<main>
-<div class="hero">
-  <div class="wrap hero-grid">
-    <h1>Small tools, one job each.</h1>
-    <p class="stand">Written by one person, for jobs I kept doing by hand. Each tool below is shown by its job: what you hand it, and what you get back.</p>
-  </div>
-</div>
-
-<section id="tools" class="board-wrap" aria-labelledby="tools-h">
-  <div class="wrap">
-    <div class="board-head">
-      <h2 id="tools-h"><span class="count"><!-- build:count -->12<!-- /build:count --></span> tools</h2>
-      <p class="cycle"><span class="tally" aria-hidden="true"><b id="at">01</b> / <!-- build:count -->12<!-- /build:count --></span><button class="pause" type="button" id="pause" aria-pressed="false">Pause</button></p>
-    </div>
-    <div class="board">
-      <div class="index-wrap">
-        <ol class="index" id="index">
-<!-- build:board -->
-<li class="tool" data-repo="screen-mark" data-site="https://real-fruit-snacks.github.io/screen-mark/" data-src="https://github.com/Real-Fruit-Snacks/screen-mark">
-  <a class="row" href="https://real-fruit-snacks.github.io/screen-mark/" aria-describedby="job-screen-mark"><span class="no">01</span><span class="name">screen-mark</span><span class="lang">Rust</span></a>
-  <div class="job" id="job-screen-mark">
-    <p class="desc">Screenshot capture and annotation in pure Rust</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">Ctrl+PrintScreen</span></code></span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out"><code><span class="w">screen-mark_</span><wbr><span class="w">2026-11-05_</span><wbr><span class="w">091412.png</span></code></span></p>
-    <p class="meta"><span class="m">Rust · Windows, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/screen-mark">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="port-sync" data-site="https://real-fruit-snacks.github.io/port-sync/" data-src="https://github.com/Real-Fruit-Snacks/port-sync">
-  <a class="row" href="https://real-fruit-snacks.github.io/port-sync/" aria-describedby="job-port-sync"><span class="no">02</span><span class="name">port-sync</span><span class="lang">Rust</span></a>
-  <div class="job" id="job-port-sync">
-    <p class="desc">Keeps qBittorrent's port synced to Proton VPN</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">Port</span> <span class="w">pair</span> <span class="w">51037-&gt;51037</span></code></span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out"><code><span class="w">listening</span> <span class="w">port</span> <span class="w">updated:</span> <span class="w">48213</span> <span class="w">-&gt;</span> <span class="w">51037</span></code></span></p>
-    <p class="meta"><span class="m">Rust · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/port-sync">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="carify" data-site="https://real-fruit-snacks.github.io/carify/" data-src="https://github.com/Real-Fruit-Snacks/carify">
-  <a class="row" href="https://real-fruit-snacks.github.io/carify/" aria-describedby="job-carify"><span class="no">03</span><span class="name">carify</span><span class="lang">sh, PowerShell</span></a>
-  <div class="job" id="job-carify">
-    <p class="desc">Convert video for Uconnect USB playback, via ffmpeg</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in">HEVC <span class="w">10-bit</span> · 1080p · AC3 5.1</span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out">H.264 <span class="w">8-bit</span> · 720p · AAC stereo</span></p>
-    <p class="meta"><span class="m">sh, PowerShell · Windows, macOS, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/carify">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="certapi" data-site="https://real-fruit-snacks.github.io/certapi/" data-src="https://github.com/Real-Fruit-Snacks/certapi">
-  <a class="row" href="https://real-fruit-snacks.github.io/certapi/" aria-describedby="job-certapi"><span class="no">04</span><span class="name">certapi</span><span class="lang">C#</span></a>
-  <div class="job" id="job-certapi">
-    <p class="desc">mTLS API client for the Windows certificate store</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in">a client certificate in <code><span class="w">CurrentUser\</span><wbr><span class="w">My</span></code></span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out">200 OK; the key never left the store</span></p>
-    <p class="meta"><span class="m">C# · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/certapi">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="identity-gen" data-site="https://real-fruit-snacks.github.io/identity-gen/" data-src="https://github.com/Real-Fruit-Snacks/identity-gen">
-  <a class="row" href="https://real-fruit-snacks.github.io/identity-gen/" aria-describedby="job-identity-gen"><span class="no">05</span><span class="name">identity-gen</span><span class="lang">HTML</span></a>
-  <div class="job" id="job-identity-gen">
-    <p class="desc">Offline generator for throwaway signup identities</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in">a signup form that wants too much</span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out">a <span class="w">stand-in:</span> name, handle, passphrase</span></p>
-    <p class="meta"><span class="m">HTML · browser</span> <a href="https://github.com/Real-Fruit-Snacks/identity-gen">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="amazon-order-sync" data-site="https://real-fruit-snacks.github.io/amazon-order-sync/" data-src="https://github.com/Real-Fruit-Snacks/amazon-order-sync">
-  <a class="row" href="https://real-fruit-snacks.github.io/amazon-order-sync/" aria-describedby="job-amazon-order-sync"><span class="no">06</span><span class="name">amazon-order-sync</span><span class="lang">Rust</span></a>
-  <div class="job" id="job-amazon-order-sync">
-    <p class="desc">Syncs your Amazon orders into local Markdown notes</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in">Amazon's order history</span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out">one <code><span class="w">Order-&lt;id&gt;.md</span></code> per order</span></p>
-    <p class="meta"><span class="m">Rust · Windows, Linux</span> <a href="https://github.com/Real-Fruit-Snacks/amazon-order-sync">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="powershell-toolbox" data-site="https://real-fruit-snacks.github.io/powershell-toolbox/" data-src="https://github.com/Real-Fruit-Snacks/powershell-toolbox">
-  <a class="row" href="https://real-fruit-snacks.github.io/powershell-toolbox/" aria-describedby="job-powershell-toolbox"><span class="no">07</span><span class="name">powershell-toolbox</span><span class="lang">PowerShell</span></a>
-  <div class="job" id="job-powershell-toolbox">
-    <p class="desc">A grab-bag of my PowerShell scripts, each one standalone</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in">every repo your <code><span class="w">gh</span></code> login sees</span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out">one at a time: keep, archive or delete</span></p>
-    <p class="meta"><span class="m">PowerShell · Windows</span> <a href="https://github.com/Real-Fruit-Snacks/powershell-toolbox">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="pwn-broker" data-site="https://real-fruit-snacks.github.io/pwn-broker/" data-src="https://github.com/Real-Fruit-Snacks/pwn-broker">
-  <a class="row" href="https://real-fruit-snacks.github.io/pwn-broker/" aria-describedby="job-pwn-broker"><span class="no">08</span><span class="name">pwn-broker</span><span class="lang">Python</span></a>
-  <div class="job" id="job-pwn-broker">
-    <p class="desc">Keeps a box's targets, notes, creds and tools in order</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">pwn-broker</span> <span class="w">new</span></code></span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out"><code><span class="w">2026-11-16_</span><wbr><span class="w">htb_</span><wbr><span class="w">forest.finished.tar.gz</span></code></span></p>
-    <p class="meta"><span class="m">Python · Kali Linux</span> <a href="https://github.com/Real-Fruit-Snacks/pwn-broker">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="pwn-shop" data-site="https://real-fruit-snacks.github.io/pwn-shop/" data-src="https://github.com/Real-Fruit-Snacks/pwn-shop">
-  <a class="row" href="https://real-fruit-snacks.github.io/pwn-shop/" aria-describedby="job-pwn-shop"><span class="no">09</span><span class="name">pwn-shop</span><span class="lang">Python</span></a>
-  <div class="job" id="job-pwn-shop">
-    <p class="desc">Tool packages for pwn-broker, built from upstream releases</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in">an upstream release, pinned by <span class="w">SHA-256</span></span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out"><code><span class="w">kerbrute-1.0.3-1.zip</span></code></span></p>
-    <p class="meta"><span class="m">Python · Kali Linux</span> <a href="https://github.com/Real-Fruit-Snacks/pwn-shop">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="pwn-playbooks" data-site="https://real-fruit-snacks.github.io/pwn-playbooks/" data-src="https://github.com/Real-Fruit-Snacks/pwn-playbooks">
-  <a class="row" href="https://real-fruit-snacks.github.io/pwn-playbooks/" aria-describedby="job-pwn-playbooks"><span class="no">10</span><span class="name">pwn-playbooks</span><span class="lang">Markdown</span></a>
-  <div class="job" id="job-pwn-playbooks">
-    <p class="desc">Playbooks for pwn-broker: read into the note, fill in, run</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">:Pb</span> <span class="w">smb</span></code> in the note window</span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out"><code><span class="w">Playbook:</span> <span class="w">SMB</span> <span class="w">enumeration</span></code>, to fill in</span></p>
-    <p class="meta"><span class="m">Markdown · Kali Linux</span> <a href="https://github.com/Real-Fruit-Snacks/pwn-playbooks">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="pwn-report" data-site="https://real-fruit-snacks.github.io/pwn-report/" data-src="https://github.com/Real-Fruit-Snacks/pwn-report">
-  <a class="row" href="https://real-fruit-snacks.github.io/pwn-report/" aria-describedby="job-pwn-report"><span class="no">11</span><span class="name">pwn-report</span><span class="lang">Python</span></a>
-  <div class="job" id="job-pwn-report">
-    <p class="desc">Private, evidence-linked reports from pwn-broker archives</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in"><code><span class="w">2026-11-16_</span><wbr><span class="w">htb_</span><wbr><span class="w">forest.finished.tar.gz</span></code></span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out"><code><span class="w">report.md</span></code>, every file with its <span class="w">SHA-256</span></span></p>
-    <p class="meta"><span class="m">Python · Kali Linux</span> <a href="https://github.com/Real-Fruit-Snacks/pwn-report">Source</a></p>
-  </div>
-</li>
-<li class="tool" data-repo="open-file" data-site="https://real-fruit-snacks.github.io/open-file/" data-src="https://github.com/Real-Fruit-Snacks/open-file">
-  <a class="row" href="https://real-fruit-snacks.github.io/open-file/" aria-describedby="job-open-file"><span class="no">12</span><span class="name">open-file</span><span class="lang">TypeScript</span></a>
-  <div class="job" id="job-open-file">
-    <p class="desc">Learn and play chess in your browser, offline</p>
-    <p class="io"><span class="k k-in">In</span> <span class="v-in">a blunder in one of your games</span></p>
-    <p class="io"><span class="k k-out">Out</span> <span class="v-out">a puzzle made from it</span></p>
-    <p class="meta"><span class="m">TypeScript · browser</span> <a href="https://github.com/Real-Fruit-Snacks/open-file">Source</a></p>
-  </div>
-</li>
-<!-- /build:board -->
-        </ol>
-        <i class="marker" aria-hidden="true"></i>
+        <nav class="rail-nav" aria-label="Primary">
+          <ul>
+            <li>
+              <a href="#top" data-nav="top" aria-current="page">
+                <span class="nav-lead">
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <rect x="2" y="2" width="5" height="5" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="9" y="2" width="5" height="5" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="2" y="9" width="5" height="5" stroke="currentColor" stroke-width="1.5"/>
+                    <rect x="9" y="9" width="5" height="5" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                  Horizon
+                </span>
+                <span class="nav-count">06</span>
+              </a>
+            </li>
+            <li>
+              <a href="#catalog" data-nav="catalog">
+                <span class="nav-lead">
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <line x1="2" y1="4" x2="14" y2="4" stroke="currentColor" stroke-width="1.5"/>
+                    <line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5"/>
+                    <line x1="2" y1="12" x2="10" y2="12" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                  Cue Sheet
+                </span>
+                <span class="nav-count">12</span>
+              </a>
+            </li>
+            <li>
+              <a href="#standards" data-nav="standards">
+                <span class="nav-lead">
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                  Principles
+                </span>
+                <span class="nav-count">04</span>
+              </a>
+            </li>
+            <li>
+              <a href="#retired" data-nav="retired">
+                <span class="nav-lead">
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <rect x="2" y="3" width="12" height="3" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M3.5 6V13H12.5V6" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                  Retired
+                </span>
+                <span class="nav-count">08</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/Real-Fruit-Snacks">
+                <span class="nav-lead">
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M5 11L11 5M11 5H6M11 5V10" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                  GitHub
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <div class="display" id="display" aria-hidden="true">
-<!-- build:display -->
-<div class="d-head"><span class="d-no">01</span><p class="d-name">screen-mark</p><p class="d-meta">Rust · Windows, Linux</p></div>
-<p class="d-desc">Screenshot capture and annotation in pure Rust</p>
-<div class="d-job">
-  <span class="k k-in">In</span>
-  <p class="v v-in"><span class="dim"><code><span class="w">Ctrl+PrintScreen</span></code></span><span class="lit"><code><span class="w">Ctrl+PrintScreen</span></code></span></p>
-  <span class="k k-out">Out</span>
-  <p class="v v-out"><code><span class="w">screen-mark_</span><wbr><span class="w">2026-11-05_</span><wbr><span class="w">091412.png</span></code></p>
-  <i class="seam"></i>
-</div>
-<p class="d-links"><a tabindex="-1" href="https://real-fruit-snacks.github.io/screen-mark/">Project page</a><a tabindex="-1" href="https://github.com/Real-Fruit-Snacks/screen-mark">Source</a></p>
-<!-- /build:display -->
+
+      <div class="rail-desk">
+        <div class="desk-cue-readout">
+          <div class="desk-cue-code" id="railPhaseCode">LX 263</div>
+          <div class="desk-cue-phase" id="railPhaseLabel">Beacon Horizon</div>
+          <div class="desk-cue-tool" id="railToolReadout">#01 · screen-mark</div>
+        </div>
+
+        <button type="button" class="scheme-toggle" id="schemeToggle">
+          <span class="opt-to-light">
+            <svg aria-hidden="true" width="15" height="15" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M8 1.5V3M8 13V14.5M1.5 8H3M13 8H14.5M3.4 3.4L4.5 4.5M11.5 11.5L12.6 12.6M12.6 3.4L11.5 4.5M4.5 11.5L3.4 12.6" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>Daylight</span>
+          </span>
+          <span class="opt-to-dark">
+            <svg aria-hidden="true" width="15" height="15" viewBox="0 0 16 16" fill="none">
+              <path d="M12.5 10.2A5.2 5.2 0 0 1 5.8 3.5a5.5 5.5 0 1 0 6.7 6.7Z" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>Night Cue</span>
+          </span>
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M3 6H13M13 6L10.5 3.5M13 10H3M3 10L5.5 12.5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </button>
       </div>
+    </aside>
+
+    <div class="stage-main" id="top">
+      <main>
+        <section class="cyc-hero" aria-labelledby="main-heading">
+          <div class="cyc-curtain cyc-curtain--0" aria-hidden="true"></div>
+          <div class="cyc-curtain cyc-curtain--1" aria-hidden="true"></div>
+          <div class="cyc-curtain cyc-curtain--2" aria-hidden="true"></div>
+          <div class="cyc-curtain cyc-curtain--3" aria-hidden="true"></div>
+          <div class="cyc-curtain cyc-curtain--4" aria-hidden="true"></div>
+          <div class="cyc-curtain cyc-curtain--5" aria-hidden="true"></div>
+          <div class="cyc-scrim" aria-hidden="true"></div>
+
+          <svg class="horizon-stage-art" aria-hidden="true" viewBox="0 0 1440 220" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="beamLine" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#215175" stop-opacity="0"/>
+                <stop offset="35%" stop-color="#4f88b5" stop-opacity="0.72"/>
+                <stop offset="72%" stop-color="#f06e2b" stop-opacity="0.88"/>
+                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.96"/>
+              </linearGradient>
+              <linearGradient id="floorFade" x1="0" y1="22" x2="0" y2="220" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.22"/>
+                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="22" x2="1440" y2="22" stroke="url(#beamLine)" stroke-width="2"/>
+            <line x1="1180" y1="22" x2="540" y2="220" stroke="url(#floorFade)" stroke-width="1"/>
+            <line x1="1220" y1="22" x2="780" y2="220" stroke="url(#floorFade)" stroke-width="1"/>
+            <line x1="1260" y1="22" x2="1040" y2="220" stroke="url(#floorFade)" stroke-width="1"/>
+            <line x1="1300" y1="22" x2="1320" y2="220" stroke="url(#floorFade)" stroke-width="1"/>
+          </svg>
+
+          <div class="hero-grid">
+            <div>
+              <h1 class="hero-title" id="main-heading" tabindex="-1">Real-Fruit-Snacks. Built local-first.</h1>
+              <p class="hero-stand">Open-source desktop utilities, Windows networking clients, Kali workflows, and offline browser apps—built to run directly on your machine with zero accounts, zero tracking, and verifiable inputs and outputs.</p>
+              <div class="hero-actions">
+                <a class="btn-primary" href="#catalog" id="primaryAction">
+                  <span>Explore 12 tools</span>
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter">
+                    <path d="M4 12h15"/><path d="M13.5 6.5L19 12l-5.5 5.5"/>
+                  </svg>
+                </a>
+                <a class="btn-secondary" href="#standards">Core principles</a>
+              </div>
+            </div>
+
+            <div class="hero-telemetry">
+              <div class="telemetry-phase" id="heroPhaseTitle">LX 263 · BEACON HORIZON</div>
+              <div class="telemetry-row">
+                <span class="telemetry-label">Active tools</span>
+                <span class="telemetry-val">12 public repos</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="telemetry-label">Supporting</span>
+                <span class="telemetry-val">rfs-brand · rfs.tools</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="telemetry-label">Retired archive</span>
+                <span class="telemetry-val">08 read-only</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="telemetry-label">Telemetry</span>
+                <span class="telemetry-val">Zero accounts</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="horizon-desk">
+            <label for="horizon-scrubber">Cyclorama Horizon Fader</label>
+            <input
+              id="horizon-scrubber"
+              class="horizon-scrubber"
+              type="range"
+              min="0"
+              max="5"
+              step="1"
+              value="2"
+              aria-valuetext="LX 263 Beacon Horizon"
+            >
+            <span class="horizon-cue-tag" id="scrubberReadout">LX 263 / 512</span>
+          </div>
+
+          <div class="horizon-strip" role="group" aria-label="Lighting phase horizon cues">
+            <button type="button" class="phase-tile phase-tile--0" data-horizon="0" data-tool="pwn-broker" aria-pressed="false">
+              <div>
+                <div class="phase-tile-code"><span>LX 001</span><span>Python</span></div>
+                <div class="phase-tile-name">pwn-broker</div>
+              </div>
+              <div class="phase-tile-job">Keeps a box's targets, notes, creds and tools in order.</div>
+              <div class="phase-dots" aria-hidden="true">
+                <span class="is-lit"></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </button>
+
+            <button type="button" class="phase-tile phase-tile--1" data-horizon="1" data-tool="port-sync" aria-pressed="false">
+              <div>
+                <div class="phase-tile-code"><span>LX 127</span><span>Rust</span></div>
+                <div class="phase-tile-name">port-sync</div>
+              </div>
+              <div class="phase-tile-job">Keeps qBittorrent's port synced to Proton VPN.</div>
+              <div class="phase-dots" aria-hidden="true">
+                <span class="is-lit"></span><span class="is-lit"></span><span></span><span></span><span></span><span></span>
+              </div>
+            </button>
+
+            <button type="button" class="phase-tile phase-tile--2" data-horizon="2" data-tool="screen-mark" aria-pressed="true">
+              <div>
+                <div class="phase-tile-code"><span>LX 263</span><span>Rust</span></div>
+                <div class="phase-tile-name">screen-mark</div>
+              </div>
+              <div class="phase-tile-job">Screenshot capture and annotation in pure Rust.</div>
+              <div class="phase-dots" aria-hidden="true">
+                <span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span><span></span><span></span><span></span>
+              </div>
+            </button>
+
+            <button type="button" class="phase-tile phase-tile--3" data-horizon="3" data-tool="carify" aria-pressed="false">
+              <div>
+                <div class="phase-tile-code"><span>LX 389</span><span>sh / PS</span></div>
+                <div class="phase-tile-name">carify</div>
+              </div>
+              <div class="phase-tile-job">Convert video for Uconnect USB playback, via ffmpeg.</div>
+              <div class="phase-dots" aria-hidden="true">
+                <span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span><span></span><span></span>
+              </div>
+            </button>
+
+            <button type="button" class="phase-tile phase-tile--4" data-horizon="4" data-tool="certapi" aria-pressed="false">
+              <div>
+                <div class="phase-tile-code"><span>LX 455</span><span>C#</span></div>
+                <div class="phase-tile-name">certapi</div>
+              </div>
+              <div class="phase-tile-job">mTLS API client for the Windows certificate store.</div>
+              <div class="phase-dots" aria-hidden="true">
+                <span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span><span></span>
+              </div>
+            </button>
+
+            <button type="button" class="phase-tile phase-tile--5" data-horizon="5" data-tool="open-file" aria-pressed="false">
+              <div>
+                <div class="phase-tile-code"><span>LX 512</span><span>TypeScript</span></div>
+                <div class="phase-tile-name">open-file</div>
+              </div>
+              <div class="phase-tile-job">Learn and play chess in your browser, offline.</div>
+              <div class="phase-dots" aria-hidden="true">
+                <span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span><span class="is-lit"></span>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <section class="band" id="catalog" aria-labelledby="catalog-heading">
+          <div class="band-head">
+            <div>
+              <h2 id="catalog-heading">Complete cue sheet</h2>
+              <p class="band-lead">All twelve active public repositories in display order. Select any row to inspect its input-to-output trace and clone command on the proof desk.</p>
+            </div>
+          </div>
+
+          <div class="catalog-controls">
+            <div class="filter-group" role="group" aria-label="Filter tools by stack">
+              <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All (12)</button>
+              <button type="button" class="filter-btn" data-filter="rust" aria-pressed="false">Rust (3)</button>
+              <button type="button" class="filter-btn" data-filter="kali" aria-pressed="false">Python &amp; Kali (4)</button>
+              <button type="button" class="filter-btn" data-filter="windows" aria-pressed="false">Windows (6)</button>
+              <button type="button" class="filter-btn" data-filter="browser" aria-pressed="false">Browser (2)</button>
+            </div>
+
+            <div class="search-wrap">
+              <label for="tool-search">Filter</label>
+              <input id="tool-search" class="search-input" type="search" placeholder="Name, language, or OS...">
+            </div>
+          </div>
+
+          <div class="catalog-layout">
+            <div class="cue-table-wrap">
+              <table class="cue-table">
+                <caption>Real-Fruit-Snacks active repositories (<span id="visibleCount">12</span> of 12 shown)</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Repository &amp; Job</th>
+                    <th scope="col">Stack</th>
+                    <th scope="col">IN &rarr; OUT Proof</th>
+                    <th scope="col">Links</th>
+                  </tr>
+                </thead>
+                <tbody id="cueTableBody">
+                  <tr class="is-selected" data-repo="screen-mark" data-tags="rust windows linux">
+                    <td class="cue-num-cell">#01</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="screen-mark" aria-pressed="true">screen-mark</button>
+                      <p class="tool-desc-inline">Screenshot capture and annotation in pure Rust</p>
+                    </td>
+                    <td class="tool-stack">Rust<br>Windows, Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>Ctrl+PrintScreen</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>screen-mark_2026-11-05_091412.png</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/screen-mark/">Docs <span class="visually-hidden">for screen-mark</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/screen-mark">Source <span class="visually-hidden">for screen-mark</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="port-sync" data-tags="rust windows">
+                    <td class="cue-num-cell">#02</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="port-sync" aria-pressed="false">port-sync</button>
+                      <p class="tool-desc-inline">Keeps qBittorrent's port synced to Proton VPN</p>
+                    </td>
+                    <td class="tool-stack">Rust<br>Windows</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>Port pair 51037-&gt;51037</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>listening port updated: 48213 -&gt; 51037</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/port-sync/">Docs <span class="visually-hidden">for port-sync</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/port-sync">Source <span class="visually-hidden">for port-sync</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="carify" data-tags="windows macos linux shell powershell">
+                    <td class="cue-num-cell">#03</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="carify" aria-pressed="false">carify</button>
+                      <p class="tool-desc-inline">Convert video for Uconnect USB playback, via ffmpeg</p>
+                    </td>
+                    <td class="tool-stack">sh, PowerShell<br>Win, macOS, Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>HEVC 10-bit · 1080p · AC3 5.1</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>H.264 8-bit · 720p · AAC stereo</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/carify/">Docs <span class="visually-hidden">for carify</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/carify">Source <span class="visually-hidden">for carify</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="certapi" data-tags="windows csharp">
+                    <td class="cue-num-cell">#04</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="certapi" aria-pressed="false">certapi</button>
+                      <p class="tool-desc-inline">mTLS API client for the Windows certificate store</p>
+                    </td>
+                    <td class="tool-stack">C#<br>Windows</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>a client certificate in CurrentUser\My</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>200 OK; the key never left the store</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/certapi/">Docs <span class="visually-hidden">for certapi</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/certapi">Source <span class="visually-hidden">for certapi</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="identity-gen" data-tags="browser html">
+                    <td class="cue-num-cell">#05</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="identity-gen" aria-pressed="false">identity-gen</button>
+                      <p class="tool-desc-inline">Offline generator for throwaway signup identities</p>
+                    </td>
+                    <td class="tool-stack">HTML<br>Browser</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>a signup form that wants too much</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>a stand-in: name, handle, passphrase</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/identity-gen/">Docs <span class="visually-hidden">for identity-gen</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/identity-gen">Source <span class="visually-hidden">for identity-gen</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="amazon-order-sync" data-tags="rust windows linux">
+                    <td class="cue-num-cell">#06</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="amazon-order-sync" aria-pressed="false">amazon-order-sync</button>
+                      <p class="tool-desc-inline">Syncs your Amazon orders into local Markdown notes</p>
+                    </td>
+                    <td class="tool-stack">Rust<br>Windows, Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>Amazon's order history</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>one Order-&lt;id&gt;.md per order</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/amazon-order-sync/">Docs <span class="visually-hidden">for amazon-order-sync</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/amazon-order-sync">Source <span class="visually-hidden">for amazon-order-sync</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="powershell-toolbox" data-tags="windows powershell">
+                    <td class="cue-num-cell">#07</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="powershell-toolbox" aria-pressed="false">powershell-toolbox</button>
+                      <p class="tool-desc-inline">A grab-bag of my PowerShell scripts, each one standalone</p>
+                    </td>
+                    <td class="tool-stack">PowerShell<br>Windows</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>every repo your gh login sees</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>one at a time: keep, archive or delete</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/powershell-toolbox/">Docs <span class="visually-hidden">for powershell-toolbox</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/powershell-toolbox">Source <span class="visually-hidden">for powershell-toolbox</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="pwn-broker" data-tags="kali python linux">
+                    <td class="cue-num-cell">#08</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="pwn-broker" aria-pressed="false">pwn-broker</button>
+                      <p class="tool-desc-inline">Keeps a box's targets, notes, creds and tools in order</p>
+                    </td>
+                    <td class="tool-stack">Python<br>Kali Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>pwn-broker new</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>2026-11-16_htb_forest.finished.tar.gz</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/pwn-broker/">Docs <span class="visually-hidden">for pwn-broker</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/pwn-broker">Source <span class="visually-hidden">for pwn-broker</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="pwn-shop" data-tags="kali python linux">
+                    <td class="cue-num-cell">#09</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="pwn-shop" aria-pressed="false">pwn-shop</button>
+                      <p class="tool-desc-inline">Tool packages for pwn-broker, built from upstream releases</p>
+                    </td>
+                    <td class="tool-stack">Python<br>Kali Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>an upstream release, pinned by SHA-256</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>kerbrute-1.0.3-1.zip</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/pwn-shop/">Docs <span class="visually-hidden">for pwn-shop</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/pwn-shop">Source <span class="visually-hidden">for pwn-shop</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="pwn-playbooks" data-tags="kali markdown python linux">
+                    <td class="cue-num-cell">#10</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="pwn-playbooks" aria-pressed="false">pwn-playbooks</button>
+                      <p class="tool-desc-inline">Playbooks for pwn-broker: read into the note, fill in, run</p>
+                    </td>
+                    <td class="tool-stack">Markdown<br>Kali Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>:Pb smb in the note window</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>Playbook: SMB enumeration, to fill in</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/pwn-playbooks/">Docs <span class="visually-hidden">for pwn-playbooks</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/pwn-playbooks">Source <span class="visually-hidden">for pwn-playbooks</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="pwn-report" data-tags="kali python linux">
+                    <td class="cue-num-cell">#11</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="pwn-report" aria-pressed="false">pwn-report</button>
+                      <p class="tool-desc-inline">Private, evidence-linked reports from pwn-broker archives</p>
+                    </td>
+                    <td class="tool-stack">Python<br>Kali Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>2026-11-16_htb_forest.finished.tar.gz</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>report.md, every file with its SHA-256</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/pwn-report/">Docs <span class="visually-hidden">for pwn-report</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/pwn-report">Source <span class="visually-hidden">for pwn-report</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="open-file" data-tags="browser typescript">
+                    <td class="cue-num-cell">#12</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="open-file" aria-pressed="false">open-file</button>
+                      <p class="tool-desc-inline">Learn and play chess in your browser, offline</p>
+                    </td>
+                    <td class="tool-stack">TypeScript<br>Browser</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>a blunder in one of your games</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>a puzzle made from it</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/open-file/">Docs <span class="visually-hidden">for open-file</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/open-file">Source <span class="visually-hidden">for open-file</span></a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="empty-state" id="emptyState" hidden>
+                <p>No active repositories match that filter.</p>
+                <button type="button" class="filter-btn" id="resetFilterBtn">Reset filters</button>
+              </div>
+            </div>
+
+            <aside class="proof-desk" aria-label="Selected tool proof desk">
+              <div class="proof-wash-header">
+                <span class="proof-wash-cue" id="proofCue">#01 / 12</span>
+                <span class="proof-wash-lang" id="proofLang">Rust</span>
+              </div>
+              <div class="proof-body">
+                <div class="proof-head">
+                  <h3 id="proofRepo">screen-mark</h3>
+                </div>
+
+                <p class="proof-summary" id="proofDesc">Screenshot capture and annotation in pure Rust.</p>
+
+                <div class="proof-trace">
+                  <div class="trace-row">
+                    <span class="trace-key">Input</span>
+                    <code id="proofIn">Ctrl+PrintScreen</code>
+                  </div>
+                  <div class="trace-divider">
+                    <span class="trace-plat-badge"><span class="k">[os]</span> <span id="proofPlatform">Windows, Linux</span></span>
+                  </div>
+                  <div class="trace-row">
+                    <span class="trace-key trace-key--out">Output</span>
+                    <code id="proofOut">screen-mark_2026-11-05_091412.png</code>
+                  </div>
+                </div>
+
+                <div class="clone-block">
+                  <span class="clone-label">Repository clone command</span>
+                  <div class="clone-row">
+                    <code class="clone-code" id="clone-cmd">git clone https://github.com/Real-Fruit-Snacks/screen-mark.git</code>
+                    <span class="copy-wrap">
+                      <button type="button" class="copy-btn" command="--copy" commandfor="clone-cmd" aria-label="Copy git clone command">
+                        <svg class="icon-copy" aria-hidden="true" width="15" height="15" viewBox="0 0 16 16" fill="none">
+                          <rect x="5" y="5" width="8" height="9" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                          <path d="M11 5V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h1" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                        <svg class="icon-check" aria-hidden="true" width="15" height="15" viewBox="0 0 16 16" fill="none">
+                          <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="1.75"/>
+                        </svg>
+                      </button>
+                      <span class="copy-tip" role="status"></span>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="proof-actions">
+                  <a class="btn-primary" id="proofDocsLink" href="https://real-fruit-snacks.github.io/screen-mark/">Project page</a>
+                  <a class="btn-secondary" id="proofRepoLink" href="https://github.com/Real-Fruit-Snacks/screen-mark">GitHub source</a>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="band" id="standards" aria-labelledby="standards-heading">
+          <div class="band-head">
+            <div>
+              <h2 id="standards-heading">Core principles</h2>
+              <p class="band-lead">Four commitments held across active Real-Fruit-Snacks projects today, paired with the two supporting repositories behind the brand and front door.</p>
+            </div>
+          </div>
+
+          <ol class="rules-list">
+            <li>
+              <span class="rule-code">01 / LOCAL</span>
+              <h3 class="rule-title">Local-first by default</h3>
+              <p class="rule-note">Every tool runs directly on your machine—whether a native Rust binary, a Windows C# or PowerShell client, a Kali workflow, or an offline browser app.</p>
+            </li>
+            <li>
+              <span class="rule-code">02 / PRIVACY</span>
+              <h3 class="rule-title">No accounts or tracking</h3>
+              <p class="rule-note">Zero signups, zero analytics beacons, and zero background cloud dependencies sitting between you and your own data.</p>
+            </li>
+            <li>
+              <span class="rule-code">03 / OPEN</span>
+              <h3 class="rule-title">Source-first on GitHub</h3>
+              <p class="rule-note">Every active project ships public, inspectable source code alongside dedicated documentation pages, open issues, and pull requests.</p>
+            </li>
+            <li>
+              <span class="rule-code">04 / DIRECT</span>
+              <h3 class="rule-title">Direct downloads &amp; reproducible setups</h3>
+              <p class="rule-note">Install, clone, or run straight from each repository with predictable dependencies—and retired projects stay clearly marked read-only.</p>
+            </li>
+          </ol>
+
+          <div class="around-grid">
+            <article class="around-item">
+              <div>
+                <h3>rfs-brand</h3>
+                <p>RFS brand system, profile art, and repository templates.</p>
+              </div>
+              <div class="row-links">
+                <a href="https://real-fruit-snacks.github.io/rfs-brand/">Docs <span class="visually-hidden">for rfs-brand</span></a>
+                <a href="https://github.com/Real-Fruit-Snacks/rfs-brand">Source <span class="visually-hidden">for rfs-brand</span></a>
+              </div>
+            </article>
+            <article class="around-item">
+              <div>
+                <h3>rfs.tools</h3>
+                <p>The front door at rfs.tools, one page pointing at GitHub.</p>
+              </div>
+              <div class="row-links">
+                <a href="https://rfs.tools/">Visit <span class="visually-hidden">rfs.tools</span></a>
+                <a href="https://github.com/Real-Fruit-Snacks/rfs.tools">Source <span class="visually-hidden">for rfs.tools</span></a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="band" id="retired" aria-labelledby="retired-heading">
+          <div class="band-head">
+            <div>
+              <h2 id="retired-heading">Retired archive</h2>
+              <p class="band-lead">Eight public repositories—including retired frameworks, earlier toolkits, and the five-part water series—kept transparently archived and read-only, with no further fixes or releases.</p>
+            </div>
+          </div>
+
+          <div class="retired-grid">
+            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/forge-framework">
+              <span class="retired-name">forge-framework</span>
+              <span class="retired-tag">Archived · Read-only</span>
+            </a>
+            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/agent-toolkit">
+              <span class="retired-name">agent-toolkit</span>
+              <span class="retired-tag">Archived · Read-only</span>
+            </a>
+            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/dev-toolkit">
+              <span class="retired-name">dev-toolkit</span>
+              <span class="retired-tag">Archived · Read-only</span>
+            </a>
+            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Kraken">
+              <span class="retired-name">Kraken</span>
+              <span class="retired-tag">Water series · Archived</span>
+            </a>
+            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Maelstrom">
+              <span class="retired-name">Maelstrom</span>
+              <span class="retired-tag">Water series · Archived</span>
+            </a>
+            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Rapids">
+              <span class="retired-name">Rapids</span>
+              <span class="retired-tag">Water series · Archived</span>
+            </a>
+            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Lure">
+              <span class="retired-name">Lure</span>
+              <span class="retired-tag">Water series · Archived</span>
+            </a>
+            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Undertow">
+              <span class="retired-name">Undertow</span>
+              <span class="retired-tag">Water series · Archived</span>
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="stage-footer">
+        <p>Issues and PRs welcome on any active repo. No roadmap, no Discord. If one saves you time, you can <a href="https://github.com/sponsors/Real-Fruit-Snacks">sponsor Real-Fruit-Snacks on GitHub</a>.</p>
+        <div class="footer-links">
+          <a href="https://github.com/Real-Fruit-Snacks">github.com/Real-Fruit-Snacks</a>
+          <a href="https://rfs.tools/">rfs.tools</a>
+          <a href="https://github.com/sponsors/Real-Fruit-Snacks">Sponsor</a>
+        </div>
+      </footer>
     </div>
   </div>
-</section>
 
-<section id="around" class="around" aria-labelledby="around-h">
-  <div class="wrap split">
-    <h2 id="around-h">Around them</h2>
-    <ul class="plain">
-<!-- build:around -->
-<li><a href="https://real-fruit-snacks.github.io/rfs-brand/">rfs-brand</a><span>RFS brand, profile art and repo templates</span><a class="src" href="https://github.com/Real-Fruit-Snacks/rfs-brand">Source</a></li>
-<li><a href="https://rfs.tools/">rfs.tools</a><span>The front door at rfs.tools, one page pointing at GitHub</span><a class="src" href="https://github.com/Real-Fruit-Snacks/rfs.tools">Source</a></li>
-<!-- /build:around -->
-    </ul>
-  </div>
-</section>
-
-<section id="how" class="how" aria-labelledby="how-h">
-  <div class="wrap">
-    <h2 id="how-h">How they're built</h2>
-    <p class="lede">The rules I hold every repo to.</p>
-    <ol class="rules">
-      <li><p>One job per tool. If it needs a second README section to explain, it's two tools.</p></li>
-      <li><p>Install is one line, shown first.</p></li>
-      <li><p>“Tested on” is a list of real versions, not a promise.</p></li>
-      <li><p>Known issues sit above the fold.</p></li>
-    </ol>
-  </div>
-</section>
-
-<section id="retired" class="retired" aria-labelledby="retired-h">
-  <div class="wrap split">
-    <h2 id="retired-h">Retired</h2>
-    <div>
-      <p><span class="state">Archived</span> Retired projects: read-only, with no fixes or releases.</p>
-      <ul class="names"><!-- build:retired --><li><a href="https://github.com/Real-Fruit-Snacks/agent-toolkit">agent-toolkit</a></li><li><a href="https://github.com/Real-Fruit-Snacks/dev-toolkit">dev-toolkit</a></li><li><a href="https://github.com/Real-Fruit-Snacks/forge-framework">forge-framework</a></li><li><a href="https://github.com/Real-Fruit-Snacks/Kraken">Kraken</a></li><li><a href="https://github.com/Real-Fruit-Snacks/Maelstrom">Maelstrom</a></li><li><a href="https://github.com/Real-Fruit-Snacks/Rapids">Rapids</a></li><li><a href="https://github.com/Real-Fruit-Snacks/Lure">Lure</a></li><li><a href="https://github.com/Real-Fruit-Snacks/Undertow">Undertow</a></li><!-- /build:retired --></ul>
-    </div>
-  </div>
-</section>
-</main>
-
-<footer class="foot">
-  <div class="wrap">
-    <p class="sign">Real tools. No filler.</p>
-    <div class="foot-grid">
-      <p>Issues and PRs welcome on any active repo. No roadmap, no Discord. If one saves you time, you can <a href="https://github.com/sponsors/Real-Fruit-Snacks">sponsor me</a>.</p>
-      <p><a href="https://github.com/Real-Fruit-Snacks">github.com/Real-Fruit-Snacks</a> · <a href="https://rfs.tools/">rfs.tools</a> · <a href="https://github.com/Real-Fruit-Snacks/Real-Fruit-Snacks.github.io">This page's source</a></p>
-      <p class="colophon">Set in Schibsted Grotesk and Fragment Mono. Colours from the <a href="https://github.com/Real-Fruit-Snacks/rfs-brand/blob/main/BRAND.md">RFS brand</a>.</p>
-    </div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  <script src="app.js" defer></script>
 </body>
 </html>
