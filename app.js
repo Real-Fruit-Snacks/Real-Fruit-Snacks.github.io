@@ -165,7 +165,7 @@
 
   function getStoredScheme() {
     try {
-      const val = localStorage.getItem("color-scheme");
+      const val = localStorage.getItem("rfs-theme") || localStorage.getItem("color-scheme");
       return val === "light" || val === "dark" ? val : null;
     } catch {
       return null;
@@ -178,6 +178,7 @@
 
   function setSchemeOverride(targetScheme) {
     try {
+      localStorage.setItem("rfs-theme", targetScheme);
       if (targetScheme === "dark") {
         localStorage.removeItem("color-scheme");
       } else {
@@ -304,22 +305,37 @@
     }
   });
 
-  /* Two-state Dark / Alabaster Day toggle */
+  /* Two-state Dark / Alabaster Day toggle with circular View Transition */
   if (schemeToggle) {
     schemeToggle.addEventListener("click", () => {
       const target = getRenderedScheme() === "dark" ? "light" : "dark";
-      setSchemeOverride(target);
       const nextCue = target === "dark" ? 2 : 5;
-      applyPhase(nextCue, { persist: false, syncTool: true, updateHash: true });
-      try {
-        localStorage.setItem("rfs-cyc-cue", String(nextCue));
-      } catch {}
+      const applyToggle = () => {
+        setSchemeOverride(target);
+        applyPhase(nextCue, { persist: false, syncTool: true, updateHash: true });
+        try {
+          localStorage.setItem("rfs-cyc-cue", String(nextCue));
+        } catch {}
+      };
+      const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (typeof document.startViewTransition === "function" && !reduceMotion) {
+        const rect = schemeToggle.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const r = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+        document.documentElement.style.setProperty("--vt-x", `${x}px`);
+        document.documentElement.style.setProperty("--vt-y", `${y}px`);
+        document.documentElement.style.setProperty("--vt-r", `${r}px`);
+        document.startViewTransition(applyToggle);
+      } else {
+        applyToggle();
+      }
     });
   }
 
   /* Cross-tab storage sync */
   window.addEventListener("storage", (event) => {
-    if (event.key === "color-scheme") {
+    if (event.key === "rfs-theme" || event.key === "color-scheme") {
       const val = event.newValue;
       if (metaScheme) {
         metaScheme.content = val === "light" ? "light" : "dark";

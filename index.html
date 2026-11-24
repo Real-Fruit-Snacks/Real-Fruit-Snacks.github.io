@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <script>
     try {
-      var savedScheme = localStorage.getItem("color-scheme");
+      var savedScheme = localStorage.getItem("rfs-theme") || localStorage.getItem("color-scheme");
       if (savedScheme === "light" || savedScheme === "dark") {
         document.querySelector('meta[name="color-scheme"]').content = savedScheme;
       }
@@ -48,7 +48,10 @@
       <div class="rail-top-group">
         <header>
           <a class="brand-lockup" href="#top" aria-label="Real-Fruit-Snacks home">
-            <span class="brand-acronym">RFS</span>
+            <span class="brand-head-row">
+              <img class="brand-tile" src="icon.svg" alt="" width="28" height="28">
+              <span class="brand-acronym">RFS</span>
+            </span>
             <span class="brand-full">Real-Fruit-Snacks</span>
           </a>
         </header>

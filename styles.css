@@ -53,7 +53,6 @@
   color-scheme: dark;
 
   --in-oklab: ;
-  --in-oklch: ;
 
   --font-display: "Big Shoulders Stencil", "Arial Narrow", sans-serif;
   --font-body: "Albert Sans", system-ui, -apple-system, sans-serif;
@@ -116,7 +115,6 @@
 @supports (background: linear-gradient(in oklab, white, black)) {
   :root {
     --in-oklab: in oklab;
-    --in-oklch: in oklch;
   }
 }
 
@@ -273,11 +271,24 @@ a {
 /* Pure Stencil Identity with Steel-to-Beacon horizon rule */
 .brand-lockup {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.4rem;
   text-decoration: none;
   padding-bottom: 0.85rem;
   border-bottom: 2px solid transparent;
   border-image: linear-gradient(90deg var(--in-oklab), #225c87 0%, #f5752f 100%) 1;
+}
+
+.brand-head-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.brand-tile {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 6px;
 }
 
 .brand-acronym {
@@ -567,8 +578,8 @@ a {
   min-block-size: 2.85rem;
   padding: 0.65rem 1.45rem;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  background: linear-gradient(95deg var(--in-oklab), #184769 0%, #b53f0a 100%);
+  border: 0;
+  background-image: linear-gradient(95deg var(--in-oklab), #184769 0%, #b53f0a 100%);
   background-origin: border-box;
   background-clip: border-box;
   color: #ffffff;
@@ -579,13 +590,12 @@ a {
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
-  transition: transform 160ms var(--ease-expo), box-shadow 160ms ease;
+  transition: transform 160ms var(--ease-expo), filter 160ms ease;
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+  filter: brightness(1.07);
 }
 
 .btn-secondary {
@@ -780,7 +790,7 @@ a {
   justify-content: space-between;
   gap: 0.65rem;
   font-family: inherit;
-  transition: transform 180ms var(--ease-expo), border-color 180ms ease, box-shadow 180ms ease;
+  transition: transform 180ms var(--ease-expo), border-color 180ms ease;
 }
 
 .phase-tile:hover {
@@ -791,7 +801,6 @@ a {
   border-color: #ffffff;
   outline: 2px solid var(--cyc-beacon);
   outline-offset: 2px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.36);
 }
 
 .phase-tile--0 {
@@ -1136,7 +1145,6 @@ a {
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
 }
 
 .proof-wash-header {
@@ -1552,9 +1560,17 @@ a {
     padding-bottom: 0;
     border-bottom: 0;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.55rem;
     min-width: 0;
+  }
+  .brand-head-row {
+    gap: 0.45rem;
+  }
+  .brand-tile {
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
   }
   .brand-acronym {
     font-size: 1.7rem;
@@ -1675,6 +1691,31 @@ a {
   .rail-nav a[aria-current="page"] {
     outline: 2px solid Highlight;
   }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .btn-secondary {
+    background: var(--surface) !important;
+  }
+  .cyc-scrim {
+    opacity: 0.95;
+  }
+}
+
+/* Circular View Transition on Dark / Light toggle */
+::view-transition-group(root) { animation: none; }
+::view-transition-old(root) { animation: none; mix-blend-mode: normal; z-index: 1; }
+::view-transition-new(root) {
+  animation: rfs-vt-circle 560ms cubic-bezier(0.65, 0, 0.35, 1) both;
+  mix-blend-mode: normal;
+  z-index: 2;
+}
+@keyframes rfs-vt-circle {
+  from { clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%)); }
+  to { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 50%)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) { animation: none; }
 }
 
 @media print {
