@@ -130,6 +130,11 @@
       "site": "https://real-fruit-snacks.github.io/rfs-brand/"
     },
     {
+      "repo": "rfs-themes",
+      "description": "Cyclorama Dawn themes and ports for everyday apps",
+      "site": "https://real-fruit-snacks.github.io/rfs-themes/"
+    },
+    {
       "repo": "rfs.tools",
       "description": "The front door at rfs.tools, one page pointing at GitHub",
       "site": "https://rfs.tools/"
