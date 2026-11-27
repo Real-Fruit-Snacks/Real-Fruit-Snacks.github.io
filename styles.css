@@ -1661,6 +1661,12 @@ a {
   }
 }
 
+@media (max-width: 440px) {
+  .brand-full {
+    display: none;
+  }
+}
+
 /* High Contrast / Forced Colors support */
 @media (forced-colors: active) {
   body::before,
