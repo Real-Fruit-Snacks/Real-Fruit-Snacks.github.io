@@ -1447,42 +1447,8 @@ a {
 }
 
 /* ================================================================
-   RETIRED ARCHIVE & FOOTER
+   FOOTER
    ================================================================ */
-.retired-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  gap: 0.75rem;
-}
-
-.retired-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  padding: 0.95rem 1.05rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  text-decoration: none;
-  transition: border-color 150ms ease;
-}
-
-.retired-item:hover {
-  border-color: var(--border-strong);
-}
-
-.retired-name {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.retired-tag {
-  font-family: var(--font-body);
-  font-size: 0.76rem;
-  color: var(--ink-muted);
-}
-
 .stage-footer {
   padding: 2.25rem var(--stage-pad-x) 3rem;
   display: flex;
@@ -1676,8 +1642,7 @@ a {
   .proof-desk,
   .proof-wash-header,
   .cue-table-wrap,
-  .around-item,
-  .retired-item {
+  .around-item {
     background: Canvas;
     color: CanvasText;
     border: 1px solid CanvasText;

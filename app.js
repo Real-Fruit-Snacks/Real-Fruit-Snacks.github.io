@@ -140,6 +140,46 @@
       outText: "one billion pixels carved offline",
       site: "https://real-fruit-snacks.github.io/one-billion-pixels/",
       repo: "https://github.com/Real-Fruit-Snacks/one-billion-pixels"
+    },
+    "hash-bait": {
+      no: "#14",
+      language: "Rust",
+      platform: "Windows, Linux",
+      description: "Drop poisoned shortcuts on SMB shares to coerce NTLM hashes.",
+      inText: "//dc1/public + responder IP",
+      outText: "poisoned .url/.scf/.xml, NetNTLMv2",
+      site: "https://real-fruit-snacks.github.io/hash-bait/",
+      repo: "https://github.com/Real-Fruit-Snacks/hash-bait"
+    },
+    "cred-spray": {
+      no: "#15",
+      language: "Python",
+      platform: "Windows, Linux",
+      description: "Bounded, protocol-aware credential spraying.",
+      inText: "scan.xml + credentials.txt",
+      outText: "results.json, 7 explicit statuses",
+      site: "https://real-fruit-snacks.github.io/cred-spray/",
+      repo: "https://github.com/Real-Fruit-Snacks/cred-spray"
+    },
+    "ad-sweep": {
+      no: "#16",
+      language: "Rust",
+      platform: "Windows, Linux",
+      description: "Runs isolated Active Directory enumeration with NetExec.",
+      inText: "10.0.0.1-2 + credentials.txt",
+      outText: "ordered results.json per target",
+      site: "https://real-fruit-snacks.github.io/ad-sweep/",
+      repo: "https://github.com/Real-Fruit-Snacks/ad-sweep"
+    },
+    "shell-tunnel": {
+      no: "#17",
+      language: "Go",
+      platform: "Windows, Linux",
+      description: "Static SSH server for bind and reverse shells, PTY and SFTP.",
+      inText: "./build.sh reverse 10.10.14.5:4444",
+      outText: "PTY shell, SFTP & -L/-R/-D via ssh",
+      site: "https://real-fruit-snacks.github.io/shell-tunnel/",
+      repo: "https://github.com/Real-Fruit-Snacks/shell-tunnel"
     }
   };
 
@@ -397,8 +437,7 @@
     const sections = [
       { id: "top", el: document.querySelector(".cyc-hero") },
       { id: "catalog", el: document.getElementById("catalog") },
-      { id: "standards", el: document.getElementById("standards") },
-      { id: "retired", el: document.getElementById("retired") }
+      { id: "standards", el: document.getElementById("standards") }
     ].filter((s) => s.el);
 
     const observer = new IntersectionObserver(
@@ -427,7 +466,7 @@
     tableRows.forEach((row) => {
       const tags = (row.dataset.tags || "").toLowerCase();
       const text = row.textContent.toLowerCase();
-      const matchesFilter = activeFilter === "all" || tags.includes(activeFilter);
+      const matchesFilter = activeFilter === "all" || tags.split(/\s+/).includes(activeFilter);
       const matchesQuery = !query || text.includes(query);
       const visible = matchesFilter && matchesQuery;
       row.hidden = !visible;

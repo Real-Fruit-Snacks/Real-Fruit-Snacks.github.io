@@ -8,8 +8,8 @@ One static, framework-free GitHub Pages site (`index.html`, `styles.css`, `app.j
 
 | Path | What it is |
 |---|---|
-| `index.html`, `styles.css`, `app.js` | Interactive Cyclorama Dawn showcase, 13-tool Cue Sheet, sticky Proof Desk, Core Principles, and Retired Archive |
-| `tools.json` | Canonical list of the 13 active public tools, 3 supporting repos, and 8 archived repos |
+| `index.html`, `styles.css`, `app.js` | Interactive Cyclorama Dawn showcase, 17-tool Cue Sheet, sticky Proof Desk, and Core Principles |
+| `tools.json` | Canonical list of the 17 active public tools and 3 supporting repos |
 | `scripts/verify-catalog.mjs` | Zero-dependency Node script validating `tools.json`, `index.html`, `app.js`, and optional live GitHub visibility/archive status (`--github`) |
 | `fonts/` | Self-hosted variable SIL OFL WOFF2 files (`Big Shoulders Stencil`, `Albert Sans`, `Azeret Mono`) |
 | `icon.svg`, `favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `icon-*.png`, `manifest.webmanifest`, `assets/og.png` | Web icons and `1280×640` social card synced from [`rfs-brand`](https://github.com/Real-Fruit-Snacks/rfs-brand) |

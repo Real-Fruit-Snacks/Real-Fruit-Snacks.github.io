@@ -64,7 +64,7 @@
     },
     {
       "repo": "powershell-toolbox",
-      "description": "A grab-bag of standalone PowerShell scripts",
+      "description": "A grab-bag of my PowerShell scripts, each one standalone",
       "language": "PowerShell",
       "platform": "Windows",
       "short": "standalone scripts",
@@ -126,11 +126,51 @@
       "repo": "one-billion-pixels",
       "description": "Excavate one billion pixels in your browser, offline",
       "language": "TypeScript",
-      "platform": "browser",
+      "platform": "Browser",
       "short": "one billion pixel excavation",
       "in": "a single empty origin square",
       "out": "one billion pixels carved offline",
       "site": "https://real-fruit-snacks.github.io/one-billion-pixels/"
+    },
+    {
+      "repo": "hash-bait",
+      "description": "Drop poisoned shortcuts on SMB shares to coerce NTLM hashes",
+      "language": "Rust",
+      "platform": "Windows, Linux",
+      "short": "NTLM hash coercion",
+      "in": "`//dc1/public` + responder IP",
+      "out": "poisoned `.url`/`.scf`/`.xml`, NetNTLMv2",
+      "site": "https://real-fruit-snacks.github.io/hash-bait/"
+    },
+    {
+      "repo": "cred-spray",
+      "description": "Bounded, protocol-aware credential spraying",
+      "language": "Python",
+      "platform": "Windows, Linux",
+      "short": "bounded cred spraying",
+      "in": "`scan.xml` + `credentials.txt`",
+      "out": "`results.json`, 7 explicit statuses",
+      "site": "https://real-fruit-snacks.github.io/cred-spray/"
+    },
+    {
+      "repo": "ad-sweep",
+      "description": "Runs isolated Active Directory enumeration with NetExec",
+      "language": "Rust",
+      "platform": "Windows, Linux",
+      "short": "isolated AD enum",
+      "in": "`10.0.0.1-2` + `credentials.txt`",
+      "out": "ordered `results.json` per target",
+      "site": "https://real-fruit-snacks.github.io/ad-sweep/"
+    },
+    {
+      "repo": "shell-tunnel",
+      "description": "Static SSH server for bind and reverse shells, PTY and SFTP",
+      "language": "Go",
+      "platform": "Windows, Linux",
+      "short": "static SSH shell server",
+      "in": "`./build.sh reverse 10.10.14.5:4444`",
+      "out": "PTY shell, SFTP & `-L`/`-R`/`-D` via ssh",
+      "site": "https://real-fruit-snacks.github.io/shell-tunnel/"
     }
   ],
   "around": [
@@ -150,14 +190,5 @@
       "site": "https://rfs.tools/"
     }
   ],
-  "retired": [
-    "forge-framework",
-    "agent-toolkit",
-    "dev-toolkit",
-    "Kraken",
-    "Maelstrom",
-    "Rapids",
-    "Lure",
-    "Undertow"
-  ]
+  "retired": []
 }

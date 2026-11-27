@@ -19,7 +19,7 @@
     } catch (e) {}
   </script>
   <title>Real-Fruit-Snacks — Local-first open-source software</title>
-  <meta name="description" content="Thirteen local-first open-source tools across Rust, Python, C#, PowerShell, and TypeScript—desktop utilities, Windows networking, Kali workflows, and offline browser apps with zero accounts or tracking.">
+  <meta name="description" content="Seventeen local-first open-source tools across Rust, Python, C#, PowerShell, TypeScript, and Go—desktop utilities, Windows networking, Kali workflows, and offline browser apps with zero accounts or tracking.">
   <link rel="canonical" href="https://real-fruit-snacks.github.io/">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -29,11 +29,11 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://real-fruit-snacks.github.io/">
   <meta property="og:title" content="Real-Fruit-Snacks — Local-first open-source software">
-  <meta property="og:description" content="Thirteen local-first open-source tools across Rust, Python, C#, PowerShell, and TypeScript—zero accounts, zero tracking, verifiable inputs and outputs.">
+  <meta property="og:description" content="Seventeen local-first open-source tools across Rust, Python, C#, PowerShell, TypeScript, and Go—zero accounts, zero tracking, verifiable inputs and outputs.">
   <meta property="og:image" content="https://real-fruit-snacks.github.io/assets/og.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
-  <meta property="og:image:alt" content="Real-Fruit-Snacks: Built local-first. Thirteen active open-source tools on GitHub.">
+  <meta property="og:image:alt" content="Real-Fruit-Snacks: Built local-first. Seventeen active open-source tools on GitHub.">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="fonts/big-shoulders-stencil-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/albert-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -82,7 +82,7 @@
                   </svg>
                   Cue Sheet
                 </span>
-                <span class="nav-count">13</span>
+                <span class="nav-count">17</span>
               </a>
             </li>
             <li>
@@ -94,18 +94,6 @@
                   Principles
                 </span>
                 <span class="nav-count">04</span>
-              </a>
-            </li>
-            <li>
-              <a href="#retired" data-nav="retired">
-                <span class="nav-lead">
-                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <rect x="2" y="3" width="12" height="3" stroke="currentColor" stroke-width="1.5"/>
-                    <path d="M3.5 6V13H12.5V6" stroke="currentColor" stroke-width="1.5"/>
-                  </svg>
-                  Retired
-                </span>
-                <span class="nav-count">08</span>
               </a>
             </li>
             <li>
@@ -187,7 +175,7 @@
               <p class="hero-stand">Open-source desktop utilities, Windows networking clients, Kali workflows, and offline browser apps—built to run directly on your machine with zero accounts, zero tracking, and verifiable inputs and outputs.</p>
               <div class="hero-actions">
                 <a class="btn-primary" href="#catalog" id="primaryAction">
-                  <span>Explore 13 tools</span>
+                  <span>Explore 17 tools</span>
                   <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter">
                     <path d="M4 12h15"/><path d="M13.5 6.5L19 12l-5.5 5.5"/>
                   </svg>
@@ -200,15 +188,15 @@
               <div class="telemetry-phase" id="heroPhaseTitle">LX 263 · BEACON HORIZON</div>
               <div class="telemetry-row">
                 <span class="telemetry-label">Active tools</span>
-                <span class="telemetry-val">13 public repos</span>
+                <span class="telemetry-val">17 public repos</span>
               </div>
               <div class="telemetry-row">
                 <span class="telemetry-label">Supporting</span>
                 <span class="telemetry-val">03 · brand, themes, web</span>
               </div>
               <div class="telemetry-row">
-                <span class="telemetry-label">Retired archive</span>
-                <span class="telemetry-val">08 read-only</span>
+                <span class="telemetry-label">Languages</span>
+                <span class="telemetry-val">Rust, Go, Py, TS, C#</span>
               </div>
               <div class="telemetry-row">
                 <span class="telemetry-label">Telemetry</span>
@@ -305,16 +293,17 @@
           <div class="band-head">
             <div>
               <h2 id="catalog-heading">Complete cue sheet</h2>
-              <p class="band-lead">All thirteen active public repositories in display order. Select any row to inspect its input-to-output trace and clone command on the proof desk.</p>
+              <p class="band-lead">All seventeen active public repositories in display order. Select any row to inspect its input-to-output trace and clone command on the proof desk.</p>
             </div>
           </div>
 
           <div class="catalog-controls">
             <div class="filter-group" role="group" aria-label="Filter tools by stack">
-              <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All (13)</button>
-              <button type="button" class="filter-btn" data-filter="rust" aria-pressed="false">Rust (3)</button>
-              <button type="button" class="filter-btn" data-filter="kali" aria-pressed="false">Python &amp; Kali (4)</button>
-              <button type="button" class="filter-btn" data-filter="windows" aria-pressed="false">Windows (6)</button>
+              <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All (17)</button>
+              <button type="button" class="filter-btn" data-filter="rust" aria-pressed="false">Rust (5)</button>
+              <button type="button" class="filter-btn" data-filter="go" aria-pressed="false">Go (1)</button>
+              <button type="button" class="filter-btn" data-filter="kali" aria-pressed="false">Python &amp; Kali (8)</button>
+              <button type="button" class="filter-btn" data-filter="windows" aria-pressed="false">Windows (10)</button>
               <button type="button" class="filter-btn" data-filter="browser" aria-pressed="false">Browser (3)</button>
             </div>
 
@@ -327,7 +316,7 @@
           <div class="catalog-layout">
             <div class="cue-table-wrap">
               <table class="cue-table">
-                <caption>Real-Fruit-Snacks active repositories (<span id="visibleCount">13</span> of 13 shown)</caption>
+                <caption>Real-Fruit-Snacks active repositories (<span id="visibleCount">17</span> of 17 shown)</caption>
                 <thead>
                   <tr>
                     <th scope="col">No.</th>
@@ -584,6 +573,82 @@
                       </div>
                     </td>
                   </tr>
+
+                  <tr data-repo="hash-bait" data-tags="rust kali windows linux">
+                    <td class="cue-num-cell">#14</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="hash-bait" aria-pressed="false">hash-bait</button>
+                      <p class="tool-desc-inline">Drop poisoned shortcuts on SMB shares to coerce NTLM hashes</p>
+                    </td>
+                    <td class="tool-stack">Rust<br>Windows, Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>//dc1/public + responder IP</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>poisoned .url/.scf/.xml, NetNTLMv2</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/hash-bait/">Docs <span class="visually-hidden">for hash-bait</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/hash-bait">Source <span class="visually-hidden">for hash-bait</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="cred-spray" data-tags="kali python windows linux">
+                    <td class="cue-num-cell">#15</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="cred-spray" aria-pressed="false">cred-spray</button>
+                      <p class="tool-desc-inline">Bounded, protocol-aware credential spraying</p>
+                    </td>
+                    <td class="tool-stack">Python<br>Windows, Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>scan.xml + credentials.txt</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>results.json, 7 explicit statuses</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/cred-spray/">Docs <span class="visually-hidden">for cred-spray</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/cred-spray">Source <span class="visually-hidden">for cred-spray</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="ad-sweep" data-tags="rust kali windows linux">
+                    <td class="cue-num-cell">#16</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="ad-sweep" aria-pressed="false">ad-sweep</button>
+                      <p class="tool-desc-inline">Runs isolated Active Directory enumeration with NetExec</p>
+                    </td>
+                    <td class="tool-stack">Rust<br>Windows, Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>10.0.0.1-2 + credentials.txt</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>ordered results.json per target</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/ad-sweep/">Docs <span class="visually-hidden">for ad-sweep</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/ad-sweep">Source <span class="visually-hidden">for ad-sweep</span></a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr data-repo="shell-tunnel" data-tags="go kali windows linux">
+                    <td class="cue-num-cell">#17</td>
+                    <td>
+                      <button type="button" class="tool-select-btn" data-select="shell-tunnel" aria-pressed="false">shell-tunnel</button>
+                      <p class="tool-desc-inline">Static SSH server for bind and reverse shells, PTY and SFTP</p>
+                    </td>
+                    <td class="tool-stack">Go<br>Windows, Linux</td>
+                    <td class="tool-io-cell">
+                      <div><span class="io-dir">IN</span>./build.sh reverse 10.10.14.5:4444</div>
+                      <div><span class="io-dir io-dir--out">OUT</span>PTY shell, SFTP &amp; -L/-R/-D via ssh</div>
+                    </td>
+                    <td>
+                      <div class="row-links">
+                        <a href="https://real-fruit-snacks.github.io/shell-tunnel/">Docs <span class="visually-hidden">for shell-tunnel</span></a>
+                        <a href="https://github.com/Real-Fruit-Snacks/shell-tunnel">Source <span class="visually-hidden">for shell-tunnel</span></a>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
 
@@ -595,7 +660,7 @@
 
             <aside class="proof-desk" aria-label="Selected tool proof desk">
               <div class="proof-wash-header">
-                <span class="proof-wash-cue" id="proofCue">#01 / 13</span>
+                <span class="proof-wash-cue" id="proofCue">#01 / 17</span>
                 <span class="proof-wash-lang" id="proofLang">Rust</span>
               </div>
               <div class="proof-body">
@@ -659,7 +724,7 @@
             <li>
               <span class="rule-code">01 / LOCAL</span>
               <h3 class="rule-title">Local-first by default</h3>
-              <p class="rule-note">Every tool runs directly on your machine—whether a native Rust binary, a Windows C# or PowerShell client, a Kali workflow, or an offline browser app.</p>
+              <p class="rule-note">Every tool runs directly on your machine—whether a native Rust or Go binary, a Windows C# or PowerShell client, a Kali workflow, or an offline browser app.</p>
             </li>
             <li>
               <span class="rule-code">02 / PRIVACY</span>
@@ -674,7 +739,7 @@
             <li>
               <span class="rule-code">04 / DIRECT</span>
               <h3 class="rule-title">Direct downloads &amp; reproducible setups</h3>
-              <p class="rule-note">Install, clone, or run straight from each repository with predictable dependencies—and retired projects stay clearly marked read-only.</p>
+              <p class="rule-note">Install, clone, or run straight from each repository with predictable dependencies and zero vendor lock-in.</p>
             </li>
           </ol>
 
@@ -709,50 +774,6 @@
                 <a href="https://github.com/Real-Fruit-Snacks/rfs.tools">Source <span class="visually-hidden">for rfs.tools</span></a>
               </div>
             </article>
-          </div>
-        </section>
-
-        <section class="band" id="retired" aria-labelledby="retired-heading">
-          <div class="band-head">
-            <div>
-              <h2 id="retired-heading">Retired archive</h2>
-              <p class="band-lead">Eight public repositories—including retired frameworks, earlier toolkits, and the five-part water series—kept transparently archived and read-only, with no further fixes or releases.</p>
-            </div>
-          </div>
-
-          <div class="retired-grid">
-            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/forge-framework">
-              <span class="retired-name">forge-framework</span>
-              <span class="retired-tag">Archived · Read-only</span>
-            </a>
-            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/agent-toolkit">
-              <span class="retired-name">agent-toolkit</span>
-              <span class="retired-tag">Archived · Read-only</span>
-            </a>
-            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/dev-toolkit">
-              <span class="retired-name">dev-toolkit</span>
-              <span class="retired-tag">Archived · Read-only</span>
-            </a>
-            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Kraken">
-              <span class="retired-name">Kraken</span>
-              <span class="retired-tag">Water series · Archived</span>
-            </a>
-            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Maelstrom">
-              <span class="retired-name">Maelstrom</span>
-              <span class="retired-tag">Water series · Archived</span>
-            </a>
-            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Rapids">
-              <span class="retired-name">Rapids</span>
-              <span class="retired-tag">Water series · Archived</span>
-            </a>
-            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Lure">
-              <span class="retired-name">Lure</span>
-              <span class="retired-tag">Water series · Archived</span>
-            </a>
-            <a class="retired-item" href="https://github.com/Real-Fruit-Snacks/Undertow">
-              <span class="retired-name">Undertow</span>
-              <span class="retired-tag">Water series · Archived</span>
-            </a>
           </div>
         </section>
       </main>
