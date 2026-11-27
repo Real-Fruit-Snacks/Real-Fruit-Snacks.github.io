@@ -313,6 +313,10 @@ a {
   border-radius: 6px;
 }
 
+.brand-tile--light { display: none; }
+:root:has(> head > meta[name="color-scheme"][content="light"]) .brand-tile--dark { display: none; }
+:root:has(> head > meta[name="color-scheme"][content="light"]) .brand-tile--light { display: block; }
+
 .brand-acronym {
   font-family: var(--font-display);
   font-size: 2.35rem;
