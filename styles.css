@@ -75,6 +75,8 @@
   --accent-beacon-light: #ad3d0a;
   --code-bg-light: #eef2f5;
   --focus-light: #ad3d0a;
+  --wash-steel-light: rgba(31, 84, 122, 0.28);
+  --wash-beacon-light: rgba(240, 110, 43, 0.28);
 
   /* Dark (Absorbent Matte Cyclorama Black — neutral, zero slate drift) */
   --ground-dark: #050507;
@@ -88,6 +90,8 @@
   --accent-beacon-dark: #ff9254;
   --code-bg-dark: #08080b;
   --focus-dark: #ff9254;
+  --wash-steel-dark: rgba(31, 84, 122, 0.38);
+  --wash-beacon-dark: rgba(240, 110, 43, 0.30);
 
   /* Resolved default tokens (Dark LX 263) */
   --ground: var(--ground-dark);
@@ -101,6 +105,8 @@
   --accent-beacon: var(--accent-beacon-dark);
   --code-bg: var(--code-bg-dark);
   --focus: var(--focus-dark);
+  --wash-steel: var(--wash-steel-dark);
+  --wash-beacon: var(--wash-beacon-dark);
 
   --rail-w: 15rem;
   --stage-pad-x: clamp(1.25rem, 1rem + 2.4vw, 3.25rem);
@@ -132,6 +138,8 @@
   --accent-beacon: var(--accent-beacon-light);
   --code-bg: var(--code-bg-light);
   --focus: var(--focus-light);
+  --wash-steel: var(--wash-steel-light);
+  --wash-beacon: var(--wash-beacon-light);
 }
 
 /* Base reset & browser surfaces */
@@ -149,6 +157,8 @@ html {
 body {
   margin: 0;
   height: 100dvh;
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
   overflow: clip;
   background: var(--ground);
@@ -159,6 +169,18 @@ body {
   text-align: start;
   caret-color: var(--accent-beacon);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Pure linear Steel -> Beacon Orange cyclorama floor wash (zero radial neon blobs) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(100deg var(--in-oklab), var(--wash-steel) 0%, var(--wash-steel) 14%, transparent 52%, var(--wash-beacon) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.08) 45%, rgba(0, 0, 0, 0.58) 80%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.08) 45%, rgba(0, 0, 0, 0.58) 80%, #000 100%);
 }
 
 ::selection {
@@ -474,10 +496,14 @@ a {
   background: linear-gradient(116deg var(--in-oklab), #0d0806 0%, #3d1c0c 30%, #bd4612 64%, #f06e2b 88%, #ff9254 100%);
 }
 .cyc-curtain--4 {
-  background: linear-gradient(115deg var(--in-oklab), #ebf0f5 0%, #dce6ef 46%, #f8e1d2 80%, #ffffff 100%);
+  background:
+    linear-gradient(104deg var(--in-oklab), rgba(31, 84, 122, 0.24) 0%, rgba(31, 84, 122, 0.06) 34%, transparent 48%, rgba(240, 110, 43, 0.22) 74%, rgba(240, 110, 43, 0.38) 100%),
+    linear-gradient(180deg var(--in-oklab), #edf1f5 0%, #f5efe9 56%, #fae4d4 100%);
 }
 .cyc-curtain--5 {
-  background: linear-gradient(115deg var(--in-oklab), #f5f7f9 0%, #ebf1f6 54%, #fceee4 85%, #ffffff 100%);
+  background:
+    linear-gradient(100deg var(--in-oklab), rgba(31, 84, 122, 0.30) 0%, rgba(31, 84, 122, 0.11) 36%, transparent 52%, rgba(240, 110, 43, 0.16) 72%, rgba(240, 110, 43, 0.36) 100%),
+    linear-gradient(180deg var(--in-oklab), #f5f7f9 0%, #eef3f7 52%, #f9efe7 100%);
 }
 
 :root[data-cue="0"] .cyc-curtain--0,
@@ -509,7 +535,7 @@ a {
 }
 :root[data-cue="4"] .cyc-scrim,
 :root[data-cue="5"] .cyc-scrim {
-  background: linear-gradient(90deg, rgba(246, 248, 250, 0.86) 0%, rgba(246, 248, 250, 0.48) 56%, transparent 86%);
+  background: linear-gradient(180deg, rgba(245, 247, 249, 0.34) 0%, rgba(245, 247, 249, 0.12) 52%, transparent 100%);
 }
 
 /* Stage horizon floor beam anchored in the lower floor band */
@@ -524,15 +550,20 @@ a {
   opacity: 0.36;
 }
 
-@supports (animation-timeline: scroll()) {
-  .horizon-stage-art {
-    animation: horizonDrift linear both;
-    animation-timeline: scroll(root);
-    animation-range: 0px 520px;
-  }
-  @keyframes horizonDrift {
-    from { transform: translateY(0); }
-    to { transform: translateY(22px); }
+@supports ((scroll-timeline-name: --stage-scroll) and (animation-timeline: scroll()) and (animation-range: entry)) {
+  @media (prefers-reduced-motion: no-preference) {
+    .stage-main {
+      scroll-timeline: --stage-scroll block;
+    }
+    .horizon-stage-art {
+      animation: horizonDrift linear both;
+      animation-timeline: --stage-scroll;
+      animation-range: 0px 520px;
+    }
+    @keyframes horizonDrift {
+      from { transform: translateY(0); }
+      to { transform: translateY(22px); }
+    }
   }
 }
 
@@ -1628,6 +1659,7 @@ a {
 
 /* High Contrast / Forced Colors support */
 @media (forced-colors: active) {
+  body::before,
   .cyc-curtain,
   .cyc-scrim,
   .horizon-stage-art {
@@ -1684,6 +1716,9 @@ a {
 }
 
 @media print {
+  body::before {
+    display: none !important;
+  }
   html,
   body,
   .stage-shell,
