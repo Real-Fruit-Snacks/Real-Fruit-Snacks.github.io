@@ -121,6 +121,16 @@
       "in": "a blunder in one of your games",
       "out": "a puzzle made from it",
       "site": "https://real-fruit-snacks.github.io/open-file/"
+    },
+    {
+      "repo": "one-billion-pixels",
+      "description": "Excavate one billion pixels in your browser, offline",
+      "language": "TypeScript",
+      "platform": "browser",
+      "short": "one billion pixel excavation",
+      "in": "a single empty origin square",
+      "out": "one billion pixels carved offline",
+      "site": "https://real-fruit-snacks.github.io/one-billion-pixels/"
     }
   ],
   "around": [

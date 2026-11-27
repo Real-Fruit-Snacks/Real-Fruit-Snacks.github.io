@@ -130,6 +130,16 @@
       outText: "a puzzle made from it",
       site: "https://real-fruit-snacks.github.io/open-file/",
       repo: "https://github.com/Real-Fruit-Snacks/open-file"
+    },
+    "one-billion-pixels": {
+      no: "#13",
+      language: "TypeScript",
+      platform: "Browser",
+      description: "Excavate one billion pixels in your browser, offline.",
+      inText: "a single empty origin square",
+      outText: "one billion pixels carved offline",
+      site: "https://real-fruit-snacks.github.io/one-billion-pixels/",
+      repo: "https://github.com/Real-Fruit-Snacks/one-billion-pixels"
     }
   };
 
