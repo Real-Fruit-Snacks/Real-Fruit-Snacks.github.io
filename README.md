@@ -1,8 +1,8 @@
 # real-fruit-snacks.github.io
 
-The flagship catalog for **Real-Fruit-Snacks** at **[real-fruit-snacks.github.io](https://real-fruit-snacks.github.io/)** — built in the **Cyclorama Dawn · Steel & Beacon Orange** design system.
+Flagship Cyclorama Dawn catalog for Real-Fruit-Snacks
 
-One static, framework-free GitHub Pages site (`index.html`, `styles.css`, `app.js`, and self-hosted variable `.woff2` fonts in `fonts/`). Zero build server, zero third-party CDNs, zero tracking, full No-JS dark/light parity, WCAG AA contrast, and six interactive `LX` cyclorama lighting phases (`LX 001 Blackout` through `LX 512 Alabaster Day`).
+Live at **[real-fruit-snacks.github.io](https://real-fruit-snacks.github.io/)**, built in the **Cyclorama Dawn · Steel & Beacon Orange** design system. One static, framework-free GitHub Pages site (`index.html`, `styles.css`, `app.js`, and self-hosted variable `.woff2` fonts in `fonts/`). Zero build server, zero third-party CDNs, zero tracking, full No-JS dark/light parity, WCAG AA contrast, and six interactive `LX` cyclorama lighting phases (`LX 001 Blackout` through `LX 512 Alabaster Day`).
 
 ## Structure
 
